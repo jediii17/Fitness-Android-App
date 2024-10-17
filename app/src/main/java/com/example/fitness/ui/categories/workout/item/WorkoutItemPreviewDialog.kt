@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -39,7 +38,7 @@ import com.example.fitness.domain.dto.WorkoutItemDto
 import com.example.fitness.ui.common.PrimaryButton
 
 @Composable
-fun WorkoutItemPreviewDialog(modifier: Modifier = Modifier, workoutItemDto: WorkoutItemDto, isLastWorkout: Boolean = false, onDoneClick: () -> Unit, onWorkoutFinishedClick: () -> Unit) {
+fun WorkoutItemPreviewDialog(navController: NavController,modifier: Modifier = Modifier, workoutItemDto: WorkoutItemDto, isLastWorkout: Boolean = false, onDoneClick: () -> Unit, onWorkoutFinishedClick: () -> Unit) {
     val imageLoader = rememberImageLoader()
     Column(
         modifier = modifier
@@ -48,6 +47,7 @@ fun WorkoutItemPreviewDialog(modifier: Modifier = Modifier, workoutItemDto: Work
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+        Backbutton(navController)
 
         WorkoutGif(
             gifResId = workoutItemDto.imageRes,
@@ -70,8 +70,10 @@ fun WorkoutItemPreviewDialog(modifier: Modifier = Modifier, workoutItemDto: Work
     }
 }
 
+
+
 @Composable
-private fun TopBar(navController: NavController) {
+private fun Backbutton(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -79,7 +81,7 @@ private fun TopBar(navController: NavController) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { navController.navigateUp() }) {
+        IconButton(onClick = { navController.popBackStack() }) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
         }
     }
@@ -90,8 +92,8 @@ private fun WorkoutGif(gifResId: Int, imageLoader: ImageLoader) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
-            .shadow(2.dp)
+            .height(350.dp)
+
     ) {
         Image(
             painter = rememberAsyncImagePainter(
@@ -120,16 +122,17 @@ private fun ExerciseInfo(exerciseName: String, sets: Int, reps: String) {
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = reps,
-            fontSize = 14.sp,
+            text = "Each Side" +reps,
+            fontSize = 18.sp,
             color = Color.Gray
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "×$sets",
             fontWeight = FontWeight.Bold,
-            fontSize = 24.sp
+            fontSize = 45.sp
         )
     }
 }

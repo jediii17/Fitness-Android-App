@@ -92,7 +92,7 @@ fun WorkoutProgressContent(completedDaysList: SnapshotStateList<Int>,
             Spacer(modifier = Modifier.height(32.dp))
             CommonHeader(
                 text = "Workout",
-                subText = "\"Striving for progress, not perfection. Every workout is a step closer to my best self.\"",
+                subText = "\"Stay motivated on your workout journey.\"",
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally)

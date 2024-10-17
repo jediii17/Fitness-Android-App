@@ -67,6 +67,7 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
         if(showWorkoutPreview && dayContent.workouts.isNotEmpty()){
             dayContent.workouts.getOrNull(listWorkoutCounter)?.let{
                 WorkoutItemPreviewDialog(
+                    navController = navController,
                     modifier = Modifier.matchParentSize(),
                     workoutItemDto = it,
                     isLastWorkout = listWorkoutCounter == (dayContent.workouts.size - 1),
