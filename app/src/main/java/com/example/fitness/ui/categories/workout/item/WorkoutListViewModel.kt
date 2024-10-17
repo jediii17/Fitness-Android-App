@@ -27,19 +27,6 @@ class WorkoutListViewModel(private val getWorkoutItemsUseCase: GetWorkoutItemsUs
     private val _uiState = MutableStateFlow(WorkoutListUIState())
     val uiState: StateFlow<WorkoutListUIState> = _uiState.asStateFlow()
 
-    // Fetches a specific workout item by its ID
-    fun getWorkoutItem(workoutId: String) {
-        viewModelScope.launch {
-            val workoutList = getWorkoutItemsUseCase().toMutableList()
-            val workoutItem = workoutList.find { it.workoutId == workoutId }
-
-            _uiState.value = _uiState.value.copy(
-                workoutItemDto = workoutItem,
-                workoutList = workoutList
-            )
-        }
-    }
-
     //update the workout status
     fun updateWorkoutDone(workoutId: String){
         _uiState.value = _uiState.value.copy(
@@ -55,8 +42,6 @@ class WorkoutListViewModel(private val getWorkoutItemsUseCase: GetWorkoutItemsUs
                 }
             )
         )
-
-
     }
 
     // Fetches all workout items

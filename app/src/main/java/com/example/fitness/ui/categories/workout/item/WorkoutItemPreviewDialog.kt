@@ -39,10 +39,10 @@ import com.example.fitness.domain.dto.WorkoutItemDto
 import com.example.fitness.ui.common.PrimaryButton
 
 @Composable
-fun WorkoutItemPreviewDialog(workoutItemDto: WorkoutItemDto, isLastWorkout: Boolean = false, onDoneClick: () -> Unit, onWorkoutFinishedClick: () -> Unit) {
+fun WorkoutItemPreviewDialog(modifier: Modifier = Modifier, workoutItemDto: WorkoutItemDto, isLastWorkout: Boolean = false, onDoneClick: () -> Unit, onWorkoutFinishedClick: () -> Unit) {
     val imageLoader = rememberImageLoader()
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

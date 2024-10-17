@@ -16,6 +16,10 @@ class GetWorkoutItemsUseCase(private val userRepositoryImpL: UserRepositoryImpL)
         var list = emptyList<WorkoutItemDto>()
         //get the user categories
         userRepositoryImpL.getUserId(Constant.userId.longValue)?.toUserDetailsDto()?.let { user ->
+
+            //cache body type
+            Constant.bodyTypeCategory = user.bodytype
+
             list = when (user.gender) {
                 Gender.MALE.name -> {
                     generateWorkoutListCategoryForMale(

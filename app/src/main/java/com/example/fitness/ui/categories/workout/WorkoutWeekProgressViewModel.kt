@@ -26,7 +26,8 @@ class WorkoutWeekProgressViewModel(private val getWorkoutProgressUseCase: GetWor
 
         //get the last updated workout progress and check the day count
         workoutProgressDto.lastOrNull()?.let {
-            //get the last index
+
+                //get the last index
                 _uiState.value = _uiState.value.copy(
                     workoutDayCount =  it.progressDayCount,
                     workoutWeekCount =  it.progressWeekCount

@@ -32,6 +32,8 @@ import com.example.fitness.common.Constant
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.domain.dto.DayContent
 import com.example.fitness.domain.dto.WorkoutItemDto
+import com.example.fitness.ui.common.CommonHeader
+import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.theme.MyColorTheme
 import kotlinx.coroutines.CoroutineScope
@@ -44,6 +46,8 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
     var selectedDay by remember { mutableStateOf(dayId + 1) }
 
     var showWorkoutPreview by remember { mutableStateOf(false) }
+
+    var showFinishedWorkout by remember { mutableStateOf(false)}
 
     val workoutListViewModel: WorkoutListViewModel = viewModel(factory = AppViewModelProvider.Factory)
     val workoutItemUiState by workoutListViewModel.uiState.collectAsState()
@@ -59,43 +63,71 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
         }
     }
 
-    if(showWorkoutPreview && dayContent.workouts.isNotEmpty()){
-        dayContent.workouts.getOrNull(listWorkoutCounter)?.let{
-            WorkoutItemPreviewDialog(workoutItemDto = it,
-                isLastWorkout = listWorkoutCounter == (dayContent.workouts.size - 1),
-                onDoneClick = {
-                    //proceed to next workout if available
-                    if((listWorkoutCounter + 1) < dayContent.workouts.size){
-                        listWorkoutCounter += 1
+    Box(modifier = Modifier.fillMaxSize()){
+        if(showWorkoutPreview && dayContent.workouts.isNotEmpty()){
+            dayContent.workouts.getOrNull(listWorkoutCounter)?.let{
+                WorkoutItemPreviewDialog(
+                    modifier = Modifier.matchParentSize(),
+                    workoutItemDto = it,
+                    isLastWorkout = listWorkoutCounter == (dayContent.workouts.size - 1),
+                    onDoneClick = {
+                        //proceed to next workout if available
+                        if((listWorkoutCounter + 1) < dayContent.workouts.size){
+                            listWorkoutCounter += 1
+
+                            //update the list status
+                            workoutListViewModel.updateWorkoutDone(it.workoutId)
+                        }
+                    },
+                    onWorkoutFinishedClick = {
 
                         //update the list status
                         workoutListViewModel.updateWorkoutDone(it.workoutId)
+
+                        // show success finished
+                        showFinishedWorkout = true
+
                     }
-                },
-                onWorkoutFinishedClick = {
-                    //If the workout was Finished
-                      CoroutineScope(Dispatchers.IO).launch {
-                          workoutListViewModel.updateDoneProgressCount()
-                      }
-                    //hide preview
-                    showWorkoutPreview = true
+                )
+            }
+        }else{
+            WorkoutScreenContent(
+                modifier = Modifier.matchParentSize(),
+                dayContent = dayContent,
+                selectedDay = selectedDay,
+            ){
+                showWorkoutPreview = true
+            }
+        }
+
+        //show finish dialog
+        if(showFinishedWorkout){
+            DialogSuccess(
+                modifier = Modifier.matchParentSize(),
+                text = "Good job!",
+                buttonText = "OKAY"
+            ) {
+                showFinishedWorkout = false
+
+                //If the workout was Finished
+                CoroutineScope(Dispatchers.IO).launch {
+                    workoutListViewModel.updateDoneProgressCount()
                 }
-            )
+
+                //return to progress screen
+                navController.popBackStack()
+
+            }
         }
-    }else{
-        WorkoutScreenContent(
-            dayContent = dayContent,
-            selectedDay = selectedDay,
-        ){
-            showWorkoutPreview = true
-        }
+
     }
+
 }
 
 @Composable
-fun WorkoutScreenContent(dayContent: DayContent, selectedDay: Int, onClick: () -> Unit) {
+fun WorkoutScreenContent(modifier: Modifier = Modifier, dayContent: DayContent, selectedDay: Int, onClick: () -> Unit) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
@@ -138,10 +170,11 @@ fun Header(day: Int, workoutCount: Int, totalDuration: Int) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = "Day $day",
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp
+        CommonHeader(
+            text = Constant.bodyTypeCategory,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
         )
         Text(
             text = "Workouts: $workoutCount",
@@ -198,11 +231,17 @@ fun WorkoutRow(workout: WorkoutItemDto, imageLoader: ImageLoader, isWorkoutCompl
 @Composable
 fun CheckWorkoutDone(modifier: Modifier = Modifier){
 
-    Box(modifier = modifier.size(30.dp).clip(CircleShape).background(MyColorTheme.green).padding(2.dp)){
+    Box(modifier = modifier
+        .size(30.dp)
+        .clip(CircleShape)
+        .background(MyColorTheme.green)
+        .padding(2.dp)){
         Image(
             painter = painterResource(id = R.drawable.ic_check),
             contentDescription = "Login Image",
-            modifier = Modifier.matchParentSize().align(Alignment.Center)
+            modifier = Modifier
+                .matchParentSize()
+                .align(Alignment.Center)
         )
     }
 }

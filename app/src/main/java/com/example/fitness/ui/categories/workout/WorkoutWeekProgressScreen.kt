@@ -86,25 +86,37 @@ private fun updateCompletedIndexValues(completedDaysList: SnapshotStateList<Int>
 fun WorkoutProgressContent(completedDaysList: SnapshotStateList<Int>,
                            startButtonClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize().padding(18.dp)){
-        LazyColumn(
-            modifier = Modifier
-                .matchParentSize()
-                .background(MyColorTheme.backgroundMain)
-                .clip(RoundedCornerShape(34.dp))
+        Column(
+            modifier = Modifier.align(Alignment.TopStart).matchParentSize()
         ) {
+            Spacer(modifier = Modifier.height(32.dp))
+            CommonHeader(
+                text = "Workout",
+                subText = "\"Striving for progress, not perfection. Every workout is a step closer to my best self.\"",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            LazyColumn(
+                modifier = Modifier
+            ) {
+                itemsIndexed(completedDaysList) { index, completedDays ->
+                    WeekSection(
+                        weekNumber = index + 1,
+                        completedDays = completedDays,
+                        onDayCompleted = { day ->
+                            //TODO Remove the clicking of the button for now and add it to startButton
+                            // completedDaysList[index] = day
+                        }
+                    )
+                }
 
-            itemsIndexed(completedDaysList) { index, completedDays ->
-                WeekSection(
-                    weekNumber = index + 1,
-                    completedDays = completedDays,
-                    onDayCompleted = { day ->
-                        //TODO Remove the clicking of the button for now and add it to startButton
-                        // completedDaysList[index] = day
-                    }
-                )
             }
-
         }
+
+
+
         Column(modifier = Modifier.align(Alignment.BottomCenter)){
             StartButton() {
                 startButtonClick()
@@ -139,8 +151,7 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
             .background(MyColorTheme.white)
             .padding(start = 10.dp, top = 10.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.Center
-        ){
-        }
+        ) {
             Text(
                 text = "Week $weekNumber",
                 fontWeight = FontWeight.SemiBold,
@@ -181,6 +192,7 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
                     }
                 }
             }
+        }
         }
     }
 
