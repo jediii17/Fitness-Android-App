@@ -40,7 +40,6 @@ class WorkoutItemPreviewViewModel(private val getWorkoutItemsUseCase: GetWorkout
             )
         }
     }
-
 }
 
 // Data class to hold the UI state
