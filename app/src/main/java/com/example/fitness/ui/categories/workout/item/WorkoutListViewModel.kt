@@ -115,25 +115,7 @@ class WorkoutListViewModel(private val getWorkoutItemsUseCase: GetWorkoutItemsUs
                 workout.toWorkoutEntity()
             )
         }
-
-
-/*
-        //this will call the database
-        if((_uiState.value.workoutDayCount + 1) <= 7){
-            _uiState.value = _uiState.value.copy(
-                workoutDayCount = _uiState.value.workoutDayCount + 1, //add to days only since less than 7 days
-            )
-        }else{
-            //week should be less than 4 weeks
-            if( _uiState.value.workoutWeekCount + 1 < Constant.MAX_WEEK_COUNT){
-                _uiState.value = _uiState.value.copy(
-                    workoutWeekCount =  _uiState.value.workoutWeekCount + 1,
-                    workoutDayCount =  1, //reset to 1 since new week count
-                )
-            }
-        }*/
     }
-
 }
 
 // Data class to hold the UI state

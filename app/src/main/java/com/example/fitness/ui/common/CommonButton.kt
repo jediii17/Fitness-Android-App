@@ -33,7 +33,7 @@ fun PrimaryButton(modifier: Modifier = Modifier, text: String, @DrawableRes icon
         enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .height(50.dp)
             .clip(RoundedCornerShape(80))
             .background(color = greenMain_light),
         shape = RoundedCornerShape(80),

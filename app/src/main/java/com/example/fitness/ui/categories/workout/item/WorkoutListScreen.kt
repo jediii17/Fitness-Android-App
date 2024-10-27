@@ -1,6 +1,7 @@
 package com.example.fitness.ui.categories.workout.item
 
 import android.os.Build.VERSION.SDK_INT
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,6 +35,7 @@ import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.domain.dto.DayContent
 import com.example.fitness.domain.dto.WorkoutItemDto
 import com.example.fitness.ui.common.CommonHeader
+import com.example.fitness.ui.common.DialogConfirmation
 import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.theme.MyColorTheme
@@ -47,9 +50,12 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
 
     var showWorkoutPreview by remember { mutableStateOf(false) }
 
-    var showFinishedWorkout by remember { mutableStateOf(false)}
+    var showFinishedWorkout by remember { mutableStateOf(false) }
 
-    val workoutListViewModel: WorkoutListViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    var showBackPressedProgressDismiss by remember { mutableStateOf(false) }
+
+    val workoutListViewModel: WorkoutListViewModel =
+        viewModel(factory = AppViewModelProvider.Factory)
     val workoutItemUiState by workoutListViewModel.uiState.collectAsState()
 
     val dayContent = workoutItemUiState.workoutDayContent
@@ -57,23 +63,32 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
     //counter of the workout list
     var listWorkoutCounter by remember { mutableIntStateOf(0) }
 
+
+    //Show Dialog on BackPressed
+    BackHandler {
+        showBackPressedProgressDismiss = true
+    }
+
     LaunchedEffect(Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             workoutListViewModel.getWorkoutAllList()
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()){
-        if(showWorkoutPreview && dayContent.workouts.isNotEmpty()){
-            dayContent.workouts.getOrNull(listWorkoutCounter)?.let{
+    Box(modifier = Modifier.fillMaxSize()) {
+        if (showWorkoutPreview && dayContent.workouts.isNotEmpty()) {
+            dayContent.workouts.getOrNull(listWorkoutCounter)?.let {
                 WorkoutItemPreviewDialog(
-                    navController = navController,
                     modifier = Modifier.matchParentSize(),
                     workoutItemDto = it,
                     isLastWorkout = listWorkoutCounter == (dayContent.workouts.size - 1),
+                    backOnClick = {
+                        //hide preview
+                        showWorkoutPreview = false
+                    },
                     onDoneClick = {
                         //proceed to next workout if available
-                        if((listWorkoutCounter + 1) < dayContent.workouts.size){
+                        if ((listWorkoutCounter + 1) < dayContent.workouts.size) {
                             listWorkoutCounter += 1
 
                             //update the list status
@@ -91,20 +106,21 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
                     }
                 )
             }
-        }else{
+        } else {
             WorkoutScreenContent(
                 modifier = Modifier.matchParentSize(),
                 dayContent = dayContent,
                 selectedDay = selectedDay,
-            ){
+            ) {
                 showWorkoutPreview = true
             }
         }
 
         //show finish dialog
-        if(showFinishedWorkout){
+        if (showFinishedWorkout) {
             DialogSuccess(
                 modifier = Modifier.matchParentSize(),
+                icon = R.drawable.ic_success,
                 text = "Good job!",
                 buttonText = "OKAY"
             ) {
@@ -120,10 +136,28 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
 
             }
         }
+        //show WARNING to user Progress will be reset
+        if (showBackPressedProgressDismiss) {
 
+            DialogConfirmation(
+                text = "Are you sure?",
+                icon = R.drawable.ic_warning,
+                onYesClick = {
+                    navController.popBackStack()
+                },
+                onNoClick = {
+                    showBackPressedProgressDismiss = false
+                }
+            )
+
+        }
     }
-
 }
+
+
+
+
+
 
 @Composable
 fun WorkoutScreenContent(modifier: Modifier = Modifier, dayContent: DayContent, selectedDay: Int, onClick: () -> Unit) {
@@ -168,23 +202,22 @@ fun WorkOutContent(day: Int, dayContent: DayContent, onClick: () -> Unit) {
 @Composable
 fun Header(day: Int, workoutCount: Int, totalDuration: Int) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CommonHeader(
             text = Constant.bodyTypeCategory,
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
+            textAlign = TextAlign.Center
         )
         Text(
             text = "Workouts: $workoutCount",
-            fontSize = 16.sp,
+            fontSize = 18.sp,
             color = Color.Gray
         )
         Text(
-            text = "Total Duration: $totalDuration sec",
-            fontSize = 16.sp,
+            text = "Total Duration: $totalDuration secs",
+            fontSize = 18.sp,
             color = Color.Gray
         )
     }

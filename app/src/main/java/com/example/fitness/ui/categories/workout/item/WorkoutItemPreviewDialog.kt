@@ -38,7 +38,12 @@ import com.example.fitness.domain.dto.WorkoutItemDto
 import com.example.fitness.ui.common.PrimaryButton
 
 @Composable
-fun WorkoutItemPreviewDialog(navController: NavController,modifier: Modifier = Modifier, workoutItemDto: WorkoutItemDto, isLastWorkout: Boolean = false, onDoneClick: () -> Unit, onWorkoutFinishedClick: () -> Unit) {
+fun WorkoutItemPreviewDialog(modifier: Modifier = Modifier,
+                             workoutItemDto: WorkoutItemDto,
+                             isLastWorkout: Boolean = false,
+                             backOnClick: () -> Unit,
+                             onDoneClick: () -> Unit,
+                             onWorkoutFinishedClick: () -> Unit) {
     val imageLoader = rememberImageLoader()
     Column(
         modifier = modifier
@@ -47,7 +52,9 @@ fun WorkoutItemPreviewDialog(navController: NavController,modifier: Modifier = M
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Backbutton(navController)
+        Backbutton(){
+            backOnClick()
+        }
 
         WorkoutGif(
             gifResId = workoutItemDto.imageRes,
@@ -56,7 +63,7 @@ fun WorkoutItemPreviewDialog(navController: NavController,modifier: Modifier = M
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        ExerciseInfo(exerciseName = workoutItemDto.workoutName, sets = 1, reps = "x ${workoutItemDto.reps}")
+        ExerciseInfo(exerciseName = workoutItemDto.workoutName, reps = "x ${workoutItemDto.reps}")
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -73,7 +80,7 @@ fun WorkoutItemPreviewDialog(navController: NavController,modifier: Modifier = M
 
 
 @Composable
-private fun Backbutton(navController: NavController) {
+private fun Backbutton(onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -81,7 +88,7 @@ private fun Backbutton(navController: NavController) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { navController.popBackStack() }) {
+        IconButton(onClick = { onClick()  }) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
         }
     }
@@ -110,7 +117,7 @@ private fun WorkoutGif(gifResId: Int, imageLoader: ImageLoader) {
 }
 
 @Composable
-private fun ExerciseInfo(exerciseName: String, sets: Int, reps: String) {
+private fun ExerciseInfo(exerciseName: String, reps: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -130,7 +137,7 @@ private fun ExerciseInfo(exerciseName: String, sets: Int, reps: String) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "×$sets",
+            text = "×$reps",
             fontWeight = FontWeight.Bold,
             fontSize = 45.sp
         )

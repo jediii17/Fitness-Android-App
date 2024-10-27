@@ -13,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.fitness.ui.categories.aboutus.AboutUsScreen
 import com.example.fitness.ui.categories.message.MessageFeedbackScreen
-import com.example.fitness.ui.dashboard.PlansScreen
 import com.example.fitness.ui.categories.workout.item.WorkoutListScreen
 import com.example.fitnesstracker.common.Screens
 import com.example.fitnesstracker.ui.categories.BodyFatScreen
@@ -86,9 +85,6 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
         }
         composable(route = Screens.DASHBOARD_SCREEN.screenName) {
             DashboardScreen(navController = navController)
-        }
-        composable(route = Screens.PLANS_SCREEN.screenName) {
-            PlansScreen(navController = navController)
         }
         composable(route = Screens.MEALS_SCREEN.screenName) {
             MealsWeekProgressScreen(navController = navController)

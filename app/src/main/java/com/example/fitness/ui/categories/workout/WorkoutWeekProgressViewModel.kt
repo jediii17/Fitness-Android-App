@@ -1,14 +1,9 @@
 package com.example.fitness.ui.categories.workout
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshots.SnapshotStateList
+
 import androidx.lifecycle.ViewModel
-import com.example.fitness.common.Constant
-import com.example.fitness.domain.dto.WorkoutDto
 import com.example.fitness.domain.usecase.workout.GetWorkoutProgressUseCase
 import com.example.fitness.domain.usecase.workout.InsertWorkoutProgressUseCase
-import com.example.fitness.ui.categories.workout.item.WorkoutItemUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,15 +1,18 @@
 package com.example.fitness.ui.common
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,13 +25,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
 import com.example.fitness.ui.theme.greenMain_light
 
 @Composable
-fun DialogSuccess(modifier: Modifier = Modifier, text: String = "Updated successfully ", buttonText: String = "OKAY",  onclick: () -> Unit) {
+fun DialogSuccess(modifier: Modifier = Modifier,
+                  @DrawableRes icon: Int =R.drawable.ic_success,
+                  text: String = "Updated successfully ",
+                  buttonText: String = "OKAY",
+                  onclick: () -> Unit) {
     Box(modifier = modifier
         .fillMaxSize()
         .background(Color.Gray.copy(0.3f))){
@@ -50,7 +60,7 @@ fun DialogSuccess(modifier: Modifier = Modifier, text: String = "Updated success
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.goals),
+                painter = painterResource(id = icon),
                 contentDescription = "Login Image",
                 modifier = Modifier.size(110.dp)
             )
@@ -82,4 +92,107 @@ fun DialogSuccess(modifier: Modifier = Modifier, text: String = "Updated success
             }
         }
     }
+}
+
+@Composable
+fun DialogConfirmation(modifier: Modifier = Modifier,
+                       @DrawableRes icon: Int =R.drawable.goals,
+                       text: String = " ",
+                       buttonYesText: String = "Yes",
+                       buttonNoText: String = "No",
+                       onYesClick: () -> Unit,
+                       onNoClick: () -> Unit,
+                       ) {
+    Box(modifier = modifier
+        .fillMaxSize()
+        .background(Color.Gray.copy(0.3f))){
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(.99f)
+                .padding(horizontal = 16.dp)
+                .align(Alignment.Center)
+                .background(
+                    Color.White, RoundedCornerShape(20.dp)
+                )
+                .border(
+                    1.dp, Color(0xFFBDBDBD),
+                    RoundedCornerShape(20.dp)
+                )
+                .clip(RoundedCornerShape(10.dp))
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = "Login Image",
+                modifier = Modifier.size(110.dp)
+            )
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                fontWeight = FontWeight.Normal,
+                text = text,
+                fontSize = 20.sp,
+                textAlign = TextAlign.Center,
+            )
+            Row(modifier = Modifier
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly) {
+                Button(
+                    onClick = onYesClick,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = greenMain_light,
+                        contentColor = Color.White
+                    ),
+                    modifier = Modifier
+                        .widthIn(min = 150.dp)
+                        .padding(vertical = 12.dp)
+                        .padding(16.dp),
+                ){
+                    Text(
+                        fontWeight = FontWeight.Normal,
+                        text = buttonYesText,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+
+                Button(
+                    onClick = onNoClick,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Red,
+                        contentColor = Color.White
+                    ),
+                    modifier = Modifier
+                        .widthIn(min = 150.dp)
+                        .padding(vertical = 12.dp)
+                        .padding(16.dp),
+                ){
+                    Text(
+                        fontWeight = FontWeight.Normal,
+                        text = buttonNoText,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+        }
+    }
+}
+
+
+
+@Preview(backgroundColor = 0xFFFFFFFF, showBackground = true)
+@Composable
+fun DialogConfirmationPreview() {
+    DialogConfirmation(
+        text = "Are you sure?",
+
+        onYesClick = {
+
+        },
+        onNoClick = {
+
+        }
+    )
 }
