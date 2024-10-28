@@ -50,12 +50,6 @@ fun BottomNavigationBar(selectedScreen: String, onItemSelected: (String) -> Unit
                 onClick = { onItemSelected(Screens.DASHBOARD_SCREEN.screenName) }
             )
             BottomNavigationItem(
-                iconRes = R.drawable.plans,
-                label = "Plans",
-                isSelected = currentScreen == Screens.PLANS_SCREEN.screenName,
-                onClick = { onItemSelected(Screens.PLANS_SCREEN.screenName) }
-            )
-            BottomNavigationItem(
                 iconRes = R.drawable.workout,
                 label = "Workout",
                 isSelected = currentScreen == Screens.WORKOUTPROGRESS_SCREEN.screenName,

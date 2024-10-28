@@ -37,6 +37,7 @@ import com.example.fitness.common.BodyType
 import com.example.fitness.common.Gender
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.common.CommonHeader
+import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.theme.disabled_color
 import com.example.fitness.ui.theme.greenMain_light
 import kotlinx.coroutines.CoroutineScope
@@ -171,65 +172,6 @@ fun ProfileScreen(navController: NavController) {
         }
     }
 }
-
-@Composable
-fun DialogSuccess(modifier: Modifier = Modifier, onclick: () -> Unit) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(Color.Gray.copy(0.3f))){
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(.99f)
-                .padding(horizontal = 16.dp)
-                .align(Alignment.Center)
-                .background(
-                    Color.White, RoundedCornerShape(20.dp)
-                )
-                .border(
-                    1.dp, Color(0xFFBDBDBD),
-                    RoundedCornerShape(20.dp)
-                )
-                .clip(RoundedCornerShape(10.dp))
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                painter = painterResource(id = com.example.fitness.R.drawable.goals),
-                contentDescription = "Login Image",
-                modifier = Modifier.size(110.dp)
-            )
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                fontWeight = FontWeight.Normal,
-                text = "Updated successfully ",
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
-            )
-            Button(
-                onClick = onclick,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = greenMain_light,
-                    contentColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp)
-                    .padding(16.dp),
-            ){
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    fontWeight = FontWeight.Normal,
-                    text = "OKAY",
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center,
-                )
-            }
-        }
-    }
-
-}
-
 
 @Composable
 fun ProfileImagePicker(isUpdating: Boolean,imageFilePath: String? = null, newUriPath: (String?) -> Unit) {

@@ -1,5 +1,7 @@
 package com.example.fitness.ui
 
+//import com.example.fitness.ui.categories.profile.UpdateUserProfile
+//import com.example.fitness.ui.categories.profile.UpdateUserProfileViewModel
 import ProfileViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -11,12 +13,8 @@ import com.example.fitness.ui.categories.firstlastname.FirstLastNameViewModel
 import com.example.fitness.ui.categories.gender.GenderViewModel
 import com.example.fitness.ui.categories.goals.BodyGoalsViewModel
 import com.example.fitness.ui.categories.height.HeightViewModel
-//import com.example.fitness.ui.categories.profile.UpdateUserProfile
-//import com.example.fitness.ui.categories.profile.UpdateUserProfileViewModel
 import com.example.fitness.ui.categories.weight.WeightViewModel
-import com.example.fitness.ui.categories.workout.WorkoutWeekProgressScreen
 import com.example.fitness.ui.categories.workout.WorkoutWeekProgressViewModel
-import com.example.fitness.ui.categories.workout.item.WorkoutItemPreviewViewModel
 import com.example.fitness.ui.categories.workout.item.WorkoutListViewModel
 import com.example.fitness.ui.login.LoginViewModel
 import com.example.fitness.ui.signup.RegisterViewModel
@@ -40,12 +38,7 @@ object AppViewModelProvider {
             )
         }
 
-        // Initializer for WorkoutItemViewModel
-        initializer {
-            WorkoutItemPreviewViewModel(
-                fitnessApplication().container.getWorkoutItemsUseCase
-            )
-        }
+
         // Initializer for Gender Selection
         initializer {
             GenderViewModel(
