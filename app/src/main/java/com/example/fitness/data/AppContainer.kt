@@ -38,11 +38,14 @@ interface AppContainer {
     val getUserProfileUseCase: GetUserProfileUseCase
     val updateUserProfileUseCase: UpdateUserProfileUseCase
 
+    // for meals
+    //val getMealsCategoriesUseCase: GetMealsCategoriesUseCase
 
     //for workout
     val getWorkoutProgressUseCase: GetWorkoutProgressUseCase
     val insertWorkoutProgressUseCase: InsertWorkoutProgressUseCase
 }
+
 
 /**
  * [AppContainer] implementation that provides instance of [OfflineItemsRepository]
