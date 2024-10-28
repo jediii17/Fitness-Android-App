@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -63,7 +64,7 @@ fun WorkoutItemPreviewDialog(modifier: Modifier = Modifier,
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        ExerciseInfo(exerciseName = workoutItemDto.workoutName, reps = "x ${workoutItemDto.reps}")
+        ExerciseInfo(exerciseName = workoutItemDto.workoutName, reps = "${workoutItemDto.reps}")
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -127,18 +128,14 @@ private fun ExerciseInfo(exerciseName: String, reps: String) {
         Text(
             text = exerciseName,
             fontWeight = FontWeight.Bold,
-            fontSize = 30.sp
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Each Side" +reps,
-            fontSize = 18.sp,
-            color = Color.Gray
+            fontSize = 35.sp,
+            fontStyle = FontStyle.Italic
+
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "×$reps",
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.Black,
             fontSize = 45.sp
         )
     }

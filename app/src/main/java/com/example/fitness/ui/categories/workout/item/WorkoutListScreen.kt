@@ -348,7 +348,7 @@ fun WorkoutScreenContentPreview() {
             workouts = listOf(
                 WorkoutItemDto(
                     workoutId = "PLANKS-05",
-                    imageRes = R.drawable.gif_bk ,
+                    imageRes = R.drawable.bk_male ,
                     workoutName = "Plank Shoulder Tap",
                     reps = 5,
                     duration = 15)
