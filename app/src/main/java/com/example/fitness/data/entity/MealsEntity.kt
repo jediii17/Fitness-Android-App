@@ -13,5 +13,6 @@ data class MealsEntity(
     val calories: Int,
     val protein: Int,
     val fat: Int,
+    val carbs: Int,
     val accountId: Long = 0
 )

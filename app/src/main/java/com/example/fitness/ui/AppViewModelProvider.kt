@@ -115,6 +115,7 @@ object AppViewModelProvider {
         initializer {
             MealsWeekProgressViewModel(
                 getMealsProgressUseCase = fitnessApplication().container.getMealsProgressUseCase,
+                getMealsListUseCase = fitnessApplication().container.getMealsListUseCase,
             )
         }
 

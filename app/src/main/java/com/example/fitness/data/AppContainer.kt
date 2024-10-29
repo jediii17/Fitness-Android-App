@@ -42,7 +42,7 @@ interface AppContainer {
     val updateUserProfileUseCase: UpdateUserProfileUseCase
 
     // for meals
-    val getMealsUseCase: GetMealsListUseCase
+    val getMealsListUseCase: GetMealsListUseCase
     val getMealsProgressUseCase: GetMealsProgressUseCase
     val insertMealsProgressUseCase: InsertMealsProgressUseCase
 
@@ -117,7 +117,7 @@ class AppDataContainer(
         UpdateUserProfileUseCase(userRepositoryImpL)
     }
     //for meals
-    override val getMealsUseCase: GetMealsListUseCase by lazy{
+    override val getMealsListUseCase: GetMealsListUseCase by lazy{
         GetMealsListUseCase(userRepositoryImpL)
     }
     override val getMealsProgressUseCase: GetMealsProgressUseCase by lazy{

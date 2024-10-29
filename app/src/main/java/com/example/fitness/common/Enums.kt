@@ -82,16 +82,19 @@ enum class WorkoutCategoriesForFemale(val workoutId: String,
 }
 
 
-// meals prep for Beginner
-enum class MealsCategoriesBeginner(val mealsId: String,
-                                   @DrawableRes val imageRes: Int,
-                                   val mealsName: String,
-                                   val mealsDescription: String,
-                                   val mealTime: String,
-                                   val fats: String,
-                                   val protein: String,
-                                   val carbs: String,
-                                   val calories:  String){
+/********************************************************
+ *  meals prep for [BodyFatLevel.LEAN]
+ ********************************************************
+ *  **/
+enum class MealsCategoriesForLean(val mealsId: String,
+                                  @DrawableRes val imageRes: Int,
+                                  val mealsName: String,
+                                  val mealsDescription: String,
+                                  val mealTime: String,
+                                  val fats: String,
+                                  val protein: String,
+                                  val carbs: String,
+                                  val calories:  String){
     // for breakfast (30)
     EGGWITHRICE(mealsId = "MEALSBEGINNER-01", imageRes = R.drawable.egg_with_rice, mealsName = "Egg with Rice", mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "190", protein = "15", fats = "10", carbs = "40"),
     SINIGANG(mealsId = "MEALSBEGINNER-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "170", protein = "26", fats = "15", carbs = "23"),
@@ -110,16 +113,20 @@ enum class MealsCategoriesBeginner(val mealsId: String,
 
 
 }
-// meals prep for Intermediate
-enum class MealsCategoriesIntermediate(val mealsId: String,
-                                       @DrawableRes val imageRes: Int,
-                                       val mealsName: String,
-                                       val mealsDescription: String,
-                                       val mealTime: String,
-                                       val fats: String,
-                                       val protein: String,
-                                       val carbs: String,
-                                       val calories:  String){
+
+/********************************************************
+ *  meals prep for [BodyFatLevel.ATHLETIC]
+ ********************************************************
+ *  **/
+enum class MealsCategoriesForAthletic(val mealsId: String,
+                                      @DrawableRes val imageRes: Int,
+                                      val mealsName: String,
+                                      val mealsDescription: String,
+                                      val mealTime: String,
+                                      val fats: String,
+                                      val protein: String,
+                                      val carbs: String,
+                                      val calories:  String){
     // for breakfast (30)
     TUNAPANDESAL(mealsId = "MEALSINTERMEDIATE-01", imageRes = R.drawable.tuna_pandesal, mealsName = "Egg with Rice",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "59", protein = "15", fats = "10", carbs = "40"),
     SINIGANG(mealsId = "MEALSINTERMEDIATE-02", imageRes = R.drawable.grilled_tilapia, mealsName = "Sinigang na beef",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "189", protein = "26", fats = "15", carbs = "23"),
@@ -137,16 +144,21 @@ enum class MealsCategoriesIntermediate(val mealsId: String,
     // for dinner(30)
 
 }
-// meals prep for Advance
-enum class MealsCategoriesAdvance(val mealsId: String,
-                                  @DrawableRes val imageRes: Int,
-                                  val mealsName: String,
-                                  val mealsDescription: String,
-                                  val mealTime: String,
-                                  val fats: String,
-                                  val protein: String,
-                                  val carbs: String,
-                                  val calories:  String){
+
+
+/********************************************************
+ *  meals prep for [BodyFatLevel.NATURAL]
+ ********************************************************
+ *  **/
+enum class MealsCategoriesForNatural(val mealsId: String,
+                                     @DrawableRes val imageRes: Int,
+                                     val mealsName: String,
+                                     val mealsDescription: String,
+                                     val mealTime: String,
+                                     val fats: String,
+                                     val protein: String,
+                                     val carbs: String,
+                                     val calories:  String){
     // for breakfast (30)
     TUNAOMELET(mealsId = "MEALSADVANCE-01", imageRes = R.drawable.tuna_omelette, mealsName = "Tuna Omelet",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "15", fats = "10", carbs = "40"),
     SINIGANG(mealsId = "MEALSADVANCE-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "185", protein = "26", fats = "15", carbs = "23"),

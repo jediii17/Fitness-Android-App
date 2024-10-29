@@ -8,6 +8,10 @@ class MealsProgressDto(
     val mealsProgressWeekCount: Int,
     val mealsProgressMonthCount: Int,
     val mealsProgressDate: String,
+    val calories: Int,
+    val protein: Int,
+    val fat: Int,
+    val carbs: Int,
     val accountId: Long = 0
 )
 
@@ -23,6 +27,10 @@ fun MealsEntity.toMealsProgressDto(): MealsProgressDto = MealsProgressDto(
     mealsProgressWeekCount = mealsProgressWeekCount,
     mealsProgressMonthCount = mealsProgressMonthCount,
     mealsProgressDate = mealsProgressDate,
+    calories = calories,
+    protein = protein,
+    fat = fat,
+    carbs = carbs,
     accountId = accountId
 )
 
@@ -32,5 +40,9 @@ fun MealsEntity.toMealsEntity(): MealsEntity = MealsEntity(
     mealsProgressWeekCount = mealsProgressWeekCount,
     mealsProgressMonthCount = mealsProgressMonthCount,
     mealsProgressDate = mealsProgressDate,
+    calories = calories,
+    protein = protein,
+    fat = fat,
+    carbs = carbs,
     accountId = accountId
 )

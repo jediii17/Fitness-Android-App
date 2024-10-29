@@ -2,7 +2,9 @@ package com.example.fitness.domain.usecase.meals
 
 import com.example.fitness.common.BodyFatLevel
 import com.example.fitness.common.Constant
-import com.example.fitness.common.MealsCategoriesBeginner
+import com.example.fitness.common.MealsCategoriesForAthletic
+import com.example.fitness.common.MealsCategoriesForLean
+import com.example.fitness.common.MealsCategoriesForNatural
 import com.example.fitness.domain.dto.MealsDto
 import com.example.fitness.domain.dto.toUserDetailsDto
 import com.example.fitness.domain.repository.UserRepositoryImpL
@@ -16,18 +18,18 @@ class GetMealsListUseCase(private val userRepositoryImpL: UserRepositoryImpL) {
 
                 list = when (user.bodyfat) {
                     BodyFatLevel.LEAN.name -> {
-                        generateMealBeginner()
+                        generateMealsForLean()
                     }
 
                     BodyFatLevel.ATHLETIC.name -> {
-                        generateMealBeginner()
+                        generateMealsForAthletic()
                     }
 
                     BodyFatLevel.NATURAL.name-> {
-                        generateMealBeginner()
+                        generateMealsForNatural()
                     }
                     else ->{
-                        generateMealBeginner()
+                        generateMealsForLean()
                     }
                 }
             }
@@ -36,10 +38,51 @@ class GetMealsListUseCase(private val userRepositoryImpL: UserRepositoryImpL) {
         }
 
 
-    //generate work out per category listed in the enum
-    private fun generateMealBeginner(): List<MealsDto> {
+    /**********************************************************
+     * generate meals depending on the Body Fats
+     **********************************************************
+     * **/
+    private fun generateMealsForLean(): List<MealsDto> {
         val mutableList = mutableListOf<MealsDto>()
-        MealsCategoriesBeginner.entries.forEachIndexed { index, it ->
+        MealsCategoriesForLean.entries.forEachIndexed { index, it ->
+            mutableList.add(
+                MealsDto(
+                    mealsId = it.mealsId,
+                    imageRes = it.imageRes,
+                    mealsName = it.mealsName,
+                    mealsDescription = it.mealsDescription,
+                    calories = it.calories,
+                    fats = it.fats,
+                    protein = it.protein,
+                    carbs = it.carbs,
+                    mealTime = it.mealTime)
+            )
+        }
+        return mutableList.toList().shuffled()
+    }
+
+    private fun generateMealsForAthletic(): List<MealsDto> {
+        val mutableList = mutableListOf<MealsDto>()
+        MealsCategoriesForAthletic.entries.forEachIndexed { index, it ->
+            mutableList.add(
+                MealsDto(
+                    mealsId = it.mealsId,
+                    imageRes = it.imageRes,
+                    mealsName = it.mealsName,
+                    mealsDescription = it.mealsDescription,
+                    calories = it.calories,
+                    fats = it.fats,
+                    protein = it.protein,
+                    carbs = it.carbs,
+                    mealTime = it.mealTime)
+            )
+        }
+        return mutableList.toList().shuffled()
+    }
+
+    private fun generateMealsForNatural(): List<MealsDto> {
+        val mutableList = mutableListOf<MealsDto>()
+        MealsCategoriesForNatural.entries.forEachIndexed { index, it ->
             mutableList.add(
                 MealsDto(
                     mealsId = it.mealsId,

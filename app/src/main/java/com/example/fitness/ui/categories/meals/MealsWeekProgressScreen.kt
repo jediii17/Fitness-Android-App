@@ -9,8 +9,6 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,10 +25,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +39,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -55,8 +52,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.fitness.R
 import com.example.fitness.common.Constant
+import com.example.fitness.domain.dto.MealsDto
 import com.example.fitness.ui.AppViewModelProvider
-import com.example.fitness.ui.categories.workout.WorkoutProgressContent
 import com.example.fitness.ui.common.CommonDayCircleProgress
 import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.PrimaryButton
@@ -93,43 +90,49 @@ fun MealsWeekProgressScreen(navController: NavController) {
 
     MealsProgressContent(
         completedDaysList = completedDaysList,
+        mealsHighlights = mealsUiState.mealsHighlights,
     ){
         navController.navigate(Screens.MEALS_SCREEN.screenName)
     }
 }
 
 @Composable
-fun MealsProgressContent(completedDaysList: SnapshotStateList<Int>,
-                           startButtonClick: () -> Unit) {
-    Box(modifier = Modifier
+fun MealsProgressContent(
+    completedDaysList: SnapshotStateList<Int>,
+    mealsHighlights: List<MealsDto>,
+    startButtonClick: () -> Unit,
+) {
+    Column(modifier = Modifier
         .fillMaxSize()
         .background(MyColorTheme.backgroundMainDirtyWhite)){
+        CommonHeader(
+            text = "Weekly Meal Plan",
+            subText = "Let's check your food nutrition & calories",
+            modifier = Modifier
+                .fillMaxWidth()
+                .defaultPadding()
+        )
         LazyColumn(
             modifier = Modifier
-                .align(Alignment.TopStart)
-                .matchParentSize()
+                .fillMaxSize()
         ) {
-            item {
-                CommonHeader(
-                    text = "Weekly Meal Plan",
-                    subText = "Let's check your food nutrition & calories",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .defaultPadding()
-                )
-            }
+
             item{
                 Spacer(modifier = Modifier.height(5.dp))
                 LazyRow(
                     modifier = Modifier.defaultPaddingStart()
                 ) {
                     itemsIndexed(completedDaysList) { index, completedDays ->
-                        WeekMealSection(
-                            weekNumber = index + 1,
-                            completedDays = completedDays,
-                            onDayCompleted = { day ->
-                            }
-                        )
+                        mealsHighlights.getOrNull(index)?.let { meal ->
+                            WeekMealSection(
+                                mealsDto = meal,
+                                weekNumber = index + 1,
+                                completedDays = completedDays,
+                                onDayCompleted = { day ->
+                                }
+                            )
+                        }
+
                     }
 
                 }
@@ -165,11 +168,13 @@ private fun BottomNote(){
         ) {
             Column(
                 Modifier
+
+                    .shadow(elevation = 10.dp)
+                    .clip(RoundedCornerShape(10.dp))
                     .border(0.5.dp, Color.Gray.copy(0.4f), RoundedCornerShape(10.dp))
                     .background(Color.White)
                     .fillMaxWidth()
-                    .heightIn(min = 90.dp)
-                    .clip(RoundedCornerShape(10.dp))) {
+                    .heightIn(min = 90.dp)) {
                 Column(
                     Modifier
                         .fillMaxWidth(0.7f)
@@ -195,6 +200,7 @@ private fun BottomNote(){
             contentDescription = "Meal Image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
+
                 .offset(x = 40.dp)
                 .align(Alignment.CenterEnd)
                 .size(150.dp)
@@ -204,7 +210,7 @@ private fun BottomNote(){
 }
 
 @Composable
-private fun WeekMealSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Unit) {
+private fun WeekMealSection(mealsDto: MealsDto, weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Unit) {
     Column(
         modifier = Modifier
             .padding(top = 12.dp, end = 18.dp),
@@ -266,21 +272,37 @@ private fun WeekMealSection(weekNumber: Int, completedDays: Int, onDayCompleted:
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Menu highlight ✸",
+                    text = "Menu highlights ✸",
                     style = MaterialTheme.typography.labelLarge,
                     color = MyColorTheme.greenMain_light,
                     modifier = Modifier.padding(bottom = 15.dp)
                 )
             }
-            Image(
-                painter = painterResource(id = R.drawable.chicken_inasal),
-                contentDescription = "Meal Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
+            Box(
+                Modifier
                     .fillMaxWidth()
-                    .height(320.dp)
-                    .clip(RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp))
-            )
+                    .height(320.dp)){
+                Image(
+                    painter = painterResource(id = mealsDto.imageRes),
+                    contentDescription = "Meal Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clip(RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp))
+                )
+
+                Text(
+                    text = mealsDto.mealsName,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color.White,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(topEnd = 10.dp))
+                        .background(MyColorTheme.brumswick_green)
+                        .padding(10.dp)
+                        .align(Alignment.BottomStart)
+                )
+            }
+
         }
     }
 }
@@ -291,5 +313,52 @@ private fun WeekMealSection(weekNumber: Int, completedDays: Int, onDayCompleted:
 fun MealsWeekProgressScreenPreview() {
     val initialWeeks = List(4) { 0 }
     val completedDaysList = remember { mutableStateListOf(*initialWeeks.toTypedArray()) }
-    MealsProgressContent(completedDaysList){}
+
+    val list = listOf(
+        MealsDto(
+            mealsId = "MEALSBEGINNER-01",
+            imageRes = R.drawable.egg_with_rice,
+            mealsName = "Egg with Rice",
+            mealsDescription = "Egg with Rice",
+            calories = "120",
+            fats = "120",
+            protein = "120",
+            carbs = "20",
+            mealTime = "20",
+        ),
+        MealsDto(
+            mealsId = "MEALSBEGINNER-01",
+            imageRes = R.drawable.egg_with_rice,
+            mealsName = "Egg with Rice",
+            mealsDescription = "Egg with Rice",
+            calories = "120",
+            fats = "120",
+            protein = "120",
+            carbs = "20",
+            mealTime = "20",
+        ),
+        MealsDto(
+            mealsId = "MEALSBEGINNER-01",
+            imageRes = R.drawable.egg_with_rice,
+            mealsName = "Egg with Rice",
+            mealsDescription = "Egg with Rice",
+            calories = "120",
+            fats = "120",
+            protein = "120",
+            carbs = "20",
+            mealTime = "20",
+        ),
+        MealsDto(
+            mealsId = "MEALSBEGINNER-01",
+            imageRes = R.drawable.egg_with_rice,
+            mealsName = "Egg with Rice",
+            mealsDescription = "Egg with Rice",
+            calories = "120",
+            fats = "120",
+            protein = "120",
+            carbs = "20",
+            mealTime = "20",
+        )
+    )
+    MealsProgressContent(completedDaysList,list){}
 }
