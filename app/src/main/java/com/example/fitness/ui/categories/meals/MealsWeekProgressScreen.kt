@@ -1,135 +1,286 @@
 package com.example.fitness.ui.categories.meals
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.*
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
+import com.example.fitness.common.Constant
+import com.example.fitness.ui.AppViewModelProvider
+import com.example.fitness.ui.categories.workout.WorkoutProgressContent
+import com.example.fitness.ui.common.CommonDayCircleProgress
 import com.example.fitness.ui.common.CommonHeader
+import com.example.fitness.ui.common.PrimaryButton
+import com.example.fitness.ui.common.TrophyOfExcellence
+import com.example.fitness.ui.common.updateCompletedIndexValues
+import com.example.fitness.ui.theme.MyColorTheme
+import com.example.fitness.util.defaultPadding
+import com.example.fitness.util.defaultPaddingStart
+import com.example.fitnesstracker.common.Screens
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun MealsWeekProgressScreen(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        Spacer(modifier = Modifier.height(10.dp))
-        CommonHeader(
-            text = "Meal Plan",
-            subText = "\"Stay motivated on your journey to healthier!\"",
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
-        )
-        Spacer(modifier = Modifier.height(80.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            TabButton("Breakfast", isSelected = true)
-            TabButton("Lunch", isSelected = false)
-            TabButton("Dinner", isSelected = false)
+    val mealsWeekProgressViewModel: MealsWeekProgressViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    val mealsUiState by mealsWeekProgressViewModel.uiState.collectAsState()
+
+    val initialWeeks = List(Constant.MAX_WEEK_COUNT) { 0 }
+    var completedDaysList = remember {  mutableStateListOf(*initialWeeks.toTypedArray()) }
+
+    LaunchedEffect(Unit) {
+        CoroutineScope(Dispatchers.IO).launch{
+            mealsWeekProgressViewModel.getMealsWeekProgress()
         }
-        Box(
+        completedDaysList = updateCompletedIndexValues(completedDaysList, workWeek = mealsUiState.mealsWeekCount, workDay = mealsUiState.mealsDayCount)
+    }
+
+    //if this value changes change the progress
+    LaunchedEffect(mealsUiState) {
+        //update the list from database content
+        completedDaysList = updateCompletedIndexValues(completedDaysList, workWeek = mealsUiState.mealsWeekCount, workDay = mealsUiState.mealsDayCount)
+    }
+
+    MealsProgressContent(
+        completedDaysList = completedDaysList,
+    ){
+        navController.navigate(Screens.MEALS_SCREEN.screenName)
+    }
+}
+
+@Composable
+fun MealsProgressContent(completedDaysList: SnapshotStateList<Int>,
+                           startButtonClick: () -> Unit) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(MyColorTheme.backgroundMainDirtyWhite)){
+        LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .clip(RoundedCornerShape(20.dp))
+                .align(Alignment.TopStart)
+                .matchParentSize()
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.chickentinola),
-                contentDescription = "Meal Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.6f))
-                        )
-                    )
-                    .fillMaxWidth()
-                    .padding(12.dp)
-            ) {
-                Text("Chicken Tinola with Rice", color = Color.White, style = MaterialTheme.typography.titleMedium)
-                Text("High in protein", color = Color.White, style = MaterialTheme.typography.bodySmall)
+            item {
+                CommonHeader(
+                    text = "Weekly Meal Plan",
+                    subText = "Let's check your food nutrition & calories",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .defaultPadding()
+                )
             }
-            Icon(
-                imageVector = Icons.Default.FavoriteBorder,
-                contentDescription = "Favorite",
-                tint = Color.Red,
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(8.dp)
-                    .size(28.dp)
-            )
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 12.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            NutritionInfo("300", "Calories")
-            NutritionInfo("15g", "Protein")
-            NutritionInfo("40g", "Carbs")
-            NutritionInfo("4g", "Fats")
+            item{
+                Spacer(modifier = Modifier.height(5.dp))
+                LazyRow(
+                    modifier = Modifier.defaultPaddingStart()
+                ) {
+                    itemsIndexed(completedDaysList) { index, completedDays ->
+                        WeekMealSection(
+                            weekNumber = index + 1,
+                            completedDays = completedDays,
+                            onDayCompleted = { day ->
+                            }
+                        )
+                    }
+
+                }
+            }
+
+            item{
+                BottomNote()
+
+                Column(modifier = Modifier.defaultPadding()
+                ) {
+                    PrimaryButton(
+                        modifier = Modifier,
+                        text = "START",
+                    ) {
+                        startButtonClick()
+                    }
+                    Spacer(Modifier.height(20.dp))
+                }
+            }
+
         }
     }
 }
 
 @Composable
-fun TabButton(text: String, isSelected: Boolean) {
-    Text(
-        text = text,
-        color = if (isSelected) Color.White else Color.Black,
-        style = MaterialTheme.typography.bodyLarge,
-        modifier = Modifier
-            .background(
-                color = if (isSelected) Color(0xFF2A9D8F) else Color.LightGray,
-                shape = RoundedCornerShape(20.dp)
-            )
-            .padding(horizontal = 20.dp, vertical = 10.dp)
-    )
+private fun BottomNote(){
+    Spacer(modifier = Modifier.height( 20.dp))
+    Box(modifier = Modifier.fillMaxWidth()){
+        Column(modifier = Modifier
+            .align(Alignment.Center)
+            .fillMaxWidth()
+            .defaultPaddingStart()
+        ) {
+            Column(
+                Modifier
+                    .border(0.5.dp, Color.Gray.copy(0.4f), RoundedCornerShape(10.dp))
+                    .background(Color.White)
+                    .fillMaxWidth()
+                    .heightIn(min = 90.dp)
+                    .clip(RoundedCornerShape(10.dp))) {
+                Column(
+                    Modifier
+                        .fillMaxWidth(0.7f)
+                        .padding(10.dp)) {
+                    Text(
+                        text = "Balance Diet",
+                        fontWeight = FontWeight.SemiBold,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MyColorTheme.greenMain_light
+                    )
+                    Text(
+                        text = "Stay healthy and young by taking a healthy balanced diet!",
+                        color = MyColorTheme.brumswick_green,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+            }
+
+        }
+
+        Image(
+            painter = painterResource(id = R.drawable.vegies),
+            contentDescription = "Meal Image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .offset(x = 40.dp)
+                .align(Alignment.CenterEnd)
+                .size(150.dp)
+                .clip(CircleShape)
+        )
+    }
 }
 
 @Composable
-fun NutritionInfo(value: String, label: String) {
-    Box(
+private fun WeekMealSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Unit) {
+    Column(
         modifier = Modifier
-            .size(65.dp)
-            .clip(CircleShape)
-            .background(Color.LightGray),
-        contentAlignment = Alignment.Center
+            .padding(top = 12.dp, end = 18.dp),
+        verticalArrangement = Arrangement.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(value, style = MaterialTheme.typography.titleLarge, color = Color.Black)
-            Text(label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+        Column(modifier = Modifier
+            .border(1.dp, Color.Gray.copy(0.2f), RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(10.dp))
+            .background(MyColorTheme.white)
+            .width(
+                if ((completedDays == 7)) {
+                    350.dp
+                } else {
+                    300.dp
+                }
+            )
+            .padding(top = 10.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Column(Modifier.padding(horizontal = 10.dp)){
+                Text(
+                    text = "Week $weekNumber",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 16.sp,
+                    fontStyle = FontStyle.Normal,
+                    modifier = Modifier.padding(bottom = 10.dp),
+                    color = MyColorTheme.brumswick_green
+                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 5.dp)
+                ) {
+                    (1..7).forEach { day ->
+                        CommonDayCircleProgress(
+                            day = day,
+                            hasExtraLine = day > 1,
+                            isCompleted = day <= completedDays,
+                            isClickable = day == completedDays + 1 && completedDays < 7,
+                            onDayClick = { onDayCompleted(day) }
+                        )
+                    }
+                    Spacer(modifier = Modifier)
+                    if ((completedDays == 7)) {
+                        AnimatedVisibility(
+                            visible = true,
+                            enter = scaleIn(
+                                animationSpec = tween(durationMillis = 500)
+                            ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+                            exit = scaleOut(
+                                animationSpec = tween(durationMillis = 500)
+                            ) + fadeOut(animationSpec = tween(durationMillis = 500))
+                        ) {
+                            TrophyOfExcellence()
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Menu highlight ✸",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MyColorTheme.greenMain_light,
+                    modifier = Modifier.padding(bottom = 15.dp)
+                )
+            }
+            Image(
+                painter = painterResource(id = R.drawable.chicken_inasal),
+                contentDescription = "Meal Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(320.dp)
+                    .clip(RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp))
+            )
         }
     }
 }
@@ -138,6 +289,7 @@ fun NutritionInfo(value: String, label: String) {
 @Preview(showBackground = true)
 @Composable
 fun MealsWeekProgressScreenPreview() {
-    val navController = rememberNavController()
-    MealsWeekProgressScreen(navController)
+    val initialWeeks = List(4) { 0 }
+    val completedDaysList = remember { mutableStateListOf(*initialWeeks.toTypedArray()) }
+    MealsProgressContent(completedDaysList){}
 }

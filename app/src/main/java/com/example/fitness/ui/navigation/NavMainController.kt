@@ -22,6 +22,7 @@ import com.example.fitnesstracker.ui.categories.GoalsLeanScreen
 import com.example.fitnesstracker.ui.categories.GoalsNaturalScreen
 import com.example.fitness.ui.categories.height.HeightScreen
 import com.example.fitness.ui.categories.meals.MealsWeekProgressScreen
+import com.example.fitness.ui.categories.meals.item.MealsItemPreviewScreen
 import com.example.fitness.ui.categories.profile.FirstLastNameScreen
 import com.example.fitness.ui.help.HelpScreen
 import com.example.fitnesstracker.ui.dashboard.DashboardScreen
@@ -87,7 +88,7 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
             DashboardScreen(navController = navController)
         }
         composable(route = Screens.MEALS_SCREEN.screenName) {
-            MealsWeekProgressScreen(navController = navController)
+            MealsItemPreviewScreen(navController = navController)
         }
         composable(route = Screens.HAMBURGER_SCREEN.screenName) {
             Hamburger(navController = navController)
@@ -122,6 +123,9 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
             workoutId?.let { id ->
                // WorkoutItemPreviewScreen(navController = navController, workoutId = id)
             }
+        }
+        composable(route = Screens.MEALSPROGRESS_SCREEN.screenName) {
+            MealsWeekProgressScreen(navController = navController)
         }
     }
 }

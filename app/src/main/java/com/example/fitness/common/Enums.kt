@@ -21,6 +21,13 @@ enum class BodyFatLevel {
     NATURAL,
 }
 
+enum class MealTime{
+    BREAKFAST,
+    LUNCH,
+    DINNER
+}
+
+
 //For Workout Reps Count
 enum class WorkoutReps(val reps: Int, val durationInSeconds: Int){
     BEGINNER(reps = 8, durationInSeconds = 15),
@@ -74,66 +81,86 @@ enum class WorkoutCategoriesForFemale(val workoutId: String,
     FORWARDBENDSTANDING(workoutId = "FORWARDBENDSTANDING-15", imageRes = R.drawable.forwardbendstanding_female, workoutName = "Forward Bend Standing"),
 }
 
+
 // meals prep for Beginner
 enum class MealsCategoriesBeginner(val mealsId: String,
-                           @DrawableRes val imageRes: Int,
-                           val mealsName: String,
-                           val fats: String,
-                           val protien: String,
-                           val carbs: String,
-                           val calories:  String){
-    EGGWITHRICE(mealsId = "MEALSBEGINNER-01", imageRes = R.drawable.egg_with_rice, mealsName = "Egg with Rice", calories = "190", protien = "15", fats = "10", carbs = "40"),
-    SINIGANG(mealsId = "MEALSBEGINNER-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef", calories = "170", protien = "26", fats = "15", carbs = "23"),
-    ADOBO(mealsId = "MEALSBEGINNER-03", imageRes = R.drawable.adobo, mealsName = "Adobo with Rice", calories = "125", protien = "30", fats = "25", carbs = "55"),
-    KAREKARE(mealsId = "MEALSBEGINNER-04", imageRes = R.drawable.kare_kare, mealsName = "Kare-Kare", calories = "123", protien = "35", fats = "15", carbs = "50"),
-    CHICKENTOCINO(mealsId = "MEALSBEGINNER-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino", calories = "145", protien = "15", fats = "  15", carbs = "50"),
-    CHICKENTINOLA(mealsId = "MEALSBEGINNER-06", imageRes = R.drawable.chickentinola, mealsName = "Chicken Tinola", calories = "188", protien = "21", fats = "8", carbs = "7"),
-    SINIGANGNAPORK(mealsId = "MEALSBEGINNER-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork", calories = "160", protien = "30", fats = "25", carbs = "55"),
-    BISTEK(mealsId = "MEALSBEGINNER-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog", calories = "160", protien = "35", fats = "15", carbs = "65"),
-    LONGSILOG(mealsId = "MEALSBEGINNER-09", imageRes = R.drawable.longsilog, mealsName = "Longganisa Itlog", calories = "125", protien = "25", fats = "25", carbs = "55"),
-    SCRAMBLEEGGS(mealsId = "MEALSBEGINNER-10", imageRes = R.drawable.scrambleeggs, mealsName = "Scramble Eggs", calories = "80", protien = "28", fats = "25", carbs = "40"),
+                                   @DrawableRes val imageRes: Int,
+                                   val mealsName: String,
+                                   val mealsDescription: String,
+                                   val mealTime: String,
+                                   val fats: String,
+                                   val protein: String,
+                                   val carbs: String,
+                                   val calories:  String){
+    // for breakfast (30)
+    EGGWITHRICE(mealsId = "MEALSBEGINNER-01", imageRes = R.drawable.egg_with_rice, mealsName = "Egg with Rice", mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "190", protein = "15", fats = "10", carbs = "40"),
+    SINIGANG(mealsId = "MEALSBEGINNER-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "170", protein = "26", fats = "15", carbs = "23"),
+    ADOBO(mealsId = "MEALSBEGINNER-03", imageRes = R.drawable.adobo, mealsName = "Adobo with Rice",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "30", fats = "25", carbs = "55"),
+    KAREKARE(mealsId = "MEALSBEGINNER-04", imageRes = R.drawable.kare_kare, mealsName = "Kare-Kare",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "123", protein = "35", fats = "15", carbs = "50"),
+    CHICKENTOCINO(mealsId = "MEALSBEGINNER-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "145", protein = "15", fats = "  15", carbs = "50"),
+    CHICKENTINOLA(mealsId = "MEALSBEGINNER-06", imageRes = R.drawable.chickentinola, mealsName = "Chicken Tinola",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "188", protein = "21", fats = "8", carbs = "7"),
+    SINIGANGNAPORK(mealsId = "MEALSBEGINNER-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "160", protein = "30", fats = "25", carbs = "55"),
+    BISTEK(mealsId = "MEALSBEGINNER-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "160", protein = "35", fats = "15", carbs = "65"),
+    LONGSILOG(mealsId = "MEALSBEGINNER-09", imageRes = R.drawable.longsilog, mealsName = "Longganisa Itlog",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "25", fats = "25", carbs = "55"),
+    SCRAMBLEEGGS(mealsId = "MEALSBEGINNER-10", imageRes = R.drawable.scrambleeggs, mealsName = "Scramble Eggs",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "80", protein = "28", fats = "25", carbs = "40"),
+    // for lunch (30)
 
+
+    // for dinner(30)
 
 
 }
 // meals prep for Intermediate
 enum class MealsCategoriesIntermediate(val mealsId: String,
-                                   @DrawableRes val imageRes: Int,
-                                   val mealsName: String,
-                                   val fats: String,
-                                   val protien: String,
-                                   val carbs: String,
-                                   val calories:  String){
-    TUNAPANDESAL(mealsId = "MEALSINTERMEDIATE-01", imageRes = R.drawable.tuna_pandesal, mealsName = "Egg with Rice", calories = "59", protien = "15", fats = "10", carbs = "40"),
-    SINIGANG(mealsId = "MEALSINTERMEDIATE-02", imageRes = R.drawable.grilled_tilapia, mealsName = "Sinigang na beef", calories = "189", protien = "26", fats = "15", carbs = "23"),
-    ADOBO(mealsId = "MEALSINTERMEDIATE-03", imageRes = R.drawable.chicken_adobo, mealsName = "Adobo with Rice", calories = "170", protien = "30", fats = "25", carbs = "55"),
-    CHICKENINSAL(mealsId = "MEALSINTERMEDIATE-04", imageRes = R.drawable.chicken_inasal, mealsName = "Chiken Inasal", calories = "125", protien = "35", fats = "15", carbs = "50"),
-    CHICKENTOCINO(mealsId = "MEALSINTERMEDIATE-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino", calories = "150", protien = "15", fats = "  15", carbs = "50"),
-    CHICKENTINOLA(mealsId = "MEALSINTERMEDIATE-06", imageRes = R.drawable.chickentinola, mealsName = "Chicken Tinola", calories = "188", protien = "21", fats = "8", carbs = "7"),
-    SINIGANGNAPORK(mealsId = "MEALSINTERMEDIATE-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork", calories = "140", protien = "30", fats = "25", carbs = "55"),
-    BISTEK(mealsId = "MEALSINTERMEDIATE-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog", calories = "125", protien = "30", fats = "25", carbs = "55"),
-    CHICKENCALDS(mealsId = "MEALSINTERMEDIATE-09", imageRes = R.drawable.chicken_caldereta, mealsName = "Chicken Caldereta", calories = "113", protien = "30", fats = "25", carbs = "55"),
-    BANGUSBELLY(mealsId = "MEALSINTERMEDIATE-10", imageRes = R.drawable.bangus_belly, mealsName = "Bangus Belly", calories = "150", protien = "23", fats = "0", carbs = "0"),
+                                       @DrawableRes val imageRes: Int,
+                                       val mealsName: String,
+                                       val mealsDescription: String,
+                                       val mealTime: String,
+                                       val fats: String,
+                                       val protein: String,
+                                       val carbs: String,
+                                       val calories:  String){
+    // for breakfast (30)
+    TUNAPANDESAL(mealsId = "MEALSINTERMEDIATE-01", imageRes = R.drawable.tuna_pandesal, mealsName = "Egg with Rice",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "59", protein = "15", fats = "10", carbs = "40"),
+    SINIGANG(mealsId = "MEALSINTERMEDIATE-02", imageRes = R.drawable.grilled_tilapia, mealsName = "Sinigang na beef",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "189", protein = "26", fats = "15", carbs = "23"),
+    ADOBO(mealsId = "MEALSINTERMEDIATE-03", imageRes = R.drawable.chicken_adobo, mealsName = "Adobo with Rice",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "170", protein = "30", fats = "25", carbs = "55"),
+    CHICKENINSAL(mealsId = "MEALSINTERMEDIATE-04", imageRes = R.drawable.chicken_inasal, mealsName = "Chiken Inasal",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "35", fats = "15", carbs = "50"),
+    CHICKENTOCINO(mealsId = "MEALSINTERMEDIATE-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "15", fats = "  15", carbs = "50"),
+    CHICKENTINOLA(mealsId = "MEALSINTERMEDIATE-06", imageRes = R.drawable.chickentinola, mealsName = "Chicken Tinola",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "188", protein = "21", fats = "8", carbs = "7"),
+    SINIGANGNAPORK(mealsId = "MEALSINTERMEDIATE-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "140", protein = "30", fats = "25", carbs = "55"),
+    BISTEK(mealsId = "MEALSINTERMEDIATE-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "30", fats = "25", carbs = "55"),
+    CHICKENCALDS(mealsId = "MEALSINTERMEDIATE-09", imageRes = R.drawable.chicken_caldereta, mealsName = "Chicken Caldereta",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "113", protein = "30", fats = "25", carbs = "55"),
+    BANGUSBELLY(mealsId = "MEALSINTERMEDIATE-10", imageRes = R.drawable.bangus_belly, mealsName = "Bangus Belly",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "23", fats = "0", carbs = "0"),
+    // for lunch (30)
 
+
+    // for dinner(30)
 
 }
 // meals prep for Advance
 enum class MealsCategoriesAdvance(val mealsId: String,
-                                   @DrawableRes val imageRes: Int,
-                                   val mealsName: String,
-                                   val fats: String,
-                                   val protien: String,
-                                   val carbs: String,
-                                   val calories:  String){
-    TUNAOMELET(mealsId = "MEALSADVANCE-01", imageRes = R.drawable.tuna_omelette, mealsName = "Tuna Omelet", calories = "150", protien = "15", fats = "10", carbs = "40"),
-    SINIGANG(mealsId = "MEALSADVANCE-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef", calories = "185", protien = "26", fats = "15", carbs = "23"),
-    ADOBO(mealsId = "MEALSADVANCE-03", imageRes = R.drawable.adobo, mealsName = "Adobo with Rice", calories = "168", protien = "30", fats = "25", carbs = "55"),
-    KAREKARE(mealsId = "MEALSADVANCE-04", imageRes = R.drawable.kare_kare, mealsName = "Kare-Kare", calories = "183", protien = "35", fats = "15", carbs = "50"),
-    CHICKENTOCINO(mealsId = "MEALSADVANCE-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino", calories = "145", protien = "15", fats = "  15", carbs = "50"),
-    PORKMINUDO(mealsId = "MEALSADVANCE-06", imageRes = R.drawable.pork_menudo, mealsName = "Pork Menudo", calories = "132", protien = "21", fats = "8", carbs = "7"),
-    SINIGANGNAPORK(mealsId = "MEALSADVANCE-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork", calories = "150", protien = "30", fats = "25", carbs = "55"),
-    BISTEK(mealsId = "MEALSADVANCE-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog", calories = "150", protien = "30", fats = "25", carbs = "55"),
-    LONGSILOG(mealsId = "MEALSADVANCE-09", imageRes = R.drawable.longsilog, mealsName = "Longganisa Itlog", calories = "145", protien = "30", fats = "25", carbs = "55"),
-    SCRAMBLEEGGS(mealsId = "MEALSADVANCE-10", imageRes = R.drawable.scrambleeggs, mealsName = "Scramble Eggs", calories = "120", protien = "30", fats = "25", carbs = "55"),
+                                  @DrawableRes val imageRes: Int,
+                                  val mealsName: String,
+                                  val mealsDescription: String,
+                                  val mealTime: String,
+                                  val fats: String,
+                                  val protein: String,
+                                  val carbs: String,
+                                  val calories:  String){
+    // for breakfast (30)
+    TUNAOMELET(mealsId = "MEALSADVANCE-01", imageRes = R.drawable.tuna_omelette, mealsName = "Tuna Omelet",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "15", fats = "10", carbs = "40"),
+    SINIGANG(mealsId = "MEALSADVANCE-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "185", protein = "26", fats = "15", carbs = "23"),
+    ADOBO(mealsId = "MEALSADVANCE-03", imageRes = R.drawable.adobo, mealsName = "Adobo with Rice", mealsDescription ="", mealTime = MealTime.BREAKFAST.name,calories = "168", protein = "30", fats = "25", carbs = "55"),
+    KAREKARE(mealsId = "MEALSADVANCE-04", imageRes = R.drawable.kare_kare, mealsName = "Kare-Kare", mealsDescription ="", mealTime = MealTime.BREAKFAST.name,calories = "183", protein = "35", fats = "15", carbs = "50"),
+    CHICKENTOCINO(mealsId = "MEALSADVANCE-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "145", protein = "15", fats = "  15", carbs = "50"),
+    PORKMINUDO(mealsId = "MEALSADVANCE-06", imageRes = R.drawable.pork_menudo, mealsName = "Pork Menudo",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "132", protein = "21", fats = "8", carbs = "7"),
+    SINIGANGNAPORK(mealsId = "MEALSADVANCE-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "30", fats = "25", carbs = "55"),
+    BISTEK(mealsId = "MEALSADVANCE-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "30", fats = "25", carbs = "55"),
+    LONGSILOG(mealsId = "MEALSADVANCE-09", imageRes = R.drawable.longsilog, mealsName = "Longganisa Itlog",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "145", protein = "30", fats = "25", carbs = "55"),
+    SCRAMBLEEGGS(mealsId = "MEALSADVANCE-10", imageRes = R.drawable.scrambleeggs, mealsName = "Scramble Eggs",mealsDescription ="", mealTime = MealTime.BREAKFAST.name, calories = "120", protein = "30", fats = "25", carbs = "55"),
 
+    // for lunch (30)
+
+
+    // for dinner(30)
 }

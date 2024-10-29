@@ -10,8 +10,8 @@ enum class Screens(val screenName: String) {
     HEIGHT_SCREEN("HeightScreen"),
     WEIGHT_SCREEN("WeightScreen"),
     DASHBOARD_SCREEN("DashboardScreen"),
-    PLANS_SCREEN("Plans Screen"),
     HAMBURGER_SCREEN("Hamburger Screen"),
+    MEALSPROGRESS_SCREEN("Meals Progress Screen"),
     MEALS_SCREEN("Meals Screen"),
     BODYFAT_SCREEN("BodyFScreen"),
     BODYTYPE_SCREEN("BodyTScreen"),
@@ -25,7 +25,7 @@ enum class Screens(val screenName: String) {
     WORKOUT_PREVIEW_ITEM_SCREEN("Workout Preview GIF Screen"),
     FIRSTLAST_SCREEN("Name Screen"),
     ABOUTUS_SCREEN("About Us Screen"),
-    HELP_SCREEN("Help Screen")
+    HELP_SCREEN("Help Screen"),
 }
 
 
