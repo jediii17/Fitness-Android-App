@@ -125,7 +125,7 @@ enum class MealsCategoriesAdvance(val mealsId: String,
                                    val protien: String,
                                    val carbs: String,
                                    val calories:  String){
-    EGGWITHRICE(mealsId = "MEALSADVANCE-01", imageRes = R.drawable.egg_with_rice, mealsName = "Egg with Rice", calories = "150", protien = "15", fats = "10", carbs = "40"),
+    TUNAOMELET(mealsId = "MEALSADVANCE-01", imageRes = R.drawable.tuna_omelette, mealsName = "Tuna Omelet", calories = "150", protien = "15", fats = "10", carbs = "40"),
     SINIGANG(mealsId = "MEALSADVANCE-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef", calories = "185", protien = "26", fats = "15", carbs = "23"),
     ADOBO(mealsId = "MEALSADVANCE-03", imageRes = R.drawable.adobo, mealsName = "Adobo with Rice", calories = "168", protien = "30", fats = "25", carbs = "55"),
     KAREKARE(mealsId = "MEALSADVANCE-04", imageRes = R.drawable.kare_kare, mealsName = "Kare-Kare", calories = "183", protien = "35", fats = "15", carbs = "50"),

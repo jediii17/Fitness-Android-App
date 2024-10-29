@@ -3,6 +3,7 @@ package com.example.fitness.ui.categories.meals
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
+import com.example.fitness.ui.common.CommonHeader
 
 @Composable
 fun MealsWeekProgressScreen(navController: NavController) {
@@ -31,9 +33,16 @@ fun MealsWeekProgressScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(Color.White, shape = RoundedCornerShape(20.dp))
-            .shadow(8.dp, shape = RoundedCornerShape(20.dp))
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        CommonHeader(
+            text = "Meal Plan",
+            subText = "\"Stay motivated on your journey to healthier!\"",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
+        )
+        Spacer(modifier = Modifier.height(80.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,7 +56,7 @@ fun MealsWeekProgressScreen(navController: NavController) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(220.dp)
+                .height(250.dp)
                 .clip(RoundedCornerShape(20.dp))
         ) {
             Image(
@@ -111,11 +120,20 @@ fun TabButton(text: String, isSelected: Boolean) {
 
 @Composable
 fun NutritionInfo(value: String, label: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, style = MaterialTheme.typography.titleLarge, color = Color.Black)
-        Text(label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+    Box(
+        modifier = Modifier
+            .size(65.dp)
+            .clip(CircleShape)
+            .background(Color.LightGray),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(value, style = MaterialTheme.typography.titleLarge, color = Color.Black)
+            Text(label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+        }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
