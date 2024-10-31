@@ -418,11 +418,45 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Serve:\n" +
             "\n" +
             "Serve immediately, either plain or with your favorite toppings like cheese, herbs, or diced vegetables.", mealTime = MealTime.BREAKFAST.name, calories = "80", protein = "28", fats = "25", carbs = "40"),
-    // for lunch (15)
+    afae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    sefgef(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fawfafrf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fawohoawf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivwdeafafateen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
 
+    // for lunch (15)
+    one(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    two(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    three(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    four(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    five(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    six(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    seven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    eight(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    nine(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    ten(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    eleven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    twelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    thirteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fourteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fiveteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
 
     // for dinner(15)
-
+    dawd(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    tawdawwo(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    wda(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fowdaur(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivawdwae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    siawdx(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    sewadven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    eiwdght(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    niawdne(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    teawdn(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    elawdeven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    twawdelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    thiawdrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fouadwadrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivwdeteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
 
 }
 
@@ -801,10 +835,8 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Serve:\n" +
             "\n" +
             "Serve hot, garnished with sliced tomatoes and onions if desired. This dish pairs well with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "23", fats = "0", carbs = "0"),
-    // for lunch (15)
 
 
-    // for dinner(15)
 
 }
 
@@ -1138,9 +1170,43 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Serve:\n" +
             "\n" +
             "Remove from heat and serve immediately, as the residual heat will continue to cook the eggs slightly.", mealTime = MealTime.BREAKFAST.name, calories = "120", protein = "30", fats = "25", carbs = "55"),
-
+    afae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    sefgef(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fawfafrf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fawohoawf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivwdeafafateen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
     // for lunch (15)
-
+    one(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    two(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    three(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    four(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    five(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    six(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    seven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    eight(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    nine(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    ten(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    eleven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    twelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    thirteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fourteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fiveteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
 
     // for dinner(15)
+    dawd(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    tawdawwo(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    wda(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fowdaur(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivawdwae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    siawdx(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    sewadven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    eiwdght(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    niawdne(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    teawdn(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    elawdeven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    twawdelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    thiawdrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fouadwadrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivwdeteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+
 }
