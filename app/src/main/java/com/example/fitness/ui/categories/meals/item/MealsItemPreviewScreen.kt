@@ -20,13 +20,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
+import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.common.PrimaryButton
-import com.example.fitness.util.defaultPadding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun MealsItemPreviewScreen(navController: NavHostController) {
     var isDialogOpen by remember { mutableStateOf(false) }
-    var selectedMeal by remember { mutableStateOf("Breakfast") } // Track selected meal
+    var selectedMeal by remember { mutableStateOf("Breakfast") }
+    var showFinishedDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -48,6 +52,7 @@ fun MealsItemPreviewScreen(navController: NavHostController) {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(modifier = Modifier.height(80.dp))
+
         Text(
             text = "Day 1",
             style = MaterialTheme.typography.displayLarge,
@@ -117,7 +122,6 @@ fun MealsItemPreviewScreen(navController: NavHostController) {
             NutritionInfo("4g", "Fats")
         }
 
-        // Show dialog when isDialogOpen is true
         if (isDialogOpen) {
             AlertDialog(
                 onDismissRequest = { isDialogOpen = false },
@@ -139,12 +143,46 @@ fun MealsItemPreviewScreen(navController: NavHostController) {
         }
 
         Spacer(Modifier.height(20.dp))
-        PrimaryButton(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = "Done"
-        ) {
-            navController.popBackStack() // Navigate back to the previous screen
+
+        NavigationOptions(
+            isLastMeal = selectedMeal == "Dinner",
+            onMealFinishedClick = { showFinishedDialog = true },
+            onDoneClick = { navController.popBackStack() }
+        )
+
+        if (showFinishedDialog) {
+            DialogSuccess(
+                modifier = Modifier.fillMaxSize(),
+                icon = R.drawable.ic_success,
+                text = "Good job!",
+                buttonText = "OKAY"
+            ) {
+                showFinishedDialog = false
+                CoroutineScope(Dispatchers.IO).launch {
+                }
+                navController.popBackStack()
+            }
         }
+    }
+}
+
+@Composable
+fun NavigationOptions(
+    isLastMeal: Boolean,
+    onMealFinishedClick: () -> Unit,
+    onDoneClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 28.dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        PrimaryButton(
+            iconSuffix = if (isLastMeal) R.drawable.ic_flag else R.drawable.ic_check,
+            text = if (isLastMeal) "FINISH MEAL PREP" else "DONE",
+            onClick = { if (isLastMeal) onMealFinishedClick() else onDoneClick() }
+        )
     }
 }
 
@@ -175,7 +213,7 @@ fun NutritionInfo(value: String, label: String) {
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(value, style = MaterialTheme.typography.titleLarge, color = Color.Black)
-            Text(label, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+            Text(label, style = MaterialTheme.typography.labelSmall)
         }
     }
 }
