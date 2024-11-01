@@ -1,6 +1,7 @@
 package com.example.fitnesstracker.ui.navigation
 
 import Hamburger
+import MealsItemPreviewScreen
 import ProfileScreen
 import com.example.fitness.ui.categories.workout.WorkoutWeekProgressScreen
 import WeightScreen
@@ -22,7 +23,6 @@ import com.example.fitnesstracker.ui.categories.GoalsLeanScreen
 import com.example.fitnesstracker.ui.categories.GoalsNaturalScreen
 import com.example.fitness.ui.categories.height.HeightScreen
 import com.example.fitness.ui.categories.meals.MealsWeekProgressScreen
-import com.example.fitness.ui.categories.meals.item.MealsItemPreviewScreen
 import com.example.fitness.ui.categories.profile.FirstLastNameScreen
 import com.example.fitness.ui.help.HelpScreen
 import com.example.fitnesstracker.ui.dashboard.DashboardScreen

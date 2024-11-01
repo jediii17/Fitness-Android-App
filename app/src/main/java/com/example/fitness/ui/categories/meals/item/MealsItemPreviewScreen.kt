@@ -1,30 +1,11 @@
-package com.example.fitness.ui.categories.meals.item
-
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,24 +20,32 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
-import com.example.fitness.ui.categories.meals.MealsWeekProgressScreen
-import com.example.fitness.ui.common.CommonHeader
-
+import com.example.fitness.ui.common.PrimaryButton
+import com.example.fitness.util.defaultPadding
 
 @Composable
-fun MealsItemPreviewScreen(navController: NavHostController){
+fun MealsItemPreviewScreen(navController: NavHostController) {
+    var isDialogOpen by remember { mutableStateOf(false) }
+    var selectedMeal by remember { mutableStateOf("Breakfast") } // Track selected meal
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Spacer(modifier = Modifier.height(10.dp))
-        CommonHeader(
+
+        Text(
             text = "Meal Plan",
-            subText = "Stay motivated on your journey to be healthier.",
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
+            style = MaterialTheme.typography.headlineMedium,
+            color = Color.Black,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        Text(
+            text = "Stay motivated on your journey to be healthier.",
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Gray,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(modifier = Modifier.height(80.dp))
         Text(
@@ -64,23 +53,27 @@ fun MealsItemPreviewScreen(navController: NavHostController){
             style = MaterialTheme.typography.displayLarge,
             color = Color.Black,
             fontSize = 25.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            TabButton("Breakfast", isSelected = true)
-            TabButton("Lunch", isSelected = false)
-            TabButton("Dinner", isSelected = false)
+            TabButton("Breakfast", selectedMeal == "Breakfast") { selectedMeal = "Breakfast" }
+            TabButton("Lunch", selectedMeal == "Lunch") { selectedMeal = "Lunch" }
+            TabButton("Dinner", selectedMeal == "Dinner") { selectedMeal = "Dinner" }
         }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
                 .clip(RoundedCornerShape(20.dp))
+                .clickable { isDialogOpen = true }
         ) {
             Image(
                 painter = painterResource(id = R.drawable.chickentinola),
@@ -111,6 +104,7 @@ fun MealsItemPreviewScreen(navController: NavHostController){
                 )
             }
         }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -122,13 +116,40 @@ fun MealsItemPreviewScreen(navController: NavHostController){
             NutritionInfo("40g", "Carbs")
             NutritionInfo("4g", "Fats")
         }
+
+        // Show dialog when isDialogOpen is true
+        if (isDialogOpen) {
+            AlertDialog(
+                onDismissRequest = { isDialogOpen = false },
+                confirmButton = {
+                    Button(onClick = { isDialogOpen = false }) {
+                        Text("Close")
+                    }
+                },
+                text = {
+                    Column {
+                        Text("Ingredients")
+                        Text("- Chicken")
+                        Text("- Ginger")
+                        Text("- Green Papaya")
+                        Text("- Spinach")
+                    }
+                }
+            )
+        }
+
+        Spacer(Modifier.height(20.dp))
+        PrimaryButton(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = "Done"
+        ) {
+            navController.popBackStack() // Navigate back to the previous screen
+        }
     }
 }
 
-
-
 @Composable
-fun TabButton(text: String, isSelected: Boolean) {
+fun TabButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
     Text(
         text = text,
         color = if (isSelected) Color.White else Color.Black,
@@ -138,6 +159,7 @@ fun TabButton(text: String, isSelected: Boolean) {
                 color = if (isSelected) Color(0xFF2A9D8F) else Color.LightGray,
                 shape = RoundedCornerShape(20.dp)
             )
+            .clickable { onClick() }
             .padding(horizontal = 20.dp, vertical = 10.dp)
     )
 }
@@ -158,11 +180,9 @@ fun NutritionInfo(value: String, label: String) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun MealsItemPreviewScreenPreview() {
     val navController = rememberNavController()
     MealsItemPreviewScreen(navController)
 }
-
