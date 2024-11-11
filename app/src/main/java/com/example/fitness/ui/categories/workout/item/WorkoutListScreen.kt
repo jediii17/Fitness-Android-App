@@ -207,8 +207,9 @@ fun Header(day: Int, workoutCount: Int, totalDuration: Int) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CommonHeader(
+            textAlign = TextAlign.Center,
             text = Constant.bodyTypeCategory,
-            textAlign = TextAlign.Center
+            fontSize = 16.sp
         )
         Text(
             text = "Workouts: $workoutCount",

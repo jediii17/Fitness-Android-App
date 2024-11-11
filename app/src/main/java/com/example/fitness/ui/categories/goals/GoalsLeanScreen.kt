@@ -1,7 +1,6 @@
 package com.example.fitnesstracker.ui.categories
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -25,16 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.fitness.R
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.categories.goals.BodyGoalsViewModel
 import com.example.fitness.ui.common.CommonHeader
@@ -62,11 +56,12 @@ fun GoalsLeanScreen(navController: NavController) {
     ) {
         Spacer(modifier = Modifier.height(32.dp))
         CommonHeader(
-            text = "Lean",
-            subText =  "Please choose your goals.",
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
+            text = "Lean",
+            subText =  "Please choose your goals.",
+            fontSize = 16.sp
         )
         Spacer(modifier = Modifier.height(190.dp))
 

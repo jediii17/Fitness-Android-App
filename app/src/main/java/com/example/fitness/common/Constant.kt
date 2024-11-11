@@ -1,11 +1,8 @@
 package com.example.fitness.common
 
-import androidx.compose.material3.AssistChipDefaults.Height
-import androidx.compose.runtime.MutableFloatState
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.text.font.FontSynthesis.Companion.Weight
+import com.example.fitness.domain.dto.MealsDto
 
 object Constant {
     var isLogin = mutableStateOf(false) // false is default bypass muna
@@ -15,8 +12,12 @@ object Constant {
 
     var bodyTypeCategory = BodyType.BEGINNER.name
 
-    val COMPLETED_STATUS = "COMPLETED"
-    val MAX_WEEK_COUNT = 4
+    //cache menu highlight
+    val mealHighlightCache = mutableListOf<MealsDto>()
+
+    const val NO_MEAL_HIGHLIGHT_ID = "@NO_MEAL_HIGHLIGHT_ID@"
+    const val COMPLETED_STATUS = "COMPLETED"
+    const val MAX_WEEK_COUNT = 4
 
     //for logout purposes
     fun logoutReset(){

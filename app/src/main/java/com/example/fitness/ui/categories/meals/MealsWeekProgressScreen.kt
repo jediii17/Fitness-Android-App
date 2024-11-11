@@ -92,7 +92,11 @@ fun MealsWeekProgressScreen(navController: NavController) {
         completedDaysList = completedDaysList,
         mealsHighlights = mealsUiState.mealsHighlights,
     ){
-        navController.navigate(Screens.MEALS_SCREEN.screenName)
+        if(mealsUiState.mealsWeekCount == 0 && mealsUiState.mealsDayCount == 0){
+            navController.navigate(Screens.MEALS_SCREEN.screenName + "/${mealsUiState.mealsHighlights.getOrNull(0)}")
+        }else{
+            navController.navigate(Screens.MEALS_SCREEN.screenName+"/${Constant.NO_MEAL_HIGHLIGHT_ID}")//send only empty content -> to get from the enums
+        }
     }
 }
 
@@ -106,11 +110,12 @@ fun MealsProgressContent(
         .fillMaxSize()
         .background(MyColorTheme.backgroundMainDirtyWhite)){
         CommonHeader(
-            text = "Weekly Meal Plan",
-            subText = "Let's check your food nutrition & calories",
             modifier = Modifier
                 .fillMaxWidth()
-                .defaultPadding()
+                .defaultPadding(),
+            text = "Weekly Meal Plan",
+            subText = "Let's check your food nutrition & calories.",
+            fontSize = 16.sp
         )
         LazyColumn(
             modifier = Modifier
@@ -132,7 +137,6 @@ fun MealsProgressContent(
                                 }
                             )
                         }
-
                     }
 
                 }

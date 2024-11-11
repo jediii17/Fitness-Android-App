@@ -36,7 +36,9 @@ import androidx.compose.ui.window.Dialog
 import com.example.fitness.R
 import com.example.fitness.ui.theme.greenMain_light
 import androidx.compose.material.*
+import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.*
+import androidx.compose.ui.window.DialogProperties
 
 
 @Composable
@@ -45,14 +47,18 @@ fun DialogSuccess(modifier: Modifier = Modifier,
                   text: String = "Updated successfully ",
                   buttonText: String = "OKAY",
                   onclick: () -> Unit) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(Color.Gray.copy(0.3f))){
+
+    Dialog(onDismissRequest = {  onclick() },
+        properties = DialogProperties(
+            dismissOnBackPress = false,
+            dismissOnClickOutside = false,
+        )
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth(.99f)
                 .padding(horizontal = 16.dp)
-                .align(Alignment.Center)
+               // .align(Alignment.Center)
                 .background(
                     Color.White, RoundedCornerShape(20.dp)
                 )
@@ -109,14 +115,16 @@ fun DialogConfirmation(modifier: Modifier = Modifier,
                        onYesClick: () -> Unit,
                        onNoClick: () -> Unit,
                        ) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(Color.Gray.copy(0.3f))){
+    Dialog(onDismissRequest = {  onNoClick() },
+        properties = DialogProperties(
+            dismissOnBackPress = false,
+            dismissOnClickOutside = false,
+        )
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth(.99f)
                 .padding(horizontal = 16.dp)
-                .align(Alignment.Center)
                 .background(
                     Color.White, RoundedCornerShape(20.dp)
                 )

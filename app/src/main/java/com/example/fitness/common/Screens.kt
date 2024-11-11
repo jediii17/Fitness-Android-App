@@ -22,7 +22,6 @@ enum class Screens(val screenName: String) {
     MESSAGE_SCREEN("Message Screen"),
     WORKOUT_LIST_SCREEN("Workout List Screen"),
     WORKOUTPROGRESS_SCREEN("Workout Progress Screen"),
-    WORKOUT_PREVIEW_ITEM_SCREEN("Workout Preview GIF Screen"),
     FIRSTLAST_SCREEN("Name Screen"),
     ABOUTUS_SCREEN("About Us Screen"),
     HELP_SCREEN("Help Screen"),

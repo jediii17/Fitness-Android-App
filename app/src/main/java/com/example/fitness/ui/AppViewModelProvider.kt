@@ -1,7 +1,5 @@
 package com.example.fitness.ui
 
-//import com.example.fitness.ui.categories.profile.UpdateUserProfile
-//import com.example.fitness.ui.categories.profile.UpdateUserProfileViewModel
 import ProfileViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -14,6 +12,7 @@ import com.example.fitness.ui.categories.gender.GenderViewModel
 import com.example.fitness.ui.categories.goals.BodyGoalsViewModel
 import com.example.fitness.ui.categories.height.HeightViewModel
 import com.example.fitness.ui.categories.meals.MealsWeekProgressViewModel
+import com.example.fitness.ui.categories.meals.item.MealsItemPreviewViewModel
 import com.example.fitness.ui.categories.weight.WeightViewModel
 import com.example.fitness.ui.categories.workout.WorkoutWeekProgressViewModel
 import com.example.fitness.ui.categories.workout.item.WorkoutListViewModel
@@ -116,6 +115,14 @@ object AppViewModelProvider {
             MealsWeekProgressViewModel(
                 getMealsProgressUseCase = fitnessApplication().container.getMealsProgressUseCase,
                 getMealsListUseCase = fitnessApplication().container.getMealsListUseCase,
+            )
+        }
+
+        initializer {
+            MealsItemPreviewViewModel(
+                getMealsProgressUseCase = fitnessApplication().container.getMealsProgressUseCase,
+                getMealsListUseCase = fitnessApplication().container.getMealsListUseCase,
+                insertMealsProgressUseCase = fitnessApplication().container.insertMealsProgressUseCase,
             )
         }
 

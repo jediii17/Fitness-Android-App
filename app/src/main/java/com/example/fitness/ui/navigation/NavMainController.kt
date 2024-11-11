@@ -87,9 +87,7 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
         composable(route = Screens.DASHBOARD_SCREEN.screenName) {
             DashboardScreen(navController = navController)
         }
-        composable(route = Screens.MEALS_SCREEN.screenName) {
-            MealsItemPreviewScreen(navController = navController)
-        }
+
         composable(route = Screens.HAMBURGER_SCREEN.screenName) {
             Hamburger(navController = navController)
         }
@@ -115,17 +113,13 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
             HelpScreen(navController = navController)
         }
 
-        //TODO To be removed
-        composable(
-            route = "${Screens.WORKOUT_PREVIEW_ITEM_SCREEN.screenName}/{workoutId}",
-        ) { navBackStackEntry ->
-            val workoutId = navBackStackEntry.arguments?.getString("workoutId")
-            workoutId?.let { id ->
-               // WorkoutItemPreviewScreen(navController = navController, workoutId = id)
-            }
-        }
         composable(route = Screens.MEALSPROGRESS_SCREEN.screenName) {
             MealsWeekProgressScreen(navController = navController)
+        }
+
+        composable(route = Screens.MEALS_SCREEN.screenName + "/{mealId}") { navBackStackEntry ->
+            val mealId = navBackStackEntry.arguments?.getString("mealId")
+            MealsItemPreviewScreen(navController = navController, mealId = mealId)
         }
     }
 }

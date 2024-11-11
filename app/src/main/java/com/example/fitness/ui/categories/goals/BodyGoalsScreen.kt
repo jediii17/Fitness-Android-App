@@ -23,21 +23,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.categories.goals.BodyGoalsViewModel
-import com.example.fitness.ui.categories.height.HeightScreen
-import com.example.fitness.ui.categories.height.HeightViewModel
 import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.theme.darkGreen_dark
-import com.example.fitness.ui.theme.green
 import com.example.fitness.ui.theme.greenMain_light
 import com.example.fitnesstracker.common.Screens
 import kotlinx.coroutines.CoroutineScope
@@ -59,11 +52,12 @@ fun BodyGoalsScreen(navController: NavController) {
     ) {
         Spacer(modifier = Modifier.height(32.dp))
         CommonHeader(
-            text = "Athletic",
-            subText =  "Please choose your goals.",
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
+            text = "Athletic",
+            subText =  "Please choose your goals.",
+            fontSize = 16.sp
         )
 
         Spacer(modifier = Modifier.height(190.dp))

@@ -1,6 +1,5 @@
 package com.example.fitness.domain.dto
 
-import com.example.fitness.data.entity.MealsEntity
 
 data class MealsDto(
     val mealsId: String,

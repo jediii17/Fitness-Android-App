@@ -12,7 +12,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,10 +24,8 @@ import com.example.fitness.common.Constant
 import com.example.fitness.common.Gender
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.categories.bodytype.BodyTypeViewModel
-import com.example.fitness.ui.categories.gender.GenderViewModel
 import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.theme.darkGreen_dark
-import com.example.fitness.ui.theme.green
 import com.example.fitness.ui.theme.greenMain_light
 import com.example.fitnesstracker.common.Screens
 import kotlinx.coroutines.CoroutineScope
@@ -51,11 +48,12 @@ fun BodyTypeScreen(navController: NavController,) {
     ) {
         Spacer(modifier = Modifier.height(32.dp))
         CommonHeader(
-            text = "Body Type Level",
-            subText =  "Choose your body type level.",
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
+            text = "Body Type Level",
+            subText =  "Choose your body type level.",
+            fontSize = 16.sp
         )
         Spacer(modifier = Modifier.height(100.dp))
 

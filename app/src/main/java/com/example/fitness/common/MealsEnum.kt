@@ -5,10 +5,10 @@ import com.example.fitness.R
 
 
 
-enum class MealTime{
-    BREAKFAST,
-    LUNCH,
-    DINNER
+enum class MealTime(val label: String){
+    BREAKFAST("Breakfast"),
+    LUNCH("Lunch"),
+    DINNER("Dinner"),
 }
 
 /********************************************************
@@ -24,7 +24,28 @@ enum class MealsCategoriesForLean(val mealsId: String,
                                   val protein: String,
                                   val carbs: String,
                                   val calories:  String){
-    // for breakfast (15)
+
+    // for BREAKFAST (15)
+    Tuna(mealsId = "TUNA-01", imageRes = R.drawable.chicken_tocino_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    two(mealsId = "", imageRes = R.drawable.chickentinola_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    three(mealsId = "", imageRes = R.drawable.inihawnababoybreakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    four(mealsId = "", imageRes = R.drawable.chicken_tocino_with_brown_rice_breakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    five(mealsId = "", imageRes = R.drawable.fish_escabeche_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    six(mealsId = "", imageRes = R.drawable.grilled_chicken_inasal__breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    seven(mealsId = "", imageRes = R.drawable.pandesal_spread_with_creamy_peanut_butter_breakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    eight(mealsId = "", imageRes = R.drawable.paksiw_na_pata_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    nine(mealsId = "", imageRes = R.drawable.oatmeal_with_almond_milk__topped_with_bananas_and_chia_seeds_boiled_egg_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    ten(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    eleven(mealsId = "", imageRes = R.drawable.scrambled_eggs_made_with_3_eggs_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    twelve(mealsId = "", imageRes = R.drawable.tinolang_manok__chicken_stew__breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    thirteen(mealsId = "", imageRes = R.drawable.sinigang_na_hipon_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    fourteen(mealsId = "", imageRes = R.drawable.tinola_with_malunggay__chicken_tinola__breakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    fiveteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+
+
+
+
+    // for LUNCH (15)
     EGGWITHRICE(mealsId = "MEALSBEGINNER-01", imageRes = R.drawable.egg_with_rice, mealsName = "Egg with Rice", mealsDescription ="Ingredients\n" +
             "Rice:\n" +
             "\n" +
@@ -53,7 +74,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "\n" +
             "Combine: Once the rice is cooked, add it to the skillet with the scrambled eggs. Mix well and season with soy sauce, pepper, and any optional ingredients.\n" +
             "\n" +
-            "Serve: Garnish with chopped green onions or any other desired toppings.", mealTime = MealTime.BREAKFAST.name, calories = "190", protein = "15", fats = "10", carbs = "40"),
+            "Serve: Garnish with chopped green onions or any other desired toppings.", mealTime = MealTime.LUNCH.label, calories = "190", protein = "15", fats = "10", carbs = "40"),
     SINIGANG(mealsId = "MEALSBEGINNER-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef",mealsDescription ="Ingredients\n" +
             "Beef:\n" +
             "\n" +
@@ -90,7 +111,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "\n" +
             "Finish with Kangkong: Add the water spinach and let it cook for a few more minutes until wilted.\n" +
             "\n" +
-            "Serve: Enjoy hot with rice!", mealTime = MealTime.BREAKFAST.name, calories = "170", protein = "26", fats = "15", carbs = "23"),
+            "Serve: Enjoy hot with rice!", mealTime = MealTime.LUNCH.label, calories = "170", protein = "26", fats = "15", carbs = "23"),
     ADOBO(mealsId = "MEALSBEGINNER-03", imageRes = R.drawable.adobo, mealsName = "Adobo with Rice",mealsDescription ="Ingredients\n" +
             "Rice:\n" +
             "\n" +
@@ -124,7 +145,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Once the adobo is cooked, shred the meat (if desired) and stir it into the cooked rice. Mix thoroughly, allowing the rice to absorb the adobo flavors.\n" +
             "Serve:\n" +
             "\n" +
-            "Garnish with chopped green onions. Serve hot as a main dish or side.", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "30", fats = "25", carbs = "55"),
+            "Garnish with chopped green onions. Serve hot as a main dish or side.", mealTime = MealTime.LUNCH.label, calories = "125", protein = "30", fats = "25", carbs = "55"),
     KAREKARE(mealsId = "MEALSBEGINNER-04", imageRes = R.drawable.kare_kare, mealsName = "Kare-Kare",mealsDescription ="Ingredients\n" +
             "Meat:\n" +
             "\n" +
@@ -156,7 +177,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Add the eggplant, banana heart, and string beans. Cook until the vegetables are tender. Finally, add bok choy or kangkong and cook briefly.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with shrimp paste on the side and steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "123", protein = "35", fats = "15", carbs = "50"),
+            "Serve hot with shrimp paste on the side and steamed rice.", mealTime = MealTime.LUNCH.label, calories = "123", protein = "35", fats = "15", carbs = "50"),
     CHICKENTOCINO(mealsId = "MEALSBEGINNER-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino",mealsDescription ="Ingredients\n" +
             "Chicken:\n" +
             "\n" +
@@ -183,7 +204,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Add the marinated chicken (discard any excess marinade) and cook until browned and cooked through, about 10-15 minutes. Stir occasionally to ensure even cooking.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with garlic rice and a side of fried eggs for a classic breakfast.", mealTime = MealTime.BREAKFAST.name, calories = "145", protein = "15", fats = "  15", carbs = "50"),
+            "Serve hot with garlic rice and a side of fried eggs for a classic breakfast.", mealTime = MealTime.LUNCH.label, calories = "145", protein = "15", fats = "  15", carbs = "50"),
     CHICKENTINOLA(mealsId = "MEALSBEGINNER-06", imageRes = R.drawable.chickentinola, mealsName = "Chicken Tinola",mealsDescription ="Ingredients\n" +
             "Chicken:\n" +
             "\n" +
@@ -218,7 +239,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Stir in the spinach or moringa leaves and cook for another minute until wilted.\n" +
             "Serve:\n" +
             "\n" +
-            "Adjust seasoning to taste. Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "188", protein = "21", fats = "8", carbs = "7"),
+            "Adjust seasoning to taste. Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "188", protein = "21", fats = "8", carbs = "7"),
     SINIGANGNAPORK(mealsId = "MEALSBEGINNER-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork",mealsDescription ="Ingredients\n" +
             "Pork:\n" +
             "\n" +
@@ -257,7 +278,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Add the eggplant, string beans, and kangkong. Cook for a few more minutes until the vegetables are tender.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "160", protein = "30", fats = "25", carbs = "55"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "160", protein = "30", fats = "25", carbs = "55"),
     BISTEK(mealsId = "MEALSBEGINNER-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog",mealsDescription ="Ingredients\n" +
             "Beef:\n" +
             "\n" +
@@ -293,7 +314,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Return the sautéed onions to the pan and mix well.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "160", protein = "35", fats = "15", carbs = "65"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "160", protein = "35", fats = "15", carbs = "65"),
     LONGSILOG(mealsId = "MEALSBEGINNER-09", imageRes = R.drawable.longsilog, mealsName = "Longganisa Itlog",mealsDescription ="Ingredients\n" +
             "Longganisa:\n" +
             "\n" +
@@ -321,7 +342,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "In a separate pan, heat a little oil over medium heat. Crack the eggs into the pan and cook to your desired doneness (sunny-side up, scrambled, etc.).\n" +
             "Serve:\n" +
             "\n" +
-            "Plate the cooked longganisa with the eggs. Serve with garlic rice and optional sides like sliced tomatoes or cucumber.", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "25", fats = "25", carbs = "55"),
+            "Plate the cooked longganisa with the eggs. Serve with garlic rice and optional sides like sliced tomatoes or cucumber.", mealTime = MealTime.LUNCH.label, calories = "125", protein = "25", fats = "25", carbs = "55"),
     SCRAMBLEEGGS(mealsId = "MEALSBEGINNER-10", imageRes = R.drawable.scrambleeggs, mealsName = "Scramble Eggs",mealsDescription ="Ingredients\n" +
             "4 large eggs\n" +
             "1-2 tablespoons of milk or cream (optional, for creaminess)\n" +
@@ -346,46 +367,24 @@ enum class MealsCategoriesForLean(val mealsId: String,
             "Remove the pan from the heat when the eggs are just set (they will continue to cook from residual heat). Adjust seasoning if needed.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve immediately, either plain or with your favorite toppings like cheese, herbs, or diced vegetables.", mealTime = MealTime.BREAKFAST.name, calories = "80", protein = "28", fats = "25", carbs = "40"),
-    afae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    sefgef(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fawfafrf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fawohoawf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fivwdeafafateen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+            "Serve immediately, either plain or with your favorite toppings like cheese, herbs, or diced vegetables.", mealTime = MealTime.LUNCH.label, calories = "80", protein = "28", fats = "25", carbs = "40"),
 
-    // for lunch (15)
-    one(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    two(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    three(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    four(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    five(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    six(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    seven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    eight(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    nine(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    ten(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    eleven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    twelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    thirteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fourteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fiveteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-
-    // for dinner(15)
-    dawd(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    tawdawwo(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    wda(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fowdaur(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fivawdwae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    siawdx(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    sewadven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    eiwdght(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    niawdne(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    teawdn(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    elawdeven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    twawdelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    thiawdrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fouadwadrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fivwdeteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+          // for dinner(15)
+          dawd(mealsId = "", imageRes = R.drawable.beef_caldereta_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          tawdawwo(mealsId = "", imageRes = R.drawable.chicken_adobo_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          wda(mealsId = "", imageRes = R.drawable.chicken_adobo_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          fowdaur(mealsId = "", imageRes = R.drawable.pinakbet_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          fivawdwae(mealsId = "", imageRes = R.drawable.chicken_caldereta_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          siawdx(mealsId = "", imageRes = R.drawable.bangus_belly_sinigang_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          sewadven(mealsId = "", imageRes = R.drawable.grilled_bangus_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          eiwdght(mealsId = "", imageRes = R.drawable.grilled_tilapia_w_spinach_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+          niawdne(mealsId = "", imageRes = R.drawable.pork_binagoongan_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          teawdn(mealsId = "", imageRes = R.drawable.chicken_tocino_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          elawdeven(mealsId = "", imageRes = R.drawable.tuna_omellete_with_mango_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+          twawdelve(mealsId = "", imageRes = R.drawable.pandesal_with_peanut_and_papaya_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          thiawdrteen(mealsId = "", imageRes = R.drawable.tuna_pandesal_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          fouadwadrteen(mealsId = "", imageRes = R.drawable.pork_nilaga_with_cucumber_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+          fivwdeteen(mealsId = "", imageRes = R.drawable.tuna__dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
 
 }
 
@@ -402,7 +401,24 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
                                       val protein: String,
                                       val carbs: String,
                                       val calories:  String){
-    // for breakfast (15)
+
+    // for BREAKFAST (15)
+    Tuna(mealsId = "TUNA-01", imageRes = R.drawable.chicken_tocino_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    two(mealsId = "", imageRes = R.drawable.chickentinola_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    three(mealsId = "", imageRes = R.drawable.inihawnababoybreakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    four(mealsId = "", imageRes = R.drawable.chicken_tocino_with_brown_rice_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    five(mealsId = "", imageRes = R.drawable.fish_escabeche_breakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    six(mealsId = "", imageRes = R.drawable.grilled_chicken_inasal__breakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    seven(mealsId = "", imageRes = R.drawable.pandesal_spread_with_creamy_peanut_butter_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    eight(mealsId = "", imageRes = R.drawable.paksiw_na_pata_breakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    nine(mealsId = "", imageRes = R.drawable.oatmeal_with_almond_milk__topped_with_bananas_and_chia_seeds_boiled_egg_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    ten(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    eleven(mealsId = "", imageRes = R.drawable.scrambled_eggs_made_with_3_eggs_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    twelve(mealsId = "", imageRes = R.drawable.tinolang_manok__chicken_stew__breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+
+
+
+    // for LUNCH (15)
     TUNAPANDESAL(mealsId = "MEALSINTERMEDIATE-01", imageRes = R.drawable.tuna_pandesal, mealsName = "Tuna Pandesal",mealsDescription ="Ingredients\n" +
             "For the Pandesal:\n" +
             "4 cups all-purpose flour\n" +
@@ -451,7 +467,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Once the pandesal has cooled slightly, cut them in half and fill with the tuna mixture.\n" +
             "Serve:\n" +
             "\n" +
-            "Enjoy your Tuna Pandesal warm or at room temperature!", mealTime = MealTime.BREAKFAST.name, calories = "59", protein = "15", fats = "10", carbs = "40"),
+            "Enjoy your Tuna Pandesal warm or at room temperature!", mealTime = MealTime.LUNCH.label, calories = "59", protein = "15", fats = "10", carbs = "40"),
     SINIGANG(mealsId = "MEALSINTERMEDIATE-02", imageRes = R.drawable.grilled_tilapia, mealsName = "Sinigang na beef",mealsDescription ="Ingredients\n" +
             "Beef:\n" +
             "\n" +
@@ -493,7 +509,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Add the eggplant, string beans, and kangkong. Cook for a few more minutes until the vegetables are tender.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "189", protein = "26", fats = "15", carbs = "23"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "189", protein = "26", fats = "15", carbs = "23"),
     ADOBO(mealsId = "MEALSINTERMEDIATE-03", imageRes = R.drawable.chicken_adobo, mealsName = "Adobo with Rice",mealsDescription ="Ingredients\n" +
             "For the Adobo:\n" +
             "1.5 pounds of chicken, pork, or a mix (cut into pieces)\n" +
@@ -529,7 +545,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Cook according to the rice cooker instructions or bring to a boil on the stovetop, then reduce heat to low, cover, and simmer until the rice is tender and the water is absorbed (about 18-20 minutes).\n" +
             "Serve:\n" +
             "Plate the Dish:\n" +
-            "Serve the adobo over a bed of rice. Drizzle some sauce over the top for added flavor.", mealTime = MealTime.BREAKFAST.name, calories = "170", protein = "30", fats = "25", carbs = "55"),
+            "Serve the adobo over a bed of rice. Drizzle some sauce over the top for added flavor.", mealTime = MealTime.LUNCH.label, calories = "170", protein = "30", fats = "25", carbs = "55"),
     CHICKENINSAL(mealsId = "MEALSINTERMEDIATE-04", imageRes = R.drawable.chicken_inasal, mealsName = "Chiken Inasal",mealsDescription ="Ingredients\n" +
             "For the Marinade:\n" +
             "\n" +
@@ -562,7 +578,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Place the chicken on the grill. Cook for about 5-7 minutes on each side, basting with the oil and vinegar mixture every few minutes until the chicken is cooked through and has nice grill marks.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve the Chicken Inasal hot, with steamed rice and a side of vinegar dip or soy sauce with chopped chilies.", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "35", fats = "15", carbs = "50"),
+            "Serve the Chicken Inasal hot, with steamed rice and a side of vinegar dip or soy sauce with chopped chilies.", mealTime = MealTime.LUNCH.label, calories = "125", protein = "35", fats = "15", carbs = "50"),
     CHICKENTOCINO(mealsId = "MEALSINTERMEDIATE-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino",mealsDescription ="Ingredients\n" +
             "For the Chicken:\n" +
             "\n" +
@@ -588,7 +604,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Heat the cooking oil in a pan over medium heat. Add the marinated chicken (discard excess marinade) and cook until browned and cooked through, about 5-7 minutes per side.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with garlic rice and a side of fried eggs for a classic breakfast experience.", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "15", fats = "  15", carbs = "50"),
+            "Serve hot with garlic rice and a side of fried eggs for a classic breakfast experience.", mealTime = MealTime.LUNCH.label, calories = "150", protein = "15", fats = "  15", carbs = "50"),
     CHICKENTINOLA(mealsId = "MEALSINTERMEDIATE-06", imageRes = R.drawable.chickentinola, mealsName = "Chicken Tinola",mealsDescription ="Ingredients\n" +
             "Chicken:\n" +
             "\n" +
@@ -623,7 +639,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Stir in the spinach or moringa leaves and cook for another minute until wilted.\n" +
             "Serve:\n" +
             "\n" +
-            "Adjust seasoning to taste. Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "188", protein = "21", fats = "8", carbs = "7"),
+            "Adjust seasoning to taste. Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "188", protein = "21", fats = "8", carbs = "7"),
     SINIGANGNAPORK(mealsId = "MEALSINTERMEDIATE-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork",mealsDescription ="Ingredients\n" +
             "For the Soup:\n" +
             "Pork:\n" +
@@ -661,7 +677,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Add the eggplant, string beans, and kangkong. Cook for a few more minutes until the vegetables are tender.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "140", protein = "30", fats = "25", carbs = "55"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "140", protein = "30", fats = "25", carbs = "55"),
     BISTEK(mealsId = "MEALSINTERMEDIATE-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog",mealsDescription ="Ingredients\n" +
             "For the Beef:\n" +
             "1 to 1.5 pounds of beef sirloin or flank steak (sliced thinly against the grain)\n" +
@@ -692,7 +708,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Return the sautéed onions to the pan and mix well.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "125", protein = "30", fats = "25", carbs = "55"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "125", protein = "30", fats = "25", carbs = "55"),
     CHICKENCALDS(mealsId = "MEALSINTERMEDIATE-09", imageRes = R.drawable.chicken_caldereta, mealsName = "Chicken Caldereta",mealsDescription ="Ingredients\n" +
             "For the Chicken:\n" +
             "\n" +
@@ -738,7 +754,7 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "Adjust seasoning with salt and pepper to taste.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "113", protein = "30", fats = "25", carbs = "55"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "113", protein = "30", fats = "25", carbs = "55"),
     BANGUSBELLY(mealsId = "MEALSINTERMEDIATE-10", imageRes = R.drawable.bangus_belly, mealsName = "Bangus Belly",mealsDescription ="Ingredients\n" +
             "For the Bangus Belly:\n" +
             "\n" +
@@ -763,8 +779,24 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
             "For Pan-Frying: Heat oil in a pan over medium heat. Add the marinated bangus belly and cook for about 5-7 minutes on each side, or until golden brown and cooked through.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot, garnished with sliced tomatoes and onions if desired. This dish pairs well with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "23", fats = "0", carbs = "0"),
+            "Serve hot, garnished with sliced tomatoes and onions if desired. This dish pairs well with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "150", protein = "23", fats = "0", carbs = "0"),
 
+    // for dinner(15)
+    dawd(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    tawdawwo(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    wda(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    fowdaur(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivawdwae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    siawdx(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    sewadven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    eiwdght(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    niawdne(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    teawdn(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    elawdeven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    twawdelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    thiawdrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    fouadwadrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivwdeteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
 
 
 }
@@ -783,7 +815,28 @@ enum class MealsCategoriesForNatural(val mealsId: String,
                                      val protein: String,
                                      val carbs: String,
                                      val calories:  String){
-    // for breakfast (15)
+
+
+     // for BREAKFAST (15)
+     Tuna(mealsId = "TUNA-01", imageRes = R.drawable.chicken_tocino_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     two(mealsId = "", imageRes = R.drawable.chickentinola_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     three(mealsId = "", imageRes = R.drawable.inihawnababoybreakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     four(mealsId = "", imageRes = R.drawable.chicken_tocino_with_brown_rice_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+     five(mealsId = "", imageRes = R.drawable.fish_escabeche_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     six(mealsId = "", imageRes = R.drawable.grilled_chicken_inasal__breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+     seven(mealsId = "", imageRes = R.drawable.pandesal_spread_with_creamy_peanut_butter_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+     eight(mealsId = "", imageRes = R.drawable.paksiw_na_pata_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     nine(mealsId = "", imageRes = R.drawable.oatmeal_with_almond_milk__topped_with_bananas_and_chia_seeds_boiled_egg_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     ten(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     eleven(mealsId = "", imageRes = R.drawable.scrambled_eggs_made_with_3_eggs_breakfast, mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     twelve(mealsId = "", imageRes = R.drawable.tinolang_manok__chicken_stew__breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+     thirteen(mealsId = "", imageRes = R.drawable.sinigang_na_hipon_breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+     fourteen(mealsId = "", imageRes = R.drawable.tinola_with_malunggay__chicken_tinola__breakfast , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label, calories =" ", protein ="" , carbs = "", fats = ""),
+     fiveteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime =MealTime.BREAKFAST.label , calories =" ", protein ="" , carbs = "", fats = ""),
+
+
+
+    // for LUNCH (15)
     TUNAOMELET(mealsId = "MEALSADVANCE-01", imageRes = R.drawable.tuna_omelette, mealsName = "Tuna Omelet",mealsDescription ="2 pounds pork (butt, shoulder, ham or belly) - cut into ¼ inch thin\n" +
             "¾ cup brown sugar\n" +
             "1 ½ tablespoons salt\n" +
@@ -800,7 +853,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "In a big bowl, combine all ingredients except for the pork slices. Mix until well blended.\n" +
             "Add the pork and mix using the hand, use hand gloves to avoid stains. Mix for several minutes to an hour.\n" +
             "Transfer to a container with a cover and let it sit overnight on the counter.\n" +
-            "Mix again for a couple of times before putting in the fridge. Cure for 24 hours or up to 3 days. Can be frozen afterwards and stored longer.", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "15", fats = "10", carbs = "40"),
+            "Mix again for a couple of times before putting in the fridge. Cure for 24 hours or up to 3 days. Can be frozen afterwards and stored longer.", mealTime = MealTime.LUNCH.label, calories = "150", protein = "15", fats = "10", carbs = "40"),
     SINIGANG(mealsId = "MEALSADVANCE-02", imageRes = R.drawable.sinigang, mealsName = "Sinigang na beef",mealsDescription ="Ingredients\n" +
             "Beef:\n" +
             "\n" +
@@ -842,7 +895,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Add the eggplant, string beans, and kangkong. Cook for a few more minutes until the vegetables are tender.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "185", protein = "26", fats = "15", carbs = "23"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "185", protein = "26", fats = "15", carbs = "23"),
     ADOBO(mealsId = "MEALSADVANCE-03", imageRes = R.drawable.adobo, mealsName = "Adobo with Rice", mealsDescription ="Ingredients\n" +
             "For the Meat:\n" +
             "\n" +
@@ -874,7 +927,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "If you prefer a thicker sauce, you can let it simmer uncovered for an additional 10-15 minutes until it reduces to your desired consistency. Adjust seasoning with salt and pepper if needed.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name,calories = "168", protein = "30", fats = "25", carbs = "55"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label,calories = "168", protein = "30", fats = "25", carbs = "55"),
     KAREKARE(mealsId = "MEALSADVANCE-04", imageRes = R.drawable.kare_kare, mealsName = "Kare-Kare", mealsDescription ="Ingredients\n" +
             "For the Meat:\n" +
             "\n" +
@@ -911,7 +964,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Add the bok choy or pechay and cook until just wilted.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice and a side of bagoong.", mealTime = MealTime.BREAKFAST.name,calories = "183", protein = "35", fats = "15", carbs = "50"),
+            "Serve hot with steamed rice and a side of bagoong.", mealTime = MealTime.LUNCH.label,calories = "183", protein = "35", fats = "15", carbs = "50"),
     CHICKENTOCINO(mealsId = "MEALSADVANCE-05", imageRes = R.drawable.chikentocino, mealsName = "Chicken Tocino",mealsDescription ="Ingredients\n" +
             "For the Chicken:\n" +
             "\n" +
@@ -936,7 +989,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Heat oil in a pan over medium heat. Remove the chicken from the marinade (discard excess marinade) and cook in the hot pan until browned and cooked through, about 5-7 minutes per side.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with garlic rice and a side of fried eggs for a classic Filipino breakfast.", mealTime = MealTime.BREAKFAST.name, calories = "145", protein = "15", fats = "  15", carbs = "50"),
+            "Serve hot with garlic rice and a side of fried eggs for a classic Filipino breakfast.", mealTime = MealTime.LUNCH.label, calories = "145", protein = "15", fats = "  15", carbs = "50"),
     PORKMINUDO(mealsId = "MEALSADVANCE-06", imageRes = R.drawable.pork_menudo, mealsName = "Pork Menudo",mealsDescription ="Ingredients\n" +
             "For the Pork:\n" +
             "\n" +
@@ -977,7 +1030,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Add the diced bell pepper and green peas. Cook for an additional 5-10 minutes until the vegetables are tender.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "132", protein = "21", fats = "8", carbs = "7"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "132", protein = "21", fats = "8", carbs = "7"),
     SINIGANGNAPORK(mealsId = "MEALSADVANCE-07", imageRes = R.drawable.sinigangpork, mealsName = "Sinigang na pork",mealsDescription ="Ingredients\n" +
             "Pork:\n" +
             "\n" +
@@ -1019,7 +1072,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Add the eggplant, string beans, and kangkong. Cook for a few more minutes until the vegetables are tender.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "30", fats = "25", carbs = "55"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "150", protein = "30", fats = "25", carbs = "55"),
     BISTEK(mealsId = "MEALSADVANCE-08", imageRes = R.drawable.bistek_tagalog, mealsName = "Bistek Tagalog",mealsDescription ="Ingredients\n" +
             "For the Beef:\n" +
             "\n" +
@@ -1053,7 +1106,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Return the sautéed onions to the pan and mix well.\n" +
             "Serve:\n" +
             "\n" +
-            "Serve hot with steamed rice.", mealTime = MealTime.BREAKFAST.name, calories = "150", protein = "30", fats = "25", carbs = "55"),
+            "Serve hot with steamed rice.", mealTime = MealTime.LUNCH.label, calories = "150", protein = "30", fats = "25", carbs = "55"),
     LONGSILOG(mealsId = "MEALSADVANCE-09", imageRes = R.drawable.longsilog, mealsName = "Longganisa Itlog",mealsDescription ="Ingredients\n" +
             "For the Longganisa:\n" +
             "\n" +
@@ -1077,7 +1130,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "In a separate pan, heat a bit of oil over medium heat. Crack the eggs into the pan and cook to your preference (sunny side up, scrambled, or over easy). Season with salt and pepper.\n" +
             "Serve:\n" +
             "\n" +
-            "On a plate, serve the cooked longganisa alongside the eggs. Add steamed rice and any optional sides, like sliced tomatoes or pickled vegetables.", mealTime = MealTime.BREAKFAST.name, calories = "145", protein = "30", fats = "25", carbs = "55"),
+            "On a plate, serve the cooked longganisa alongside the eggs. Add steamed rice and any optional sides, like sliced tomatoes or pickled vegetables.", mealTime = MealTime.LUNCH.label, calories = "145", protein = "30", fats = "25", carbs = "55"),
     SCRAMBLEEGGS(mealsId = "MEALSADVANCE-10", imageRes = R.drawable.scrambleeggs, mealsName = "Scramble Eggs",mealsDescription ="Ingredients\n" +
             "4-6 eggs\n" +
             "2-3 tablespoons of milk or cream (optional, for creaminess)\n" +
@@ -1098,44 +1151,28 @@ enum class MealsCategoriesForNatural(val mealsId: String,
             "Using a spatula, gently stir the eggs, pushing them from the edges toward the center. Continue to cook, stirring occasionally, until the eggs are just set but still slightly soft (about 3-5 minutes).\n" +
             "Serve:\n" +
             "\n" +
-            "Remove from heat and serve immediately, as the residual heat will continue to cook the eggs slightly.", mealTime = MealTime.BREAKFAST.name, calories = "120", protein = "30", fats = "25", carbs = "55"),
+            "Remove from heat and serve immediately, as the residual heat will continue to cook the eggs slightly.", mealTime = MealTime.LUNCH.label, calories = "120", protein = "30", fats = "25", carbs = "55"),
     afae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
     sefgef(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
     fawfafrf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
     fawohoawf(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
     fivwdeafafateen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    // for lunch (15)
-    one(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    two(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    three(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    four(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    five(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    six(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    seven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    eight(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    nine(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    ten(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    eleven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    twelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    thirteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fourteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fiveteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
 
     // for dinner(15)
-    dawd(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    tawdawwo(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    wda(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fowdaur(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fivawdwae(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    siawdx(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    sewadven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    eiwdght(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    niawdne(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    teawdn(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    elawdeven(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    twawdelve(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    thiawdrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fouadwadrteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
-    fivwdeteen(mealsId = "", imageRes = R.drawable.tuna_omelette , mealsName = "", mealsDescription = "", mealTime ="" , calories =" ", protein ="" , carbs = "", fats = ""),
+    dawd(mealsId = "", imageRes = R.drawable.beef_caldereta_dinner , mealsName = "Beef Caldereta", mealsDescription = "", mealTime =MealTime.DINNER.label , calories ="35", protein ="35" , carbs = "59", fats = "77"),
+    tawdawwo(mealsId = "", imageRes = R.drawable.chicken_adobo_dinner , mealsName = "Chicken Abodo", mealsDescription = "", mealTime =MealTime.DINNER.label , calories ="54", protein ="54" , carbs = "54", fats = "54"),
+    wda(mealsId = "", imageRes = R.drawable.chicken_caldereta_dinner , mealsName = "Chicken Caldereta", mealsDescription = "", mealTime =MealTime.DINNER.label , calories ="46", protein ="6" , carbs = "4", fats = "5"),
+    fowdaur(mealsId = "", imageRes = R.drawable.pinakbet_dinner , mealsName = "Pinakbet", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" 45", protein ="54" , carbs = "5", fats = "56"),
+    fivawdwae(mealsId = "", imageRes = R.drawable.chicken_caldereta_dinner , mealsName = "", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    siawdx(mealsId = "", imageRes = R.drawable.bangus_belly_sinigang_dinner , mealsName = "Bangus Belly", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    sewadven(mealsId = "", imageRes = R.drawable.grilled_bangus_dinner , mealsName = "Grilled Bangus", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    eiwdght(mealsId = "", imageRes = R.drawable.grilled_tilapia_w_spinach_dinner , mealsName = "Grilled Tilapia", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    niawdne(mealsId = "", imageRes = R.drawable.pork_binagoongan_dinner , mealsName = "Pork Binagoongan", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    teawdn(mealsId = "", imageRes = R.drawable.chicken_tocino_dinner , mealsName = "Chicken Tocino", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    elawdeven(mealsId = "", imageRes = R.drawable.tuna_omellete_with_mango_dinner , mealsName = "Tuna Omelette", mealsDescription = "", mealTime =MealTime.DINNER.label, calories =" ", protein ="" , carbs = "", fats = ""),
+    twawdelve(mealsId = "", imageRes = R.drawable.pandesal_with_peanut_and_papaya_dinner , mealsName = "Bread with Peanut butter", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    thiawdrteen(mealsId = "", imageRes = R.drawable.tuna_pandesal_dinner , mealsName = "Tuna Pandesal", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    fouadwadrteen(mealsId = "", imageRes = R.drawable.pork_nilaga_with_cucumber_dinner , mealsName = "Pork with cucumber", mealsDescription = "", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
+    fivwdeteen(mealsId = "", imageRes = R.drawable.tuna__dinner , mealsName = "", mealsDescription = "Tuna with Rice", mealTime =MealTime.DINNER.label , calories =" ", protein ="" , carbs = "", fats = ""),
 
 }

@@ -1,166 +1,317 @@
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
+import com.example.fitness.common.MealTime
+import com.example.fitness.ui.AppViewModelProvider
+import com.example.fitness.ui.categories.meals.item.MealsItemPreviewViewModel
+import com.example.fitness.ui.categories.meals.item.MealsPreviewUIState
+import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.common.PrimaryButton
+import com.example.fitness.ui.theme.MyColorTheme
+import com.example.fitness.util.defaultPadding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun MealsItemPreviewScreen(navController: NavHostController) {
+fun MealsItemPreviewScreen(navController: NavHostController, mealId: String?) {
+    val mealsItemPreviewViewModel: MealsItemPreviewViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    val mealsUiState by mealsItemPreviewViewModel.uiState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        mealId?.let { mealId ->
+            CoroutineScope(Dispatchers.IO).launch {
+                mealsItemPreviewViewModel.getMealsWeekHighlights(mealId)
+            }
+        }
+    }
+
     var isDialogOpen by remember { mutableStateOf(false) }
-    var selectedMeal by remember { mutableStateOf("Breakfast") }
+    var selectedMeal by remember { mutableStateOf(MealTime.BREAKFAST.label) }
     var showFinishedDialog by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
+    if (mealsUiState.meals.isEmpty()) {
+        Column(
+            modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+
+        ) {
+            CircularProgressIndicator(modifier = Modifier.size(50.dp), color = Color.LightGray)
+        }
+    } else {
+        MealsItemPreviewContent(
+            mealsUiState = mealsUiState,
+            selectedMeal = selectedMeal,
+            isDialogOpen = isDialogOpen,
+            isShowFinishedDialog = showFinishedDialog,
+            selectionMealClick = { selectedMeal = it },
+            dialogOpenClick = { isDialogOpen = it },
+            showFinishedDialogClick = { showFinishedDialog = it },
+            finalizeDoneClick = {
+                CoroutineScope(Dispatchers.IO).launch {
+                    mealsItemPreviewViewModel.updateDoneProgressCount()
+                }
+                navController.popBackStack()
+            }
+        )
+    }
+}
+
+@Composable
+private fun MealsItemPreviewContent(
+    mealsUiState: MealsPreviewUIState,
+    selectedMeal: String,
+    isDialogOpen: Boolean,
+    isShowFinishedDialog: Boolean,
+    selectionMealClick: (String) -> Unit,
+    dialogOpenClick: (Boolean) -> Unit,
+    showFinishedDialogClick: (Boolean) -> Unit,
+    finalizeDoneClick: () -> Unit,
+) {
+    if (isShowFinishedDialog) {
+        DialogSuccess(
+            icon = R.drawable.ic_success,
+            text = "Good job!",
+            buttonText = "OKAY"
+        ) {
+            showFinishedDialogClick(false)
+            finalizeDoneClick()
+        }
+    }
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        CommonHeader(
+            text = "Meal Plan",
+            subText = "Complete your daily nutrition.",
+            fontSize = 26.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .defaultPadding())
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        NutritionSection(modifier = Modifier)
+
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(
-            text = "Meal Plan",
-            style = MaterialTheme.typography.headlineMedium,
-            color = Color.Black,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Text(
-            text = "Stay motivated on your journey to be healthier.",
-            style = MaterialTheme.typography.bodySmall,
-            color = Color.Gray,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Spacer(modifier = Modifier.height(80.dp))
-
-        Text(
-            text = "Day 1",
-            style = MaterialTheme.typography.displayLarge,
-            color = Color.Black,
-            fontSize = 25.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            TabButton("Breakfast", selectedMeal == "Breakfast") { selectedMeal = "Breakfast" }
-            TabButton("Lunch", selectedMeal == "Lunch") { selectedMeal = "Lunch" }
-            TabButton("Dinner", selectedMeal == "Dinner") { selectedMeal = "Dinner" }
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .clip(RoundedCornerShape(20.dp))
-                .clickable { isDialogOpen = true }
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.chickentinola),
-                contentDescription = "Meal Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.6f))
-                        )
-                    )
-                    .fillMaxWidth()
-                    .padding(12.dp)
+        Column(Modifier
+            .defaultPadding()) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround
             ) {
-                Text(
-                    "Chicken Tinola with Rice",
-                    color = Color.White,
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Text(
-                    "High in protein",
-                    color = Color.White,
-                    style = MaterialTheme.typography.bodySmall
+                MealTime.values().forEachIndexed { index, mealTime ->
+                    TabButton(
+                        mealTime.label,
+                        selectedMeal == mealTime.label
+                    ) { selectionMealClick(mealTime.label) }
+
+                    if (index < MealTime.values().size - 1) {
+                        Spacer(modifier = Modifier.width(20.dp))
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            TabContent(
+                mealsPreviewUIState = mealsUiState,
+                selectedMeal = selectedMeal,
+                dialogOpenClick = dialogOpenClick
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            NavigationOptions(
+                isLastMeal = selectedMeal == MealTime.DINNER.label,
+                onMealFinishedClick = { showFinishedDialogClick(true) },
+                onDoneClick = finalizeDoneClick
+            )
+
+            if (isDialogOpen) {
+                AlertDialog(
+                    onDismissRequest = { dialogOpenClick(false) },
+                    confirmButton = {
+                        Button(onClick = { dialogOpenClick(false) }) {
+                            Text("Close")
+                        }
+                    },
+                    text = {
+                        Column {
+                            Text("Ingredients")
+                            Text("- Chicken")
+                            Text("- Ginger")
+                            Text("- Green Papaya")
+                            Text("- Spinach")
+                        }
+                    }
                 )
             }
         }
+    }
+}
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 12.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            NutritionInfo("300", "Calories")
-            NutritionInfo("15g", "Protein")
-            NutritionInfo("40g", "Carbs")
-            NutritionInfo("4g", "Fats")
-        }
-
-        if (isDialogOpen) {
-            AlertDialog(
-                onDismissRequest = { isDialogOpen = false },
-                confirmButton = {
-                    Button(onClick = { isDialogOpen = false }) {
-                        Text("Close")
-                    }
-                },
-                text = {
-                    Column {
-                        Text("Ingredients")
-                        Text("- Chicken")
-                        Text("- Ginger")
-                        Text("- Green Papaya")
-                        Text("- Spinach")
-                    }
-                }
+@Composable
+fun NutritionSection(modifier: Modifier = Modifier) {
+    LazyRow(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        item {
+            NutritionCard(
+                title = "Calories",
+                text = "Total:",
+                value = "832kCal",
+                color = Color(0xFFE0F7FA),
+                icon = R.drawable.ic_fire
             )
         }
+        item {
+            NutritionCard(
+                title = "Protein",
+                text = "Total:",
+                value = "200g",
+                color = Color(0xFFE8F5E9),
+                icon = R.drawable.ic_protein
+            )
+        }
+        item {
+            NutritionCard(
+                title = "Carbs",
+                text = "Total:",
+                value = "100g",
+                color = Color(0xFFFFF3E0),
+                icon = R.drawable.ic_water
+            )
+        }
+        item {
+            NutritionCard(
+                title = "Fats",
+                text = "Total:",
+                value = "50g",
+                color = Color(0xFFFADCFF),
+                icon = R.drawable.ic_water
+            )
+        }
+    }
+}
 
-        Spacer(Modifier.height(20.dp))
-
-        NavigationOptions(
-            isLastMeal = selectedMeal == "Dinner",
-            onMealFinishedClick = { showFinishedDialog = true },
-            onDoneClick = { navController.popBackStack() }
+@Composable
+fun NutritionCard(
+    title: String,
+    text: String = "",
+    value: String,
+    color: Color,
+    icon: Int
+) {
+    Column(
+        modifier = Modifier
+            .height(160.dp)
+            .width(90.dp)
+            .clip(RoundedCornerShape(15.dp))
+            .background(color)
+            .padding(5.dp),
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+            color = Color.Black,
+            modifier = Modifier.padding(bottom = 8.dp)
         )
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = icon),
+                contentDescription = "$title icon",
+                modifier = Modifier
+                    .size(28.dp)
+                    .padding(end = 8.dp)
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
+                color = Color.Black
+            )
+        }
+    }
+}
 
-        if (showFinishedDialog) {
-            DialogSuccess(
-                modifier = Modifier.fillMaxSize(),
-                icon = R.drawable.ic_success,
-                text = "Good job!",
-                buttonText = "OKAY"
+
+@Composable
+private fun TabContent(
+    mealsPreviewUIState: MealsPreviewUIState,
+    selectedMeal: String,
+    dialogOpenClick: (Boolean) -> Unit
+) {
+    mealsPreviewUIState.meals.firstOrNull { it.mealTime == selectedMeal }?.let { currentMeal ->
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .clickable { dialogOpenClick(true) }
             ) {
-                showFinishedDialog = false
-                CoroutineScope(Dispatchers.IO).launch {
-                }
-                navController.popBackStack()
+                Image(
+                    painter = painterResource(id = currentMeal.imageRes),
+                    contentDescription = "Meal Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clip(RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp))
+                )
+                Text(
+                    text = currentMeal.mealsName,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color.White,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(topEnd = 10.dp))
+                        .background(MyColorTheme.brumswick_green)
+                        .padding(10.dp)
+                        .align(Alignment.BottomStart)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                NutritionInfo(currentMeal.calories, "Calories", Color(0xFFE0F7FA))
+                NutritionInfo("${currentMeal.protein}g", "Protein", Color(0xFFE8F5E9))
+                NutritionInfo("${currentMeal.carbs}g", "Carbs", Color(0xFFFFF3E0))
+                NutritionInfo("${currentMeal.fats}g", "Fats", Color(0xFFFADCFF))
             }
         }
     }
@@ -174,15 +325,16 @@ fun NavigationOptions(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 28.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
-        PrimaryButton(
-            iconSuffix = if (isLastMeal) R.drawable.ic_flag else R.drawable.ic_check,
-            text = if (isLastMeal) "FINISH MEAL PREP" else "DONE",
-            onClick = { if (isLastMeal) onMealFinishedClick() else onDoneClick() }
-        )
+        AnimatedVisibility(visible = isLastMeal) {
+            PrimaryButton(
+                iconSuffix = R.drawable.ic_flag,
+                text = if (isLastMeal) "FINISH MEAL PREP" else "DONE",
+                onClick = { if (isLastMeal) onMealFinishedClick() else onDoneClick() }
+            )
+        }
     }
 }
 
@@ -194,27 +346,43 @@ fun TabButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
         style = MaterialTheme.typography.bodyLarge,
         modifier = Modifier
             .background(
-                color = if (isSelected) Color(0xFF2A9D8F) else Color.LightGray,
+                color = if (isSelected) Color(0xFF31493C) else Color(0xFFF5F5F5),
                 shape = RoundedCornerShape(20.dp)
             )
-            .clickable { onClick() }
+            .border(
+                width = 1.dp,
+                color = if (isSelected) Color.Transparent else Color(0xFF001A23),
+                shape = RoundedCornerShape(20.dp)
+            )
             .padding(horizontal = 20.dp, vertical = 10.dp)
+
+            .clickable { onClick() }
     )
 }
 
 @Composable
-fun NutritionInfo(value: String, label: String) {
-    Box(
-        modifier = Modifier
-            .size(65.dp)
-            .clip(CircleShape)
-            .background(Color.LightGray),
-        contentAlignment = Alignment.Center
+fun NutritionInfo(value: String, label: String, color: Color) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(horizontal = 8.dp)
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(value, style = MaterialTheme.typography.titleLarge, color = Color.Black)
-            Text(label, style = MaterialTheme.typography.labelSmall)
-        }
+        Text(
+            text = value,
+            style = MaterialTheme.typography.titleLarge,
+            color = Color.Black
+        )
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelSmall,
+            color = Color.Gray
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Box(
+            modifier = Modifier
+                .width(50.dp)
+                .height(10.dp)
+                .background(color = color, shape = RoundedCornerShape(50))
+        )
     }
 }
 
@@ -222,5 +390,5 @@ fun NutritionInfo(value: String, label: String) {
 @Composable
 fun MealsItemPreviewScreenPreview() {
     val navController = rememberNavController()
-    MealsItemPreviewScreen(navController)
+    MealsItemPreviewScreen(navController, null)
 }
