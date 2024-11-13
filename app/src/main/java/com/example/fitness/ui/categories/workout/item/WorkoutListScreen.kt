@@ -126,12 +126,12 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
             ) {
                 showFinishedWorkout = false
 
-                //If the workout was Finished
+
                 CoroutineScope(Dispatchers.IO).launch {
                     workoutListViewModel.updateDoneProgressCount()
                 }
 
-                //return to progress screen
+
                 navController.popBackStack()
 
             }
