@@ -57,8 +57,8 @@ fun MealsItemPreviewScreen(navController: NavHostController, mealId: String?) {
     if (mealsUiState.meals.isEmpty()) {
         Column(
             modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
 
@@ -188,49 +188,48 @@ fun NutritionSection(modifier: Modifier = Modifier) {
         item {
             NutritionCard(
                 title = "Calories",
-                text = "Total:",
+                name = "Total:",
                 value = "832kCal",
-                color = Color(0xFFE0F7FA),
+                color = Color(0xFFACFFEB),
                 icon = R.drawable.ic_fire
             )
         }
         item {
             NutritionCard(
                 title = "Protein",
-                text = "Total:",
+                name = "Total:",
                 value = "200g",
-                color = Color(0xFFE8F5E9),
+                color = Color(0xFFA3F3A6),
                 icon = R.drawable.ic_protein
             )
         }
         item {
             NutritionCard(
                 title = "Carbs",
-                text = "Total:",
+                name = "Total:",
                 value = "100g",
-                color = Color(0xFFFFF3E0),
+                color = Color(0xFFF6BFFF),
                 icon = R.drawable.ic_water
             )
         }
         item {
             NutritionCard(
                 title = "Fats",
-                text = "Total:",
+                name = "Total:",
                 value = "50g",
-                color = Color(0xFFFADCFF),
+                color = Color(0xFFFDB299),
                 icon = R.drawable.ic_water
             )
         }
     }
 }
-
 @Composable
 fun NutritionCard(
     title: String,
-    text: String = "",
     value: String,
     color: Color,
-    icon: Int
+    icon: Int,
+    name: String
 ) {
     Column(
         modifier = Modifier
@@ -241,28 +240,32 @@ fun NutritionCard(
             .padding(5.dp),
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-            color = Color.Black,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
+
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
                 painter = painterResource(id = icon),
                 contentDescription = "$title icon",
-                modifier = Modifier
-                    .size(28.dp)
-                    .padding(end = 8.dp)
+                modifier = Modifier.size(20.dp)
             )
             Text(
-                text = value,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
-                color = Color.Black
+                text = title,
+                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                color = Color(0xFF001A23)
             )
         }
+        Text(
+            text = name,
+            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+            color = Color(0xFF001A23),
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
+            color = Color(0xFF001A23)
+        )
     }
 }
 
@@ -308,10 +311,10 @@ private fun TabContent(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                NutritionInfo(currentMeal.calories, "Calories", Color(0xFFE0F7FA))
-                NutritionInfo("${currentMeal.protein}g", "Protein", Color(0xFFE8F5E9))
-                NutritionInfo("${currentMeal.carbs}g", "Carbs", Color(0xFFFFF3E0))
-                NutritionInfo("${currentMeal.fats}g", "Fats", Color(0xFFFADCFF))
+                NutritionInfo(currentMeal.calories, "Calories", Color(0xFFACFFEB))
+                NutritionInfo("${currentMeal.protein}g", "Protein", Color(0xFFA3F3A6))
+                NutritionInfo("${currentMeal.carbs}g", "Carbs", Color(0xFFF6BFFF))
+                NutritionInfo("${currentMeal.fats}g", "Fats", Color(0xFFFDB299))
             }
         }
     }
