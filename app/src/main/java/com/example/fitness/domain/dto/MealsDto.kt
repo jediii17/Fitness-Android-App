@@ -11,6 +11,8 @@ data class MealsDto(
     val protein: String,
     val carbs: String,
     val mealTime: String,
-)
+) {
+
+}
 
 

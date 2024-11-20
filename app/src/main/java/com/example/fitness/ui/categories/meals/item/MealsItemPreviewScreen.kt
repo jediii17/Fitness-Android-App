@@ -30,6 +30,7 @@ import com.example.fitness.ui.categories.meals.item.MealsItemPreviewViewModel
 import com.example.fitness.ui.categories.meals.item.MealsPreviewUIState
 import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.DialogSuccess
+import com.example.fitness.ui.common.IngredientsDialog
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.theme.MyColorTheme
 import com.example.fitness.util.defaultPadding
@@ -106,14 +107,16 @@ private fun MealsItemPreviewContent(
         }
     }
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = 16.dp) // Added padding to the root container for global spacing
+    ) {
         CommonHeader(
             text = "Meal Plan",
             subText = "Complete your daily nutrition.",
             fontSize = 26.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .defaultPadding())
+            modifier = Modifier.fillMaxWidth()
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -121,8 +124,9 @@ private fun MealsItemPreviewContent(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Column(Modifier
-            .defaultPadding()) {
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround
@@ -138,14 +142,16 @@ private fun MealsItemPreviewContent(
                     }
                 }
             }
+
             Spacer(modifier = Modifier.height(16.dp))
+
             TabContent(
                 mealsPreviewUIState = mealsUiState,
                 selectedMeal = selectedMeal,
                 dialogOpenClick = dialogOpenClick
             )
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             NavigationOptions(
                 isLastMeal = selectedMeal == MealTime.DINNER.label,
@@ -153,35 +159,19 @@ private fun MealsItemPreviewContent(
                 onDoneClick = finalizeDoneClick
             )
 
-            if (isDialogOpen) {
-                AlertDialog(
-                    onDismissRequest = { dialogOpenClick(false) },
-                    confirmButton = {
-                        Button(onClick = { dialogOpenClick(false) }) {
-                            Text("Close")
-                        }
-                    },
-                    text = {
-                        Column {
-                            Text("Ingredients")
-                            Text("- Chicken")
-                            Text("- Ginger")
-                            Text("- Green Papaya")
-                            Text("- Spinach")
-                        }
-                    }
-                )
-            }
         }
     }
 }
+
 
 @Composable
 fun NutritionSection(modifier: Modifier = Modifier) {
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 10.dp),
+            .size(150.dp, 150.dp)
+            .padding(start = 10.dp)
+        ,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -233,11 +223,10 @@ fun NutritionCard(
 ) {
     Column(
         modifier = Modifier
-            .height(160.dp)
-            .width(90.dp)
+            .height(200.dp)
+            .width(120.dp)
             .clip(RoundedCornerShape(15.dp))
-            .background(color)
-            .padding(5.dp),
+            .background(color),
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
 
@@ -253,7 +242,8 @@ fun NutritionCard(
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-                color = Color(0xFF001A23)
+                color = Color(0xFF001A23),
+
             )
         }
         Text(

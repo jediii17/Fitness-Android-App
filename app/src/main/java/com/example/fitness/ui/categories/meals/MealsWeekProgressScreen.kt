@@ -93,7 +93,7 @@ fun MealsWeekProgressScreen(navController: NavController) {
         mealsHighlights = mealsUiState.mealsHighlights,
     ){
         if(mealsUiState.mealsWeekCount == 0 && mealsUiState.mealsDayCount == 0){
-            navController.navigate(Screens.MEALS_SCREEN.screenName + "/${mealsUiState.mealsHighlights.getOrNull(0)}")
+            navController.navigate(Screens.MEALS_SCREEN.screenName + "/${mealsUiState.mealsHighlights.getOrNull(0)?.mealsId}")
         }else{
             navController.navigate(Screens.MEALS_SCREEN.screenName+"/${Constant.NO_MEAL_HIGHLIGHT_ID}")//send only empty content -> to get from the enums
         }

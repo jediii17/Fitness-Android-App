@@ -19,17 +19,9 @@ class MealsItemPreviewViewModel(private val getMealsProgressUseCase: GetMealsPro
                                 private val insertMealsProgressUseCase: InsertMealsProgressUseCase,
                                 ) : ViewModel() {
 
-    // Holds the UI state using MutableStateFlow for state management
     private val _uiState = MutableStateFlow(MealsPreviewUIState())
     val uiState: StateFlow<MealsPreviewUIState> = _uiState.asStateFlow()
 
-    // Holds the current meal ("Breakfast", "Lunch", "Dinner")
-    // private val _selectedMealType = MutableStateFlow("Breakfast")
-    // val selectedMealType: StateFlow<String> = _selectedMealType.asStateFlow()
-
-    // Holds meal details
-   // private val _mealInfo = MutableStateFlow(MealInfo("Chicken Tinola with Rice", "High in protein"))
-   // val mealInfo: StateFlow<MealInfo> = _mealInfo.asStateFlow()
 
     suspend fun getMealsWeekHighlights(mealId: String?){
         val mealsListUseCaseProgressDto = getMealsListUseCase.invoke()
@@ -39,7 +31,7 @@ class MealsItemPreviewViewModel(private val getMealsProgressUseCase: GetMealsPro
 
             val breakfastMeal =  meals.first{ ml -> ml.mealTime == MealTime.BREAKFAST.label }
 
-            //get the ID of the Lunch highlight
+
             val lunchMeal =  if(mealId.equals(Constant.NO_MEAL_HIGHLIGHT_ID)){
                 meals.first{ ml -> ml.mealTime == MealTime.LUNCH.label }
             }else{
@@ -48,9 +40,7 @@ class MealsItemPreviewViewModel(private val getMealsProgressUseCase: GetMealsPro
 
             val dinnerMeal =  meals.first{ ml -> ml.mealTime == MealTime.DINNER.label }
 
-            //calculate the total NUTRIENTS for today
 
-            //add all the meals for today
             mealForToday.add(breakfastMeal)
             mealForToday.add(lunchMeal)
             mealForToday.add(dinnerMeal)
@@ -66,29 +56,28 @@ class MealsItemPreviewViewModel(private val getMealsProgressUseCase: GetMealsPro
      * */
     suspend fun updateDoneProgressCount(){
 
-        //get the progress data
+
         val mealProgressDto = getMealsProgressUseCase.invoke()
 
-        //get the last updated workout progress and check the day count
+
         mealProgressDto.lastOrNull()?.let { meal ->
             var dayProgress = meal.mealsProgressDayCount
             var weekProgress = meal.mealsProgressWeekCount
             var monthProgress = meal.mealsProgressMonthCount
 
-            //calculate the days and week
+
             if((dayProgress + 1) <= 7){
-                dayProgress += 1 //add to days only since less than 7 days
+                dayProgress += 1
             }else{
-                //week should be less than 4 weeks
+
                 if( weekProgress + 1 < Constant.MAX_WEEK_COUNT){
                     weekProgress += 1
-                    dayProgress =  1 //reset to 1 since new week count
+                    dayProgress =  1
                 }else{
-                    monthProgress += 1 //add to Month progress
+                    monthProgress += 1
                 }
             }
 
-            // insert/populate to database the update
             val meals = MealsProgressDto(
                  mealsProgressDayCount = dayProgress,
                  mealsProgressWeekCount = weekProgress,
@@ -106,7 +95,6 @@ class MealsItemPreviewViewModel(private val getMealsProgressUseCase: GetMealsPro
             )
         } ?: run {
 
-            // insert new data if empty
             val meals = MealsProgressDto(
                 mealsProgressDayCount = 1,
                 mealsProgressWeekCount = 0,
@@ -124,26 +112,9 @@ class MealsItemPreviewViewModel(private val getMealsProgressUseCase: GetMealsPro
             )
         }
     }
-
-
-
-    // Holds nutritional values
-  /*  private val _nutritionInfo = MutableStateFlow(
-        NutritionInfo(
-            calories = "300",
-            protein = "15g",
-            carbs = "40g",
-            fats = "4g"
-        )
-    )
-    val nutritionInfo: StateFlow<NutritionInfo> = _nutritionInfo.asStateFlow()
-
-    // Updates the selected meal
-    fun updateSelectedMealType(mealType: String) {
-        _selectedMealType.value = mealType
-    }*/
 }
-// Data class to hold the UI state
+
+/** Data class to hold the UI state */
 data class MealsPreviewUIState(
     val calories: String? = null,
     val protein: String? = null,
@@ -153,4 +124,10 @@ data class MealsPreviewUIState(
     val totalCarbs: String? = null,
     val totalFats: String? = null,
     val meals: List<MealsDto> = emptyList(),
-)
+) {
+    data class Meal(
+        val mealsname: String,
+        val mealsdescription: String,
+        val imageRes: Int,
+    )
+}
