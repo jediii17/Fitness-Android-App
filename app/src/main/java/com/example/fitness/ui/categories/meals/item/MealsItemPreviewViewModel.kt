@@ -126,8 +126,8 @@ data class MealsPreviewUIState(
     val meals: List<MealsDto> = emptyList(),
 ) {
     data class Meal(
-        val mealsname: String,
-        val mealsdescription: String,
-        val imageRes: Int,
+        val mealTime: String,
+        val ingredients: List<String>,
+        val imageRes: Int
     )
 }

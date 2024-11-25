@@ -21,6 +21,13 @@ enum class BodyFatLevel {
     NATURAL,
 }
 
+enum class ExactLevel(val value: String) {
+    KCAL("1000kcal"),
+    FATT("540g"),
+    CARBBS("100g"),
+    PROTY("500g")
+}
+
 //For Workout Reps Count
 enum class WorkoutReps(val reps: Int, val durationInSeconds: Int){
     BEGINNER(reps = 8, durationInSeconds = 15),

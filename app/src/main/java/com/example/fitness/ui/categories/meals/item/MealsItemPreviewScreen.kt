@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
+import com.example.fitness.common.ExactLevel
 import com.example.fitness.common.MealTime
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.categories.meals.item.MealsItemPreviewViewModel
@@ -33,14 +35,14 @@ import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.common.IngredientsDialog
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.theme.MyColorTheme
-import com.example.fitness.util.defaultPadding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
 fun MealsItemPreviewScreen(navController: NavHostController, mealId: String?) {
-    val mealsItemPreviewViewModel: MealsItemPreviewViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    val mealsItemPreviewViewModel: MealsItemPreviewViewModel =
+        viewModel(factory = AppViewModelProvider.Factory)
     val mealsUiState by mealsItemPreviewViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -62,7 +64,6 @@ fun MealsItemPreviewScreen(navController: NavHostController, mealId: String?) {
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-
         ) {
             CircularProgressIndicator(modifier = Modifier.size(50.dp), color = Color.LightGray)
         }
@@ -81,10 +82,20 @@ fun MealsItemPreviewScreen(navController: NavHostController, mealId: String?) {
                 }
                 navController.popBackStack()
             }
+
+        )
+    }
+    if (isDialogOpen) {
+        val selectedMealData = mealsUiState.meals.firstOrNull { it.mealTime == selectedMeal }
+        IngredientsDialog(
+            showDialog = isDialogOpen,
+            onDismiss = { isDialogOpen = false },
+            ingredients = selectedMealData?.ingredients.orEmpty(),
+            greenMainLight = MyColorTheme.greenMain_light,
+            imageRes = selectedMealData?.imageRes
         )
     }
 }
-
 @Composable
 private fun MealsItemPreviewContent(
     mealsUiState: MealsPreviewUIState,
@@ -94,7 +105,7 @@ private fun MealsItemPreviewContent(
     selectionMealClick: (String) -> Unit,
     dialogOpenClick: (Boolean) -> Unit,
     showFinishedDialogClick: (Boolean) -> Unit,
-    finalizeDoneClick: () -> Unit,
+    finalizeDoneClick: () -> Unit
 ) {
     if (isShowFinishedDialog) {
         DialogSuccess(
@@ -108,8 +119,10 @@ private fun MealsItemPreviewContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxWidth()
-            .padding(horizontal = 16.dp) // Added padding to the root container for global spacing
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         CommonHeader(
             text = "Meal Plan",
@@ -120,50 +133,38 @@ private fun MealsItemPreviewContent(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        NutritionSection(modifier = Modifier)
+        NutritionSection(modifier = Modifier.padding(vertical = 10.dp))
 
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Column(
-            modifier = Modifier.fillMaxWidth()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                MealTime.values().forEachIndexed { index, mealTime ->
-                    TabButton(
-                        mealTime.label,
-                        selectedMeal == mealTime.label
-                    ) { selectionMealClick(mealTime.label) }
-
-                    if (index < MealTime.values().size - 1) {
-                        Spacer(modifier = Modifier.width(20.dp))
-                    }
-                }
+            MealTime.values().forEach { mealTime ->
+                TabButton(
+                    text = mealTime.label,
+                    isSelected = selectedMeal == mealTime.label,
+                    onClick = { selectionMealClick(mealTime.label) }
+                )
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            TabContent(
-                mealsPreviewUIState = mealsUiState,
-                selectedMeal = selectedMeal,
-                dialogOpenClick = dialogOpenClick
-            )
-
-            Spacer(modifier = Modifier.height(30.dp))
-
-            NavigationOptions(
-                isLastMeal = selectedMeal == MealTime.DINNER.label,
-                onMealFinishedClick = { showFinishedDialogClick(true) },
-                onDoneClick = finalizeDoneClick
-            )
-
         }
+
+        TabContent(
+            mealsPreviewUIState = mealsUiState,
+            selectedMeal = selectedMeal,
+            dialogOpenClick = dialogOpenClick
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        NavigationOptions(
+            isLastMeal = selectedMeal == MealTime.DINNER.label,
+            onMealFinishedClick = { showFinishedDialogClick(true) },
+            onDoneClick = finalizeDoneClick
+        )
     }
 }
-
-
 @Composable
 fun NutritionSection(modifier: Modifier = Modifier) {
     LazyRow(
@@ -179,7 +180,7 @@ fun NutritionSection(modifier: Modifier = Modifier) {
             NutritionCard(
                 title = "Calories",
                 name = "Total:",
-                value = "832kCal",
+                value = ExactLevel.KCAL.value,
                 color = Color(0xFFACFFEB),
                 icon = R.drawable.ic_fire
             )
@@ -188,7 +189,7 @@ fun NutritionSection(modifier: Modifier = Modifier) {
             NutritionCard(
                 title = "Protein",
                 name = "Total:",
-                value = "200g",
+                value = ExactLevel.PROTY.value,
                 color = Color(0xFFA3F3A6),
                 icon = R.drawable.ic_protein
             )
@@ -197,7 +198,7 @@ fun NutritionSection(modifier: Modifier = Modifier) {
             NutritionCard(
                 title = "Carbs",
                 name = "Total:",
-                value = "100g",
+                value = ExactLevel.CARBBS.value,
                 color = Color(0xFFF6BFFF),
                 icon = R.drawable.ic_water
             )
@@ -206,7 +207,7 @@ fun NutritionSection(modifier: Modifier = Modifier) {
             NutritionCard(
                 title = "Fats",
                 name = "Total:",
-                value = "50g",
+                value = ExactLevel.FATT.value,
                 color = Color(0xFFFDB299),
                 icon = R.drawable.ic_water
             )
@@ -216,49 +217,62 @@ fun NutritionSection(modifier: Modifier = Modifier) {
 @Composable
 fun NutritionCard(
     title: String,
+    name: String,
     value: String,
     color: Color,
-    icon: Int,
-    name: String
+    icon: Int
 ) {
-    Column(
+    Card(
         modifier = Modifier
-            .height(200.dp)
-            .width(120.dp)
-            .clip(RoundedCornerShape(15.dp))
-            .background(color),
-        verticalArrangement = Arrangement.SpaceEvenly
+            .size(120.dp, 150.dp)
+            .clip(RoundedCornerShape(16.dp)),
+        colors = CardDefaults.cardColors(containerColor = color),
+        elevation = CardDefaults.cardElevation(4.dp)
     ) {
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(
-                painter = painterResource(id = icon),
-                contentDescription = "$title icon",
-                modifier = Modifier.size(20.dp)
-            )
-            Text(
-                text = title,
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-                color = Color(0xFF001A23),
 
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                    color = Color.Black
+                )
+                Icon(
+                    painter = painterResource(id = icon),
+                    contentDescription = "$title Icon",
+                    tint = Color.Black,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Column(
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.DarkGray
+                )
+                Text(
+                    text = value,
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = Color.Black
+                )
+            }
         }
-        Text(
-            text = name,
-            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-            color = Color(0xFF001A23),
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
-            color = Color(0xFF001A23)
-        )
     }
 }
-
 
 @Composable
 private fun TabContent(
@@ -302,9 +316,9 @@ private fun TabContent(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 NutritionInfo(currentMeal.calories, "Calories", Color(0xFFACFFEB))
-                NutritionInfo("${currentMeal.protein}g", "Protein", Color(0xFFA3F3A6))
-                NutritionInfo("${currentMeal.carbs}g", "Carbs", Color(0xFFF6BFFF))
-                NutritionInfo("${currentMeal.fats}g", "Fats", Color(0xFFFDB299))
+                NutritionInfo(currentMeal.protein, "Protein", Color(0xFFA3F3A6))
+                NutritionInfo(currentMeal.carbs, "Carbs", Color(0xFFF6BFFF))
+                NutritionInfo(currentMeal.fats, "Fats", Color(0xFFFDB299))
             }
         }
     }
