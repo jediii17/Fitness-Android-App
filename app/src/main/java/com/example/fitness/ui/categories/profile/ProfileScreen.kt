@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -83,11 +82,12 @@ fun ProfileScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             CommonHeader(
-                text = "Profile",
-                subText = "\"Striving for progress, not perfection. Every workout is a step closer to my best self.\"",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
+                text = "Profile",
+                subText = "\"Striving for progress, not perfection. Every workout is a step closer to my best self.\"",
+                fontSize = 16.sp
             )
 
             Spacer(modifier = Modifier.height(16.dp))

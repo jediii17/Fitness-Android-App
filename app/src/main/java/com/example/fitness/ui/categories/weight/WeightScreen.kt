@@ -22,10 +22,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
-import com.example.fitness.common.Constant
 import com.example.fitness.common.Gender
 import com.example.fitness.ui.AppViewModelProvider
-import com.example.fitness.ui.categories.height.HeightViewModel
 import com.example.fitness.ui.theme.greenMain_light
 import com.example.fitnesstracker.common.Screens
 
@@ -56,11 +54,12 @@ fun WeightScreen(navController: NavController, gender: String = Gender.MALE.name
         ) {
             Spacer(modifier = Modifier.height(32.dp))
             CommonHeader(
-                text = "Weight",
-                subText =  "Slide to set your weight.",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
+                text = "Weight",
+                subText =  "Slide to set your weight.",
+                fontSize = 16.sp
             )
             Spacer(modifier = Modifier.height(32.dp))
             Column(

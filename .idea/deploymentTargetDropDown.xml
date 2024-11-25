@@ -2,10 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="GenderScreenPreview">
+      <entry key="GoalsNaturalScreenPreview">
         <State />
       </entry>
-      <entry key="GoalsNaturalScreenPreview">
+      <entry key="MealsItemPreviewScreenPreview">
         <State />
       </entry>
       <entry key="ProfileScreenPreview">

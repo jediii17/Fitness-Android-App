@@ -2,21 +2,15 @@ package com.example.fitness.ui.categories.workout.item
 
 import android.os.Build
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,12 +18,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
@@ -39,46 +33,39 @@ import com.example.fitness.domain.dto.WorkoutItemDto
 import com.example.fitness.ui.common.PrimaryButton
 
 @Composable
-fun WorkoutItemPreviewDialog(modifier: Modifier = Modifier,
-                             workoutItemDto: WorkoutItemDto,
-                             isLastWorkout: Boolean = false,
-                             backOnClick: () -> Unit,
-                             onDoneClick: () -> Unit,
-                             onWorkoutFinishedClick: () -> Unit) {
+fun WorkoutItemPreviewDialog(
+    modifier: Modifier = Modifier,
+    workoutItemDto: WorkoutItemDto,
+    isLastWorkout: Boolean = false,
+    backOnClick: () -> Unit,
+    onDoneClick: () -> Unit,
+    onWorkoutFinishedClick: () -> Unit
+) {
     val imageLoader = rememberImageLoader()
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(Color.White)
+            .clip(RoundedCornerShape(16.dp)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Backbutton(){
-            backOnClick()
-        }
 
-        WorkoutGif(
-            gifResId = workoutItemDto.imageRes,
-            imageLoader = imageLoader
-        )
+        Backbutton(onClick = backOnClick)
+
+        WorkoutGif(gifResId = workoutItemDto.imageRes, imageLoader = imageLoader)
 
         Spacer(modifier = Modifier.height(16.dp))
-
         ExerciseInfo(exerciseName = workoutItemDto.workoutName, reps = "${workoutItemDto.reps}")
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        NavigationOptions(isLastWorkout){
-            if(isLastWorkout){
-                onWorkoutFinishedClick()
-            }else{
-                onDoneClick()
-            }
-        }
+        NavigationOptions(isLastWorkout = isLastWorkout, onClick = {
+            if (isLastWorkout) onWorkoutFinishedClick() else onDoneClick()
+        })
     }
 }
-
-
 
 @Composable
 private fun Backbutton(onClick: () -> Unit) {
@@ -86,10 +73,10 @@ private fun Backbutton(onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { onClick()  }) {
+        IconButton(onClick = { onClick() }) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
         }
     }
@@ -101,17 +88,15 @@ private fun WorkoutGif(gifResId: Int, imageLoader: ImageLoader) {
         modifier = Modifier
             .fillMaxWidth()
             .height(350.dp)
-
+            .clip(RoundedCornerShape(16.dp))
     ) {
         Image(
             painter = rememberAsyncImagePainter(
                 model = gifResId,
                 imageLoader = imageLoader
             ),
-            contentDescription = "",
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(16.dp)),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillHeight
         )
     }
@@ -128,33 +113,37 @@ private fun ExerciseInfo(exerciseName: String, reps: String) {
         Text(
             text = exerciseName,
             fontWeight = FontWeight.Bold,
-            fontSize = 35.sp,
-            fontStyle = FontStyle.Italic
-
+            fontSize = 30.sp,
+            fontStyle = FontStyle.Italic,
+            color = Color.Black
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "×$reps",
-            fontWeight = FontWeight.Black,
-            fontSize = 45.sp
+            fontWeight = FontWeight.Bold,
+            fontSize = 40.sp,
+            color = Color.Black
         )
     }
 }
 
 @Composable
-private fun NavigationOptions(isLastWorkout: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit) {
+private fun NavigationOptions(
+    isLastWorkout: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 28.dp),
+            .padding(horizontal = 16.dp, vertical = 20.dp),
         horizontalArrangement = Arrangement.Center
     ) {
         PrimaryButton(
-            iconSuffix = if(isLastWorkout) { R.drawable.ic_flag  } else { R.drawable.ic_check },
-            text = if(isLastWorkout) { "FINISH WORKOUT"  } else { "DONE" },
-        ){
-            onClick()
-        }
+            iconSuffix = if (isLastWorkout) R.drawable.ic_flag else R.drawable.ic_check,
+            text = if (isLastWorkout) "FINISH WORKOUT" else "DONE",
+            onClick = onClick
+        )
     }
 }
 
@@ -172,8 +161,3 @@ private fun rememberImageLoader(): ImageLoader {
         .build()
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun WorkoutItemScreenPreview() {
-    //WorkoutItemPreviewScreen(navController = rememberNavController(), workoutId = "workout1")
-}

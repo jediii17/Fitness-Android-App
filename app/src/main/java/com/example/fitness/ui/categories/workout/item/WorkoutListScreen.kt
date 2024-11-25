@@ -126,12 +126,12 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
             ) {
                 showFinishedWorkout = false
 
-                //If the workout was Finished
+
                 CoroutineScope(Dispatchers.IO).launch {
                     workoutListViewModel.updateDoneProgressCount()
                 }
 
-                //return to progress screen
+
                 navController.popBackStack()
 
             }
@@ -207,8 +207,9 @@ fun Header(day: Int, workoutCount: Int, totalDuration: Int) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CommonHeader(
+            textAlign = TextAlign.Center,
             text = Constant.bodyTypeCategory,
-            textAlign = TextAlign.Center
+            fontSize = 16.sp
         )
         Text(
             text = "Workouts: $workoutCount",

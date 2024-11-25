@@ -1,0 +1,19 @@
+package com.example.fitness.domain.dto
+
+
+data class MealsDto(
+    val mealsId: String,
+    val imageRes: Int,
+    val mealsName: String,
+    val ingredients: String,
+    val calories: String,
+    val fats: String,
+    val protein: String,
+    val carbs: String,
+    val mealTime: String,
+) {
+
+
+}
+
+

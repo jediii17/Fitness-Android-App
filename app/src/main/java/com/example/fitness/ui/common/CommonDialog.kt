@@ -8,14 +8,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,10 +32,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.window.Dialog
 import com.example.fitness.R
 import com.example.fitness.ui.theme.greenMain_light
+import androidx.compose.material.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.runtime.*
+import androidx.compose.ui.window.DialogProperties
+
 
 @Composable
 fun DialogSuccess(modifier: Modifier = Modifier,
@@ -39,14 +47,18 @@ fun DialogSuccess(modifier: Modifier = Modifier,
                   text: String = "Updated successfully ",
                   buttonText: String = "OKAY",
                   onclick: () -> Unit) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(Color.Gray.copy(0.3f))){
+
+    Dialog(onDismissRequest = {  onclick() },
+        properties = DialogProperties(
+            dismissOnBackPress = false,
+            dismissOnClickOutside = false,
+        )
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth(.99f)
                 .padding(horizontal = 16.dp)
-                .align(Alignment.Center)
+               // .align(Alignment.Center)
                 .background(
                     Color.White, RoundedCornerShape(20.dp)
                 )
@@ -103,14 +115,16 @@ fun DialogConfirmation(modifier: Modifier = Modifier,
                        onYesClick: () -> Unit,
                        onNoClick: () -> Unit,
                        ) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(Color.Gray.copy(0.3f))){
+    Dialog(onDismissRequest = {  onNoClick() },
+        properties = DialogProperties(
+            dismissOnBackPress = false,
+            dismissOnClickOutside = false,
+        )
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth(.99f)
                 .padding(horizontal = 16.dp)
-                .align(Alignment.Center)
                 .background(
                     Color.White, RoundedCornerShape(20.dp)
                 )
@@ -196,3 +210,5 @@ fun DialogConfirmationPreview() {
         }
     )
 }
+
+

@@ -1,4 +1,3 @@
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,11 +22,7 @@ import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.dashboard.HamburgerViewModel
 import com.example.fitness.ui.theme.darkGreen_dark
-import com.example.fitness.ui.theme.greenMain_light
 import com.example.fitnesstracker.common.Screens
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Composable
 fun Hamburger(navController: NavController) {
@@ -55,11 +49,12 @@ fun Hamburger(navController: NavController) {
                 .padding(19.dp)
         ) {
             CommonHeader(
-                    text = "Settings",
-                subText =  "Customize your account.",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
+                text = "Settings",
+                subText =  "Customize your account.",
+                fontSize = 16.sp
             )
 
             Spacer(modifier = Modifier.height(50.dp))

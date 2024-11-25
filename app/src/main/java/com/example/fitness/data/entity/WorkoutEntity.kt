@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 data class WorkoutEntity (
     @PrimaryKey(autoGenerate = true)
         val workoutId: Long = 0,
-    val progressDayCount: Int,
-    val progressWeekCount: Int,
-    val progressMonthCount: Int,
-    val progressDate: String,
-    val accountId: Long = 0
+        val progressDayCount: Int,
+        val progressWeekCount: Int,
+        val progressMonthCount: Int,
+        val progressDate: String,
+        val accountId: Long = 0
 )

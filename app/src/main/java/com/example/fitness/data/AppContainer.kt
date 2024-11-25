@@ -2,7 +2,7 @@ package com.example.fitness.data
 
 import android.content.Context
 import com.example.fitness.data.db.FitnessDb
-import com.example.fitness.data.repository.WorkoutRepository
+import com.example.fitness.domain.repository.MealsRepositoryImpl
 import com.example.fitness.domain.repository.UserRepositoryImpL
 import com.example.fitness.domain.repository.WorkoutRepositoryImpl
 import com.example.fitness.domain.usecase.profile.GetUserProfileUseCase
@@ -15,6 +15,9 @@ import com.example.fitness.domain.usecase.InsertHeightUseCase
 import com.example.fitness.domain.usecase.InsertWeightUseCase
 import com.example.fitness.domain.usecase.LoginUseCase
 import com.example.fitness.domain.usecase.RegisterUseCase
+import com.example.fitness.domain.usecase.meals.GetMealsListUseCase
+import com.example.fitness.domain.usecase.meals.GetMealsProgressUseCase
+import com.example.fitness.domain.usecase.meals.InsertMealsProgressUseCase
 import com.example.fitness.domain.usecase.profile.UpdateUserProfileUseCase
 import com.example.fitness.domain.usecase.workout.GetWorkoutItemsUseCase
 import com.example.fitness.domain.usecase.workout.GetWorkoutProgressUseCase
@@ -39,7 +42,9 @@ interface AppContainer {
     val updateUserProfileUseCase: UpdateUserProfileUseCase
 
     // for meals
-    //val getMealsCategoriesUseCase: GetMealsCategoriesUseCase
+    val getMealsListUseCase: GetMealsListUseCase
+    val getMealsProgressUseCase: GetMealsProgressUseCase
+    val insertMealsProgressUseCase: InsertMealsProgressUseCase
 
     //for workout
     val getWorkoutProgressUseCase: GetWorkoutProgressUseCase
@@ -66,6 +71,14 @@ class AppDataContainer(
     val workoutRepositoryImpL: WorkoutRepositoryImpl by lazy {
         WorkoutRepositoryImpl(FitnessDb.getDatabase(context).WorkoutDao())
     }
+
+    /**
+     * Implementation for [MealsRepositoryImpl]
+     */
+    val mealsRepositoryImpL: MealsRepositoryImpl by lazy {
+        MealsRepositoryImpl(FitnessDb.getDatabase(context).MealsDao())
+    }
+
 
     //add usecase implementation for login use case
     override val loginUseCase: LoginUseCase by lazy {
@@ -102,6 +115,16 @@ class AppDataContainer(
     }
     override val updateUserProfileUseCase: UpdateUserProfileUseCase by lazy{
         UpdateUserProfileUseCase(userRepositoryImpL)
+    }
+    //for meals
+    override val getMealsListUseCase: GetMealsListUseCase by lazy{
+        GetMealsListUseCase(userRepositoryImpL)
+    }
+    override val getMealsProgressUseCase: GetMealsProgressUseCase by lazy{
+        GetMealsProgressUseCase(mealsRepositoryImpL)
+    }
+    override val insertMealsProgressUseCase: InsertMealsProgressUseCase by lazy{
+        InsertMealsProgressUseCase(mealsRepositoryImpL)
     }
 
     //for workout repository

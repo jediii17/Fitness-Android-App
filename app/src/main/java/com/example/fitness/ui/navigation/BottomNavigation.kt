@@ -58,8 +58,8 @@ fun BottomNavigationBar(selectedScreen: String, onItemSelected: (String) -> Unit
             BottomNavigationItem(
                 iconRes = R.drawable.meals,
                 label = "Meals",
-                isSelected = currentScreen == Screens.MEALS_SCREEN.screenName,
-                onClick = { onItemSelected(Screens.MEALS_SCREEN.screenName) }
+                isSelected = currentScreen == Screens.MEALSPROGRESS_SCREEN.screenName,
+                onClick = { onItemSelected(Screens.MEALSPROGRESS_SCREEN.screenName) }
             )
             BottomNavigationItem(
                 iconRes = R.drawable.humburger,

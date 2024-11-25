@@ -78,7 +78,7 @@ fun LoginScreen(navController: NavController) {
         Image(
            painter = painterResource(id = com.example.fitness.R.drawable.logo),
             contentDescription = "Login Image",
-            modifier = Modifier.size(276.dp)
+            modifier = Modifier.size(260.dp)
         )
         Spacer(modifier = Modifier.height(30.dp))
 
