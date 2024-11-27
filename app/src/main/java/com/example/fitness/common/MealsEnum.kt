@@ -32,10 +32,20 @@ enum class MealsCategoriesForLean(val mealsId: String,
     Tuna(
         mealsId = "TUNA-01",
         imageRes = R.drawable.chicken_tocino_breakfast,
-        mealsName = "Chicken Tocino Breakfast",
-        ingredients = "A sweet and savory Filipino dish made with marinated chicken served with garlic rice and a fried egg.",
+        mealsName = "Chicken Tocino",
+        ingredients = "1. Marinate the Chicken\n" +
+                "In a bowl, combine pineapple juice, brown sugar, ketchup, soy sauce, garlic, salt, and pepper. If desired, add a small drop of red food coloring.\n" +
+                "Mix well until the sugar is dissolved.\n" +
+                "Add the sliced chicken and mix to coat the chicken evenly with the marinade.\n" +
+                "Cover the bowl and refrigerate for at least 4 hours, preferably overnight, for the best flavor.\n" +
+                " Cook the Chicken\n" +
+                "Heat a large frying pan over medium heat and add the marinated chicken, including some of the marinade.\n" +
+                "Bring it to a simmer and allow the chicken to cook until the marinade has slightly thickened and reduced. This usually takes about 15–20 minutes.\n" +
+                "Once the liquid has reduced, add a little oil to the pan and pan-fry the chicken until it is caramelized and slightly charred on the edges.\n" +
+                "Serve\n" +
+                "Serve the Chicken Tocino with steamed rice and fried egg (this combination is called \"Tocilog\"). Optionally, add sliced tomatoes or pickled vegetables on the side.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "400",
+        calories = "400 kcal",
         protein = "28g",
         carbs = "45g",
         fats = "15g"
@@ -45,9 +55,23 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "TUNA-02",
         imageRes = R.drawable.chickentinola_breakfast,
         mealsName = "Chicken Tinola",
-        ingredients = "A comforting Filipino chicken soup made with ginger, green papaya, and chili leaves, often served with rice.",
+        ingredients = "Sauté the Aromatics\n" +
+                "Heat cooking oil in a large pot over medium heat.\n" +
+                "Sauté garlic, onion, and ginger until aromatic and slightly softened.\n" +
+                "2. Cook the Chicken\n" +
+                "Add the chicken pieces to the pot and cook until they are lightly browned.\n" +
+                "Pour in the fish sauce and stir to coat the chicken. Cook for another 2 minutes.\n" +
+                "3. Simmer the Soup\n" +
+                "Add water or chicken broth to the pot and bring it to a boil.\n" +
+                "Reduce the heat to a simmer, cover, and cook until the chicken is tender (about 20–25 minutes).\n" +
+                "4. Add the Vegetables\n" +
+                "Add the green papaya or chayote to the pot and cook until they are tender but not mushy (about 10 minutes).\n" +
+                "Toss in the malunggay or chili leaves and let them wilt for about 1–2 minutes.\n" +
+                "5. Season and Serve\n" +
+                "Taste the soup and season with salt and pepper as needed. If you like, add whole green chili peppers for extra flavor.\n" +
+                "Serve hot with steamed rice.\n",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "350",
+        calories = "150 Kcal",
         protein = "30g",
         carbs = "35g",
         fats = "12g"
@@ -56,10 +80,22 @@ enum class MealsCategoriesForLean(val mealsId: String,
     three(
         mealsId = "TUNA-03",
         imageRes = R.drawable.inihawnababoybreakfast,
-        mealsName = "Inihaw na Baboy (Grilled Pork)",
-        ingredients = "Grilled marinated pork served with rice and a side of pickled vegetables, a staple Filipino dish.",
+        mealsName = "Inihaw na Baboy",
+        ingredients = "Marinate the Pork\n" +
+                "In a large bowl, combine soy sauce, calamansi juice, banana ketchup, garlic, brown sugar, black pepper, and salt. Mix well.\n" +
+                "Add the pork slices and coat them evenly with the marinade.\n" +
+                "Cover and marinate for at least 3 hours or overnight in the refrigerator for best flavor.\n" +
+                " Preheat the Grill\n" +
+                "Heat up a charcoal or gas grill to medium-high heat. Make sure the grates are clean and lightly oiled to prevent sticking.\n" +
+                " Grill the Pork\n" +
+                "Remove the pork from the marinade, letting the excess marinade drip off. (Reserve the marinade for basting if desired.)\n" +
+                "Grill the pork for 4–6 minutes per side or until nicely charred and cooked through. Avoid overcooking to keep the meat tender.\n" +
+                "Optional: Baste the pork with the reserved marinade during grilling to enhance flavor.\n" +
+                " Serve\n" +
+                "Transfer the grilled pork to a platter and let it rest for a few minutes.\n" +
+                "Serve with steamed rice, toyomansi (soy sauce mixed with calamansi), spicy vinegar, or a side of atchara (pickled papaya).\n",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "500",
+        calories = "250 Kcal",
         protein = "38g",
         carbs = "50g",
         fats = "20g"
@@ -69,9 +105,23 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "TUNA-04",
         imageRes = R.drawable.chicken_tocino_with_brown_rice_breakfast,
         mealsName = "Chicken Tocino with Brown Rice",
-        ingredients = "A healthier version of chicken tocino served with nutritious brown rice, perfect for a hearty breakfast.",
+        ingredients = " Cook the Brown Rice\n" +
+                "Rinse the brown rice under cold water until the water runs clear.\n" +
+                "In a pot, combine 1 cup of brown rice, 2 1/2 cups of water, and a pinch of salt.\n" +
+                "Bring to a boil over high heat, then lower the heat to a simmer. Cover the pot and cook for 40–50 minutes, or until the rice is tender and the water is absorbed.\n" +
+                "Remove from heat and let the rice sit for 5–10 minutes, then fluff with a fork." +
+                "Prepare and Cook Chicken Tocino\n" +
+                "Marinate the Chicken:\n" +
+                "\n" +
+                "Combine pineapple juice, brown sugar, ketchup, soy sauce, garlic, salt, and pepper in a bowl. Mix well.\n" +
+                "Add chicken slices and coat evenly. Marinate for at least 4 hours, preferably overnight.\n" +
+                "Cook the Chicken:\n" +
+                "\n" +
+                "In a large frying pan, place the marinated chicken along with some marinade.\n" +
+                "Simmer over medium heat until the marinade reduces and slightly thickens (about 15–20 minutes).\n" +
+                "Once the liquid has evaporated, add a little oil and pan-fry the chicken until caramelized and slightly charred.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "450",
+        calories = "150 Kcal",
         protein = "30g",
         carbs = "55g",
         fats = "16g"
@@ -81,9 +131,18 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "TUNA-05",
         imageRes = R.drawable.fish_escabeche_breakfast,
         mealsName = "Fish Escabeche",
-        ingredients = "A Filipino dish of fried fish in a sweet and sour sauce with vegetables, typically served with rice.",
+        ingredients = "Prepare and Fry the Fish\n" +
+                "Season the cleaned fish with salt and pepper.\n" +
+                "(Optional) Lightly coat the fish in flour for a crispy crust.\n" +
+                "Heat oil in a frying pan over medium heat and fry the fish until golden brown and cooked through. Set aside on a plate lined with paper towels to drain excess oil.\n" +
+                "Make the Escabeche Sauce\n" +
+                "Heat 3 tablespoons of cooking oil in a separate pan.\n" +
+                "Sauté garlic, onion, and ginger until fragrant.\n" +
+                "Add the carrots, red bell pepper, and green bell pepper, and cook for 2–3 minutes until slightly softened.\n" +
+                "In a bowl, mix vinegar, soy sauce, water, and brown sugar. Pour this mixture into the pan. Bring to a boil and let simmer for 2–3 minutes.\n" +
+                "Stir in the cornstarch slurry to thicken the sauce. Season with salt and pepper to taste.\n",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "400",
+        calories = "125 Kcal",
         protein = "30g",
         carbs = "40g",
         fats = "18g"
@@ -93,9 +152,23 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "TUNA-06",
         imageRes = R.drawable.grilled_chicken_inasal__breakfast,
         mealsName = "Grilled Chicken Inasal",
-        ingredients = "A popular Visayan dish featuring marinated grilled chicken with a tangy and savory flavor.",
+        ingredients = ". Prepare the Annatto Oil (Atsuete Oil)\n" +
+                "Heat 1/4 cup of cooking oil in a small pan.\n" +
+                "Add 2 tablespoons of annatto seeds (atsuete) and stir for about 1–2 minutes until the oil turns orange-red.\n" +
+                "Strain and set aside.\n" +
+                " Marinate the Chicken\n" +
+                "In a large bowl, combine vinegar, calamansi juice, garlic, lemongrass, ginger, soy sauce, black pepper, and salt.\n" +
+                "Add the chicken pieces and ensure they are well-coated.\n" +
+                "Cover and marinate in the refrigerator for at least 3 hours, preferably overnight, for maximum flavor.\n" +
+                " Grill the Chicken\n" +
+                "Preheat a charcoal or gas grill to medium heat.\n" +
+                "Skewer the chicken pieces if desired.\n" +
+                "Grill the chicken over indirect heat, turning occasionally and basting with the annatto butter sauce. Cook for about 30–40 minutes, or until the chicken is fully cooked (internal temperature reaches 165°F or 74°C).\n" +
+                " Serve\n" +
+                "Serve the Chicken Inasal hot with steamed garlic rice, sinamak (spiced vinegar dipping sauce), and atchara (pickled papaya).\n" +
+                "Optionally, squeeze calamansi or lime over the chicken before serving.\n",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "450",
+        calories = "120 Kcal",
         protein = "40g",
         carbs = "35g",
         fats = "18g"
@@ -107,7 +180,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Pandesal with Peanut Butter",
         ingredients = "A traditional Filipino breakfast with pandesal (soft bread rolls) spread with creamy peanut butter, a comforting and tasty treat.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "350",
+        calories = "350 Kcal",
         protein = "12g",
         carbs = "50g",
         fats = "15g"
@@ -119,7 +192,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Paksiw na Pata",
         ingredients = "Pork hock simmered in vinegar, soy sauce, and spices, a hearty and tangy Filipino dish served with rice.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "600",
+        calories = "250 Kcal",
         protein = "40g",
         carbs = "35g",
         fats = "30g"
@@ -131,7 +204,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Oatmeal with Banana and Chia Seeds",
         ingredients = "A nutritious breakfast of oatmeal cooked with almond milk, topped with banana slices, chia seeds, and a boiled egg for added protein.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "350",
+        calories = "120 Kcal",
         protein = "18g",
         carbs = "45g",
         fats = "10g"
@@ -143,7 +216,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Tuna Omelette",
         ingredients = "A protein-packed breakfast omelette made with tuna, eggs, and vegetables, perfect for a healthy start to the day.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "400",
+        calories = "85 Kcal",
         protein = "30g",
         carbs = "20g",
         fats = "25g"
@@ -155,7 +228,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Scrambled Eggs",
         ingredients = "Scrambled eggs made with three eggs, a classic breakfast dish rich in protein.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "300",
+        calories = "50 Kcal",
         protein = "21g",
         carbs = "5g",
         fats = "22g"
@@ -167,7 +240,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Tinolang Manok",
         ingredients = "A warm and soothing chicken stew with ginger, green papaya, and malunggay leaves.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "350",
+        calories = "150 Kcal",
         protein = "30g",
         carbs = "30g",
         fats = "10g"
@@ -179,7 +252,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Sinigang na Hipon (Shrimp Soup)",
         ingredients = "A tangy Filipino shrimp soup with a variety of vegetables, perfect for a light and healthy breakfast.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "250",
+        calories = "140 Kcal",
         protein = "20g",
         carbs = "25g",
         fats = "5g"
@@ -191,7 +264,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Chicken Tinola with Malunggay",
         ingredients = "A variation of chicken tinola with malunggay leaves, providing a healthy, nutrient-rich breakfast.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "300",
+        calories = "300 Kcal",
         protein = "30g",
         carbs = "35g",
         fats = "8g"
@@ -203,10 +276,10 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsName = "Tuna Omelette",
         ingredients = "A quick and healthy breakfast omelette with tuna, vegetables, and eggs for a satisfying meal.",
         mealTime = MealTime.BREAKFAST.label,
-        calories = "400",
-        protein = "30g",
+        calories = "85 Kcal",
+        protein = "9g",
         carbs = "20g",
-        fats = "25g"
+        fats = "5g"
     ),
     /********************************************************
      *  meals prep for [LUNCH]
@@ -216,62 +289,62 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "MEALSBEGINNER-01",
         imageRes = R.drawable.egg_with_rice,
         mealsName = "Egg with Rice",
-        ingredients = "",
+        ingredients = "Cooked rice served with a fried or scrambled egg. A simple and quick meal.",
         mealTime = MealTime.LUNCH.label,
-        calories = "190",
-        protein = "15",
-        fats = "10",
-        carbs = "40"
+        calories = "190 Kcal",
+        protein = "15g",
+        fats = "10g",
+        carbs = "40g"
     ),
     SINIGANG(
         mealsId = "MEALSBEGINNER-02",
         imageRes = R.drawable.sinigang,
-        mealsName = "Sinigang na beef",
-        ingredients = "",
+        mealsName = "Sinigang na Beef",
+        ingredients = "Beef chunks cooked in a tangy tamarind-based broth with vegetables like kangkong, labanos, and sitaw.",
         mealTime = MealTime.LUNCH.label,
-        calories = "170",
-        protein = "26",
-        fats = "15",
-        carbs = "23"
+        calories = "170 Kcal",
+        protein = "26g",
+        fats = "15g",
+        carbs = "23g"
     ),
-    ADOBO(
+    ADODO(
         mealsId = "MEALSBEGINNER-03",
         imageRes = R.drawable.adobo,
         mealsName = "Adobo with Rice",
-        ingredients = "",
+        ingredients = "Chicken or pork cooked in a savory sauce made of soy sauce, vinegar, garlic, and bay leaves, served with rice.",
         mealTime = MealTime.LUNCH.label,
-        calories = "125",
-        protein = "30",
-        fats = "25",
-        carbs = "55"
+        calories = "125 Kcal",
+        protein = "30g",
+        fats = "25g",
+        carbs = "55g"
     ),
     KAREKARE(
         mealsId = "MEALSBEGINNER-04",
         imageRes = R.drawable.kare_kare,
         mealsName = "Kare-Kare",
-        ingredients = "",
+        ingredients = "Oxtail, tripes, or pork hock cooked in peanut sauce with vegetables like banana hearts, eggplant, and string beans.",
         mealTime = MealTime.LUNCH.label,
-        calories = "123",
-        protein = "35",
-        fats = "15",
-        carbs = "50"
+        calories = "123 Kcal",
+        protein = "35g",
+        fats = "15g",
+        carbs = "50g"
     ),
     CHICKENTOCINO(
         mealsId = "MEALSBEGINNER-05",
         imageRes = R.drawable.chikentocino,
         mealsName = "Chicken Tocino",
-        ingredients = "",
+        ingredients = "Sweet marinated chicken made with sugar, salt, garlic, and annatto, served with rice.",
         mealTime = MealTime.LUNCH.label,
-        calories = "145",
-        protein = "15",
-        fats = "  15",
-        carbs = "50"
+        calories = "145 Kcal",
+        protein = "15g",
+        fats = "15g",
+        carbs = "50g"
     ),
     CHICKENTINOLA(
         mealsId = "MEALSBEGINNER-06",
         imageRes = R.drawable.chickentinola,
         mealsName = "Chicken Tinola",
-        ingredients = "",
+        ingredients = "Chicken cooked in a ginger-based broth with papaya, chili leaves, and sometimes moringa.",
         mealTime = MealTime.LUNCH.label,
         calories = "188 Kcal",
         protein = "21g",
@@ -281,8 +354,8 @@ enum class MealsCategoriesForLean(val mealsId: String,
     SINIGANGNAPORK(
         mealsId = "MEALSBEGINNER-07",
         imageRes = R.drawable.sinigangpork,
-        mealsName = "Sinigang na pork",
-        ingredients = "",
+        mealsName = "Sinigang na Pork",
+        ingredients = "Pork ribs or belly cooked in a sour tamarind-based broth with vegetables like kangkong, okra, and labanos.",
         mealTime = MealTime.LUNCH.label,
         calories = "160 Kcal",
         protein = "30g",
@@ -293,9 +366,9 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "MEALSBEGINNER-08",
         imageRes = R.drawable.bistek_tagalog,
         mealsName = "Bistek Tagalog",
-        ingredients = "",
+        ingredients = "Beef steak marinated in soy sauce, calamansi, and garlic, cooked with onions, and served with rice.",
         mealTime = MealTime.LUNCH.label,
-        calories = "160Kcal",
+        calories = "160 Kcal",
         protein = "35g",
         fats = "15g",
         carbs = "65g"
@@ -304,7 +377,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "MEALSBEGINNER-09",
         imageRes = R.drawable.longsilog,
         mealsName = "Longganisa Itlog",
-        ingredients = "",
+        ingredients = "Longganisa (Filipino sausage) served with a fried egg and garlic rice.",
         mealTime = MealTime.LUNCH.label,
         calories = "125 Kcal",
         protein = "25g",
@@ -315,7 +388,7 @@ enum class MealsCategoriesForLean(val mealsId: String,
         mealsId = "MEALSBEGINNER-10",
         imageRes = R.drawable.scrambleeggs,
         mealsName = "Scramble Eggs",
-        ingredients = "",
+        ingredients = "Eggs whisked and scrambled, often cooked with butter or oil for a fluffy texture.",
         mealTime = MealTime.LUNCH.label,
         calories = "80 Kcal",
         protein = "28g",
@@ -535,9 +608,9 @@ enum class MealsCategoriesForAthletic(val mealsId: String,
                     "Once the tocino is cooked and nicely browned, remove it from the pan and serve hot.",
             mealTime = MealTime.BREAKFAST.label,
             calories = "350 Kcal",
-            protein = "22 g",
-            carbs = "25 g",
-            fats = "18 g"
+            protein = "22g",
+            carbs = "25g",
+            fats = "18g"
         ),
         two(
             mealsId = "MEAL-02",
@@ -1758,157 +1831,102 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsId = "MEALSADVANCE-01",
         imageRes = R.drawable.tuna_omelette,
         mealsName = "Tuna Omelet",
-        ingredients = "",
+        ingredients = "Eggs, canned tuna, onions, bell peppers, and seasoning, all scrambled together to create a savory omelet.",
         mealTime = MealTime.LUNCH.label,
-        calories = "150",
-        protein = "15",
-        fats = "10",
-        carbs = "40"
+        calories = "150 Kcal",
+        protein = "15g",
+        fats = "10g",
+        carbs = "40g"
     ),
     SINIGANG(
         mealsId = "MEALSADVANCE-02",
         imageRes = R.drawable.sinigang,
         mealsName = "Sinigang na Beef",
-        ingredients = "",
+        ingredients = "Beef chunks cooked in a tangy tamarind-based broth with vegetables like kangkong, labanos, and sitaw.",
         mealTime = MealTime.LUNCH.label,
-        calories = "168",
-        protein = "30",
-        fats = "25",
-        carbs = "55"
+        calories = "168 Kcal",
+        protein = "30g",
+        fats = "25g",
+        carbs = "55g"
     ),
     KAREKARE(
         mealsId = "MEALSADVANCE-04",
         imageRes = R.drawable.kare_kare,
         mealsName = "Kare-Kare",
-        ingredients = "",
+        ingredients = "Oxtail, tripes, or pork hock cooked in a rich peanut sauce with vegetables like banana hearts, eggplant, and string beans.",
         mealTime = MealTime.LUNCH.label,
-        calories = "183",
-        protein = "35",
-        fats = "15",
-        carbs = "50"
+        calories = "183 Kcal",
+        protein = "35g",
+        fats = "15g",
+        carbs = "50g"
     ),
     CHICKENTOCINO(
         mealsId = "MEALSADVANCE-05",
         imageRes = R.drawable.chikentocino,
         mealsName = "Chicken Tocino",
-        ingredients = ".",
+        ingredients = "Sweet marinated chicken made with sugar, salt, garlic, and annatto, served with rice.",
         mealTime = MealTime.LUNCH.label,
-        calories = "145",
-        protein = "15",
-        fats = "15",
-        carbs = "50"
+        calories = "145 Kcal",
+        protein = "15g",
+        fats = "15g",
+        carbs = "50g"
     ),
     PORKMINUDO(
         mealsId = "MEALSADVANCE-06",
         imageRes = R.drawable.pork_menudo,
         mealsName = "Pork Menudo",
-        ingredients = "",
+        ingredients = "Pork cubes cooked in tomato sauce with carrots, potatoes, and bell peppers.",
         mealTime = MealTime.LUNCH.label,
-        calories = "132",
-        protein = "21",
-        fats = "8",
-        carbs = "7"
+        calories = "132 Kcal",
+        protein = "21g",
+        fats = "8g",
+        carbs = "7g"
     ),
     SINIGANGNAPORK(
         mealsId = "MEALSADVANCE-07",
         imageRes = R.drawable.sinigangpork,
         mealsName = "Sinigang na Pork",
-        ingredients = "",
+        ingredients = "Pork ribs or belly cooked in a sour tamarind-based broth with vegetables like kangkong, okra, and labanos.",
         mealTime = MealTime.LUNCH.label,
-        calories = "150",
-        protein = "30",
-        fats = "25",
-        carbs = "55"
+        calories = "150 Kcal",
+        protein = "30g",
+        fats = "25g",
+        carbs = "55g"
     ),
     BISTEK(
         mealsId = "MEALSADVANCE-08",
         imageRes = R.drawable.bistek_tagalog,
         mealsName = "Bistek Tagalog",
-        ingredients = "",
+        ingredients = "Beef steak marinated in soy sauce, calamansi, and garlic, cooked with onions, and served with rice.",
         mealTime = MealTime.LUNCH.label,
-        calories = "150",
-        protein = "30",
-        fats = "25",
-        carbs = "55"
+        calories = "150 Kcal",
+        protein = "30g",
+        fats = "25g",
+        carbs = "55g"
     ),
     LONGSILOG(
         mealsId = "MEALSADVANCE-09",
         imageRes = R.drawable.longsilog,
         mealsName = "Longganisa Itlog",
-        ingredients = "",
+        ingredients = "Longganisa (Filipino sausage) served with a fried egg and garlic rice.",
         mealTime = MealTime.LUNCH.label,
-        calories = "145",
-        protein = "30",
-        fats = "25",
-        carbs = "55"
+        calories = "145 Kcal",
+        protein = "30g",
+        fats = "25g",
+        carbs = "55g"
     ),
     SCRAMBLEEGGS(
         mealsId = "MEALSADVANCE-10",
         imageRes = R.drawable.scrambleeggs,
         mealsName = "Scramble Eggs",
-        ingredients = "",
+        ingredients = "Eggs whisked and scrambled, often cooked with butter or oil for a fluffy texture.",
         mealTime = MealTime.LUNCH.label,
-        calories = "120",
-        protein = "30",
-        fats = "25",
-        carbs = "55"
+        calories = "120 Kcal",
+        protein = "30g",
+        fats = "25g",
+        carbs = "55g"
     ),
-    AFAE(
-        mealsId = "",
-        imageRes = R.drawable.tuna_omelette,
-        mealsName = "",
-        ingredients = "",
-        mealTime = "",
-        calories = "",
-        protein = "",
-        carbs = "",
-        fats = ""
-    ),
-    SEFGEF(
-        mealsId = "",
-        imageRes = R.drawable.tuna_omelette,
-        mealsName = "",
-        ingredients = "",
-        mealTime = "",
-        calories = "",
-        protein = "",
-        carbs = "",
-        fats = ""
-    ),
-    FAWFAFRF(
-        mealsId = "",
-        imageRes = R.drawable.tuna_omelette,
-        mealsName = "",
-        ingredients = "",
-        mealTime = "",
-        calories = "",
-        protein = "",
-        carbs = "",
-        fats = ""
-    ),
-    FAWOHOAWF(
-        mealsId = "",
-        imageRes = R.drawable.tuna_omelette,
-        mealsName = "",
-        ingredients = "",
-        mealTime = "",
-        calories = "",
-        protein = "",
-        carbs = "",
-        fats = ""
-    ),
-    FIVWDEAFAFATEEN(
-        mealsId = "",
-        imageRes = R.drawable.tuna_omelette,
-        mealsName = "",
-        ingredients = "",
-        mealTime = "",
-        calories = "",
-        protein = "",
-        carbs = "",
-        fats = ""
-    )
-,
+
     /********************************************************
      *  meals prep for [DINNER]
      ********************************************************
@@ -1920,7 +1938,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Beef Caldereta",
         ingredients = "A hearty Filipino beef stew cooked with tomato sauce, potatoes, and vegetables for a rich and flavorful dish.",
         mealTime = MealTime.DINNER.label,
-        calories = "350",
+        calories = "350 Kcal",
         protein = "35g",
         carbs = "59g",
         fats = "77g"
@@ -1931,7 +1949,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Chicken Adobo",
         ingredients = "A classic Filipino dish made with chicken, soy sauce, vinegar, garlic, and bay leaves, creating a savory and tangy flavor.",
         mealTime = MealTime.DINNER.label,
-        calories = "380",
+        calories = "380 Kcal",
         protein = "54g",
         carbs = "54g",
         fats = "54g"
@@ -1942,7 +1960,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Chicken Caldereta",
         ingredients = "A rich and savory chicken stew made with tomato sauce, potatoes, and vegetables, offering a deliciously tender texture.",
         mealTime = MealTime.DINNER.label,
-        calories = "460",
+        calories = "250 Kcal ",
         protein = "6g",
         carbs = "4g",
         fats = "5g"
@@ -1953,8 +1971,8 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Pinakbet",
         ingredients = "A traditional Filipino vegetable dish made with a variety of vegetables like bitter melon, eggplant, and okra, cooked with shrimp paste.",
         mealTime = MealTime.DINNER.label,
-        calories = "245",
-        protein = "54g",
+        calories = "150 Kcal",
+        protein = "30g",
         carbs = "5g",
         fats = "56g"
     ),
@@ -1964,7 +1982,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Chicken Caldereta",
         ingredients = "A savory Filipino stew made with tender chicken, tomato sauce, potatoes, and a variety of vegetables.",
         mealTime = MealTime.DINNER.label,
-        calories = "400",
+        calories = "180 Kcal",
         protein = "55g",
         carbs = "5g",
         fats = "65g"
@@ -1975,10 +1993,10 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Bangus Belly Sinigang",
         ingredients = "A tangy and savory Filipino soup made with bangus (milkfish) belly, tamarind, and assorted vegetables for a refreshing taste.",
         mealTime = MealTime.DINNER.label,
-        calories = "250",
-        protein = "54g",
-        carbs = "45g",
-        fats = "45g"
+        calories = "180 Kcal",
+        protein = "24g",
+        carbs = "4g",
+        fats = "5g"
     ),
     sewadven(
         mealsId = "7",
@@ -1986,7 +2004,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Grilled Bangus",
         ingredients = "Grilled milkfish marinated with spices and served with a side of fresh vegetables or rice for a tasty and healthy meal.",
         mealTime = MealTime.DINNER.label,
-        calories = "320",
+        calories = "320 Kcal",
         protein = "56g",
         carbs = "65g",
         fats = "45g"
@@ -1997,7 +2015,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Grilled Tilapia with Spinach",
         ingredients = "A healthy meal consisting of grilled tilapia paired with spinach, offering a rich source of protein and nutrients.",
         mealTime = MealTime.DINNER.label,
-        calories = "330",
+        calories = "330 Kcal",
         protein = "65g",
         carbs = "56g",
         fats = "15g"
@@ -2008,7 +2026,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Pork Binagoongan",
         ingredients = "Pork cooked with shrimp paste, tomatoes, and eggplant, creating a savory and umami-rich Filipino dish.",
         mealTime = MealTime.DINNER.label,
-        calories = "370",
+        calories = "370 Kcal",
         protein = "34g",
         carbs = "34g",
         fats = "34g"
@@ -2019,7 +2037,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Chicken Tocino",
         ingredients = "A sweet and savory Filipino dish made with marinated chicken, garlic, and sugar, typically served with rice.",
         mealTime = MealTime.DINNER.label,
-        calories = "340",
+        calories = "340 Kcal",
         protein = "34g",
         carbs = "34g",
         fats = "34g"
@@ -2030,7 +2048,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Tuna Omelette",
         ingredients = "A protein-packed omelette with tuna, eggs, and fresh mango for a light and flavorful dinner.",
         mealTime = MealTime.DINNER.label,
-        calories = "330",
+        calories = "330 Kcal",
         protein = "34g",
         carbs = "34g",
         fats = "34g"
@@ -2041,7 +2059,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Bread with Peanut Butter",
         ingredients = "Soft pandesal bread filled with creamy peanut butter and served with fresh papaya slices for a simple yet satisfying meal.",
         mealTime = MealTime.DINNER.label,
-        calories = "350",
+        calories = "350 Kcal",
         protein = "15g",
         carbs = "45g",
         fats = "20g"
@@ -2052,7 +2070,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Tuna Pandesal",
         ingredients = "A Filipino sandwich made with pandesal rolls filled with tuna salad, offering a tasty and convenient meal.",
         mealTime = MealTime.DINNER.label,
-        calories = "400",
+        calories = "400 Kcal",
         protein = "23g",
         carbs = "45g",
         fats = "20g"
@@ -2063,7 +2081,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Pork Nilaga with Cucumber",
         ingredients = "A simple and comforting Filipino soup made with boiled pork and served with fresh cucumber on the side.",
         mealTime = MealTime.DINNER.label,
-        calories = "320",
+        calories = "320 Kcal",
         protein = "34g",
         carbs = "52g",
         fats = "23g"
@@ -2074,7 +2092,7 @@ enum class MealsCategoriesForNatural(val mealsId: String,
         mealsName = "Tuna with Rice",
         ingredients = "A quick and nutritious meal of tuna served with steamed rice, providing a good balance of protein and carbs.",
         mealTime = MealTime.DINNER.label,
-        calories = "350",
+        calories = "350 Kcal",
         protein = "12g",
         carbs = "54g",
         fats = "23g"
