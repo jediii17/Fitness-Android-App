@@ -34,7 +34,6 @@ class SharedViewModel(
 
     private val _sharedVMUIState = MutableStateFlow(SharedViewModelUIState())
     val sharedVMUIState: StateFlow<SharedViewModelUIState> = _sharedVMUIState.asStateFlow()
-
     //Add every current Day meal and it should show to the highlight menu for the currentDay -
     //this will be called on Login after successful login
     suspend fun setCurrentDayMeals(isLoadContentDoneCallback: () -> Unit){
