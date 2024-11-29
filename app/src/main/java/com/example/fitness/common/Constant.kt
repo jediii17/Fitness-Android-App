@@ -12,6 +12,8 @@ object Constant {
 
     var bodyTypeCategory = BodyType.BEGINNER.name
 
+    var cachedProgressDayID = "0/0/0"
+
     //cache menu highlight
     val mealHighlightCache = mutableListOf<MealsDto>()
 

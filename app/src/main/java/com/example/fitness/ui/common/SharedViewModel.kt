@@ -38,8 +38,6 @@ class SharedViewModel(
     //Add every current Day meal and it should show to the highlight menu for the currentDay -
     //this will be called on Login after successful login
     suspend fun setCurrentDayMeals(isLoadContentDoneCallback: () -> Unit){
-        val mealsListUseCaseProgressDto = getMealsListUseCase.invoke()
-
         //sample counter it equals = "0/0/1" //month/week/day
         val mealsDayProgressCounter = getMealsProgressUseCase.invoke().lastOrNull()?.let {
             createMealsProgressDayID(
@@ -47,87 +45,105 @@ class SharedViewModel(
                 it.mealsProgressWeekCount,
                 it.mealsProgressDayCount)
         } ?: DEFAULT_MEALS_PROGRESS_DAY_ID //start value
+        if(Constant.cachedProgressDayID != mealsDayProgressCounter) {
 
-        val mealsListFromDB = getCurrentDayMealsUseCase.invoke(mealsDayProgressCounter)
+            val mealsListUseCaseProgressDto = getMealsListUseCase.invoke()
 
-        val mealForToday = mutableListOf<MealsDto>()
+            //cached previous progressID
+            Constant.cachedProgressDayID = mealsDayProgressCounter
 
-        //check if database is empty
-        if(mealsListFromDB.isEmpty()){
-            //if the db is empty insert the menu for the day
-            mealsListUseCaseProgressDto.shuffled().let { meals ->
-                val breakfastMeal =  meals.first{ ml -> ml.mealTime == MealTime.BREAKFAST.label }
-                val lunchMeal =  meals.first{ ml -> ml.mealTime == MealTime.LUNCH.label }
-                val dinnerMeal =  meals.first{ ml -> ml.mealTime == MealTime.DINNER.label }
+            val mealsListFromDB = getCurrentDayMealsUseCase.invoke(mealsDayProgressCounter)
 
-                mealForToday.add(breakfastMeal)
-                mealForToday.add(lunchMeal)
-                mealForToday.add(dinnerMeal)
+            val mealForToday = mutableListOf<MealsDto>()
 
-                //insert the 3 meals data to database
-                mealForToday.forEach {
-                    val dailyMealSet = DailyMealSetDto(
-                        mealName = it.mealsName,
-                        mealTime = it.mealTime,
-                        progressDay = mealsDayProgressCounter,
-                        currentDate = MyUtils.getTheCurrentDate(),
-                        status = MealsStatus.ON_GOING.name,
-                        calories = it.calories.sanitizeNumberString().toInt(),
-                        protein = it.protein.sanitizeNumberString().toInt(),
-                        fat = it.fats.sanitizeNumberString().toInt(),
-                        carbs = it.carbs.sanitizeNumberString().toInt(),
-                        mealsId = it.mealsId,//mealsID from enums list
-                        accountId = Constant.userId.longValue,
-                    ).toDailyMealsSetEntity()
+            //check if database is empty
+            if (mealsListFromDB.isEmpty()) {
+                //if the db is empty insert the menu for the day
+                mealsListUseCaseProgressDto.shuffled().let { meals ->
+                    val breakfastMeal =
+                        meals.first { ml -> ml.mealTime == MealTime.BREAKFAST.label }
+                    val lunchMeal = meals.first { ml -> ml.mealTime == MealTime.LUNCH.label }
+                    val dinnerMeal = meals.first { ml -> ml.mealTime == MealTime.DINNER.label }
 
-                    //insert current daily meal database
+                    mealForToday.add(breakfastMeal.copy(mealsDayProgress = mealsDayProgressCounter))
+                    mealForToday.add(lunchMeal.copy(mealsDayProgress = mealsDayProgressCounter))
+                    mealForToday.add(dinnerMeal.copy(mealsDayProgress = mealsDayProgressCounter))
 
-                    insertCurrentDayMealUseCase.invoke(dailyMealSet)
+                    //insert the 3 meals data to database
+                    mealForToday.forEach {
+                        val dailyMealSet = DailyMealSetDto(
+                            mealName = it.mealsName,
+                            mealTime = it.mealTime,
+                            progressDay = mealsDayProgressCounter,
+                            currentDate = MyUtils.getTheCurrentDate(),
+                            status = MealsStatus.ON_GOING.name,
+                            calories = it.calories.sanitizeNumberString().toInt(),
+                            protein = it.protein.sanitizeNumberString().toInt(),
+                            fat = it.fats.sanitizeNumberString().toInt(),
+                            carbs = it.carbs.sanitizeNumberString().toInt(),
+                            mealsId = it.mealsId,//mealsID from enums list
+                            accountId = Constant.userId.longValue,
+                        ).toDailyMealsSetEntity()
+
+                        //insert current daily meal database
+
+                        insertCurrentDayMealUseCase.invoke(dailyMealSet)
+                    }
+
+                    _sharedVMUIState.value = _sharedVMUIState.value.copy(
+                        mealsDay = mealForToday
+                    )
                 }
+            } else {
+                //if may current cache na sa database get from cache
+                mealsListFromDB.let { meals ->
 
-                _sharedVMUIState.value = _sharedVMUIState.value.copy(
-                    mealsDay = mealForToday
-                )
+                    val cacheBreakfastMeal =
+                        meals.first { ml -> ml.mealTime == MealTime.BREAKFAST.label }
+                    val cacheLunchMeal = meals.first { ml -> ml.mealTime == MealTime.LUNCH.label }
+                    val cacheDinnerMeal = meals.first { ml -> ml.mealTime == MealTime.DINNER.label }
+
+                    //get more meal details from our list
+                    val breakfastMeal =
+                        mealsListUseCaseProgressDto.first { ml -> cacheBreakfastMeal.mealsId == ml.mealsId }
+                    val lunchMeal =
+                        mealsListUseCaseProgressDto.first { ml -> cacheLunchMeal.mealsId == ml.mealsId }
+                    val dinnerMeal =
+                        mealsListUseCaseProgressDto.first { ml -> cacheDinnerMeal.mealsId == ml.mealsId }
+
+                    //set the current Daily Progress to MealsDto
+                    mealForToday.add(
+                        breakfastMeal.copy(
+                            mealsStatusProgress = cacheBreakfastMeal.status,
+                            mealsDayProgress = mealsDayProgressCounter
+                        )
+                    )
+                    mealForToday.add(
+                        lunchMeal.copy(
+                            mealsStatusProgress = cacheLunchMeal.status,
+                            mealsDayProgress = mealsDayProgressCounter
+                        )
+                    )
+                    mealForToday.add(
+                        dinnerMeal.copy(
+                            mealsStatusProgress = cacheDinnerMeal.status,
+                            mealsDayProgress = mealsDayProgressCounter
+                        )
+                    )
+
+                    //populate details here
+                    _sharedVMUIState.value = _sharedVMUIState.value.copy(
+                        mealsDay = mealForToday
+                    )
+                }
             }
-        }else{
-            //if may current cache na sa database get from cache
-            mealsListFromDB.let { meals ->
 
-                val cacheBreakfastMeal =  meals.first{ ml -> ml.mealTime == MealTime.BREAKFAST.label }
-                val cacheLunchMeal =  meals.first{ ml -> ml.mealTime == MealTime.LUNCH.label }
-                val cacheDinnerMeal =  meals.first{ ml -> ml.mealTime == MealTime.DINNER.label }
+            //get the total values
+            updateMealsCountIntake(mealForToday)
 
-                //get more meal details from our list
-                val breakfastMeal =  mealsListUseCaseProgressDto.first{ml -> cacheBreakfastMeal.mealsId == ml.mealsId}
-                val lunchMeal =  mealsListUseCaseProgressDto.first{ml -> cacheLunchMeal.mealsId == ml.mealsId}
-                val dinnerMeal =  mealsListUseCaseProgressDto.first{ml -> cacheDinnerMeal.mealsId == ml.mealsId}
-
-                //set the current Daily Progress to MealsDto
-                mealForToday.add(breakfastMeal.copy(
-                    mealsStatusProgress = cacheBreakfastMeal.status,
-                    mealsDayProgress = mealsDayProgressCounter
-                ))
-                mealForToday.add(lunchMeal.copy(
-                    mealsStatusProgress = cacheLunchMeal.status,
-                    mealsDayProgress = mealsDayProgressCounter
-                ))
-                mealForToday.add(dinnerMeal.copy(
-                    mealsStatusProgress = cacheDinnerMeal.status,
-                    mealsDayProgress = mealsDayProgressCounter
-                ))
-
-                //populate details here
-                _sharedVMUIState.value = _sharedVMUIState.value.copy(
-                    mealsDay = mealForToday
-                )
-            }
+            //get meal display highlights
+            getMealsWeekHighlights(mealsListUseCaseProgressDto)
         }
-
-        //get the total values
-        updateMealsCountIntake(mealForToday)
-
-        //get meal display highlights
-        getMealsWeekHighlights(mealsListUseCaseProgressDto)
 
         //DONE LOADING CONTENT
         isLoadContentDoneCallback()

@@ -25,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.R
+import com.example.fitness.common.Constant
 import com.example.fitness.common.MealTime
 import com.example.fitness.common.MealsStatus
 import com.example.fitness.domain.dto.MealsDto
@@ -87,7 +88,7 @@ fun MealsItemPreviewScreen(navController: NavHostController, sharedViewModel: Sh
             doneMealClick = {
                 CoroutineScope(Dispatchers.IO).launch {
                     sharedVMUIState.mealsDay.firstOrNull{
-                        it.mealTime == selectedMeal
+                        it.mealTime == selectedMeal && it.mealsDayProgress == Constant.cachedProgressDayID
                     }?.let {
                         sharedViewModel.updateCurrentMealStatus(
                             mealsId = it.mealsId,

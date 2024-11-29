@@ -99,7 +99,7 @@ fun MealsWeekProgressScreen(navController: NavController, sharedViewModel: Share
     ){
         CoroutineScope(Dispatchers.IO).launch {
             //update the progress bar in Dashboard with new Content
-            //sharedViewModel.setCurrentDayMeals {
+            sharedViewModel.setCurrentDayMeals {
                 CoroutineScope(Dispatchers.Main).launch {
                     /*  if(mealsUiState.mealsWeekCount == 0 && mealsUiState.mealsDayCount == 0){
                         navController.navigate(Screens.MEALS_SCREEN.screenName + "/${sharedVMUIState.mealsWeekHighlights.getOrNull(0)?.mealsId}")
@@ -108,7 +108,7 @@ fun MealsWeekProgressScreen(navController: NavController, sharedViewModel: Share
                     navController.navigate(Screens.MEALS_SCREEN.screenName+"/${Constant.NO_MEAL_HIGHLIGHT_ID}")//send only empty content -> to get from the enums
                     //   }
                 }
-           // }
+            }
         }
     }
 }
