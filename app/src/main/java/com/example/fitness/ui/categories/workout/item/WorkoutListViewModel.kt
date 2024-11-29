@@ -1,9 +1,8 @@
 package com.example.fitness.ui.categories.workout.item
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.fitness.common.Constant
-import com.example.fitness.common.MyUtils
+import com.example.fitness.util.MyUtils
 import com.example.fitness.domain.dto.DayContent
 import com.example.fitness.domain.dto.Exercise
 import com.example.fitness.domain.dto.WorkoutDto
@@ -15,7 +14,6 @@ import com.example.fitness.domain.usecase.workout.InsertWorkoutProgressUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 // ViewModel to manage the UI state and business logic for Workout items
 class WorkoutListViewModel(private val getWorkoutItemsUseCase: GetWorkoutItemsUseCase,

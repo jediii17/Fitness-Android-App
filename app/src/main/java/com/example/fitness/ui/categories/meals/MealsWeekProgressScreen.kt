@@ -57,6 +57,7 @@ import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.common.CommonDayCircleProgress
 import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.PrimaryButton
+import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.common.TrophyOfExcellence
 import com.example.fitness.ui.common.updateCompletedIndexValues
 import com.example.fitness.ui.theme.MyColorTheme
@@ -68,9 +69,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun MealsWeekProgressScreen(navController: NavController) {
+fun MealsWeekProgressScreen(navController: NavController, sharedViewModel: SharedViewModel) {
+
+
     val mealsWeekProgressViewModel: MealsWeekProgressViewModel = viewModel(factory = AppViewModelProvider.Factory)
+
     val mealsUiState by mealsWeekProgressViewModel.uiState.collectAsState()
+    val sharedVMUIState by sharedViewModel.sharedVMUIState.collectAsState()
 
     val initialWeeks = List(Constant.MAX_WEEK_COUNT) { 0 }
     var completedDaysList = remember {  mutableStateListOf(*initialWeeks.toTypedArray()) }
@@ -90,12 +95,20 @@ fun MealsWeekProgressScreen(navController: NavController) {
 
     MealsProgressContent(
         completedDaysList = completedDaysList,
-        mealsHighlights = mealsUiState.mealsHighlights,
+        mealsHighlights = sharedVMUIState.mealsWeekHighlights,
     ){
-        if(mealsUiState.mealsWeekCount == 0 && mealsUiState.mealsDayCount == 0){
-            navController.navigate(Screens.MEALS_SCREEN.screenName + "/${mealsUiState.mealsHighlights.getOrNull(0)?.mealsId}")
-        }else{
-            navController.navigate(Screens.MEALS_SCREEN.screenName+"/${Constant.NO_MEAL_HIGHLIGHT_ID}")//send only empty content -> to get from the enums
+        CoroutineScope(Dispatchers.IO).launch {
+            //update the progress bar in Dashboard with new Content
+            //sharedViewModel.setCurrentDayMeals {
+                CoroutineScope(Dispatchers.Main).launch {
+                    /*  if(mealsUiState.mealsWeekCount == 0 && mealsUiState.mealsDayCount == 0){
+                        navController.navigate(Screens.MEALS_SCREEN.screenName + "/${sharedVMUIState.mealsWeekHighlights.getOrNull(0)?.mealsId}")
+                    }else{*/
+                    //no highlights meal for now it will be only for displaying
+                    navController.navigate(Screens.MEALS_SCREEN.screenName+"/${Constant.NO_MEAL_HIGHLIGHT_ID}")//send only empty content -> to get from the enums
+                    //   }
+                }
+           // }
         }
     }
 }

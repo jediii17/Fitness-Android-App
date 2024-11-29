@@ -19,6 +19,15 @@ object Constant {
     const val COMPLETED_STATUS = "COMPLETED"
     const val MAX_WEEK_COUNT = 4
 
+    const val DEFAULT_MEALS_PROGRESS_DAY_ID = "0/0/0"
+    fun createMealsProgressDayID(
+        month: Int?,
+        week: Int?,
+        day: Int?
+    ): String{
+       return "${month}/${week}/${day}"
+    }
+
     //for logout purposes
     fun logoutReset(){
         userId.longValue = 0L

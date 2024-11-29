@@ -16,6 +16,7 @@ import com.example.fitness.ui.categories.meals.item.MealsItemPreviewViewModel
 import com.example.fitness.ui.categories.weight.WeightViewModel
 import com.example.fitness.ui.categories.workout.WorkoutWeekProgressViewModel
 import com.example.fitness.ui.categories.workout.item.WorkoutListViewModel
+import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.login.LoginViewModel
 import com.example.fitness.ui.signup.RegisterViewModel
 
@@ -123,6 +124,20 @@ object AppViewModelProvider {
                 getMealsProgressUseCase = fitnessApplication().container.getMealsProgressUseCase,
                 getMealsListUseCase = fitnessApplication().container.getMealsListUseCase,
                 insertMealsProgressUseCase = fitnessApplication().container.insertMealsProgressUseCase,
+            )
+        }
+
+        //sharedVMs
+        // Initializer for Meals screen
+        initializer {
+            SharedViewModel(
+                getWorkoutProgressUseCase = fitnessApplication().container.getWorkoutProgressUseCase,
+                getMealsProgressUseCase = fitnessApplication().container.getMealsProgressUseCase,
+                getMealsListUseCase = fitnessApplication().container.getMealsListUseCase,
+                getCurrentDayMealsUseCase = fitnessApplication().container.getCurrentDayMealsUseCase,
+                insertCurrentDayMealUseCase = fitnessApplication().container.insertCurrentDayMealUseCase,
+                updateCurrentDayMealUseCase = fitnessApplication().container.updateCurrentDayMealUseCase,
+                deleteCurrentDayMealUseCase = fitnessApplication().container.deleteCurrentDayMealsUseCase,
             )
         }
 

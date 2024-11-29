@@ -2,6 +2,7 @@ package com.example.fitness.data
 
 import android.content.Context
 import com.example.fitness.data.db.FitnessDb
+import com.example.fitness.domain.repository.DailyMealSetRepositoryImpl
 import com.example.fitness.domain.repository.MealsRepositoryImpl
 import com.example.fitness.domain.repository.UserRepositoryImpL
 import com.example.fitness.domain.repository.WorkoutRepositoryImpl
@@ -15,9 +16,13 @@ import com.example.fitness.domain.usecase.InsertHeightUseCase
 import com.example.fitness.domain.usecase.InsertWeightUseCase
 import com.example.fitness.domain.usecase.LoginUseCase
 import com.example.fitness.domain.usecase.RegisterUseCase
+import com.example.fitness.domain.usecase.meals.DeleteCurrentDayMealUseCase
+import com.example.fitness.domain.usecase.meals.GetCurrentDayMealsUseCase
 import com.example.fitness.domain.usecase.meals.GetMealsListUseCase
 import com.example.fitness.domain.usecase.meals.GetMealsProgressUseCase
+import com.example.fitness.domain.usecase.meals.InsertCurrentDayMealUseCase
 import com.example.fitness.domain.usecase.meals.InsertMealsProgressUseCase
+import com.example.fitness.domain.usecase.meals.UpdateCurrentDayMealUseCase
 import com.example.fitness.domain.usecase.profile.UpdateUserProfileUseCase
 import com.example.fitness.domain.usecase.workout.GetWorkoutItemsUseCase
 import com.example.fitness.domain.usecase.workout.GetWorkoutProgressUseCase
@@ -44,7 +49,11 @@ interface AppContainer {
     // for meals
     val getMealsListUseCase: GetMealsListUseCase
     val getMealsProgressUseCase: GetMealsProgressUseCase
+    val getCurrentDayMealsUseCase: GetCurrentDayMealsUseCase
     val insertMealsProgressUseCase: InsertMealsProgressUseCase
+    val insertCurrentDayMealUseCase: InsertCurrentDayMealUseCase
+    val updateCurrentDayMealUseCase: UpdateCurrentDayMealUseCase
+    val deleteCurrentDayMealsUseCase: DeleteCurrentDayMealUseCase
 
     //for workout
     val getWorkoutProgressUseCase: GetWorkoutProgressUseCase
@@ -77,6 +86,13 @@ class AppDataContainer(
      */
     val mealsRepositoryImpL: MealsRepositoryImpl by lazy {
         MealsRepositoryImpl(FitnessDb.getDatabase(context).MealsDao())
+    }
+
+    /**
+     * Implementation for [DailyMealSetRepositoryImpl]
+     */
+    val dailyMealSetRepositoryImpl: DailyMealSetRepositoryImpl by lazy {
+        DailyMealSetRepositoryImpl(FitnessDb.getDatabase(context).DailyMealSetDao())
     }
 
 
@@ -123,8 +139,23 @@ class AppDataContainer(
     override val getMealsProgressUseCase: GetMealsProgressUseCase by lazy{
         GetMealsProgressUseCase(mealsRepositoryImpL)
     }
+
+    override val getCurrentDayMealsUseCase: GetCurrentDayMealsUseCase by lazy{
+        GetCurrentDayMealsUseCase(dailyMealSetRepositoryImpl)
+    }
+
     override val insertMealsProgressUseCase: InsertMealsProgressUseCase by lazy{
         InsertMealsProgressUseCase(mealsRepositoryImpL)
+    }
+
+    override val insertCurrentDayMealUseCase: InsertCurrentDayMealUseCase by lazy{
+        InsertCurrentDayMealUseCase(dailyMealSetRepositoryImpl)
+    }
+    override val updateCurrentDayMealUseCase: UpdateCurrentDayMealUseCase by lazy {
+        UpdateCurrentDayMealUseCase(dailyMealSetRepositoryImpl)
+    }
+    override val deleteCurrentDayMealsUseCase: DeleteCurrentDayMealUseCase by lazy {
+        DeleteCurrentDayMealUseCase(dailyMealSetRepositoryImpl)
     }
 
     //for workout repository

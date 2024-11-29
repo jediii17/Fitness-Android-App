@@ -9,9 +9,11 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.categories.aboutus.AboutUsScreen
 import com.example.fitness.ui.categories.message.MessageFeedbackScreen
 import com.example.fitness.ui.categories.workout.item.WorkoutListScreen
@@ -24,15 +26,20 @@ import com.example.fitnesstracker.ui.categories.GoalsNaturalScreen
 import com.example.fitness.ui.categories.height.HeightScreen
 import com.example.fitness.ui.categories.meals.MealsWeekProgressScreen
 import com.example.fitness.ui.categories.profile.FirstLastNameScreen
+import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.help.HelpScreen
-import com.example.fitnesstracker.ui.dashboard.DashboardScreen
+import com.example.fitness.ui.dashboard.DashboardScreen
 import com.example.fitness.ui.login.LoginScreen
 import com.example.fitnesstracker.ui.categories.BodyGoalsScreen
 import com.example.fitnesstracker.ui.signup.RegisterScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NavMainController(modifier: Modifier, navController: NavHostController, startDestination: String = Screens.LOGIN_SCREEN.screenName) {
+fun NavMainController(modifier: Modifier,
+                      navController: NavHostController,
+                      startDestination: String = Screens.LOGIN_SCREEN.screenName) {
+
+    val sharedViewModel: SharedViewModel = viewModel(factory = AppViewModelProvider.Factory)
 
     NavHost(
         modifier = modifier,
@@ -41,7 +48,7 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
     ) {
 
         composable(route = Screens.LOGIN_SCREEN.screenName) {
-            LoginScreen(navController = navController)
+            LoginScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
         composable(route = Screens.REGISTER_SCREEN.screenName) {
             RegisterScreen(navController = navController)
@@ -85,7 +92,7 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
             GoalsNaturalScreen(navController = navController)
         }
         composable(route = Screens.DASHBOARD_SCREEN.screenName) {
-            DashboardScreen(navController = navController)
+            DashboardScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.HAMBURGER_SCREEN.screenName) {
@@ -114,12 +121,12 @@ fun NavMainController(modifier: Modifier, navController: NavHostController, star
         }
 
         composable(route = Screens.MEALSPROGRESS_SCREEN.screenName) {
-            MealsWeekProgressScreen(navController = navController)
+            MealsWeekProgressScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.MEALS_SCREEN.screenName + "/{mealId}") { navBackStackEntry ->
             val mealId = navBackStackEntry.arguments?.getString("mealId")
-            MealsItemPreviewScreen(navController = navController, mealId = mealId)
+            MealsItemPreviewScreen(navController = navController, mealId = mealId, sharedViewModel = sharedViewModel)
         }
     }
 }

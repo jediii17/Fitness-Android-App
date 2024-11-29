@@ -21,15 +21,6 @@ class MealsWeekProgressViewModel(private val getMealsProgressUseCase: GetMealsPr
     private val _uiState = MutableStateFlow(MealsWeekProgressUIState())
     val uiState: StateFlow<MealsWeekProgressUIState> = _uiState.asStateFlow()
 
-    init {
-        //run on start
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                getMealsWeekHighlights()
-            }
-        }
-    }
-
     suspend fun getMealsWeekProgress(){
         val mealsProgressUseCaseProgressDto = getMealsProgressUseCase.invoke()
 
@@ -41,28 +32,6 @@ class MealsWeekProgressViewModel(private val getMealsProgressUseCase: GetMealsPr
                 mealsWeekCount =  it.mealsProgressWeekCount
             )
         }
-    }
-
-     private suspend fun getMealsWeekHighlights(){
-         //get the menu highlight
-         if(Constant.mealHighlightCache.isEmpty()){
-             val mealsListUseCaseProgressDto = getMealsListUseCase.invoke()
-
-             //Show only LUNCH highlights
-             mealsListUseCaseProgressDto.shuffled().filter{ it.mealTime == MealTime.LUNCH.label}.take(4).let { meals ->
-                 //clear array
-                 Constant.mealHighlightCache.clear()
-                 Constant.mealHighlightCache.addAll(meals)
-
-                 _uiState.value = _uiState.value.copy(
-                     mealsHighlights = Constant.mealHighlightCache.toList().sortedBy { it.mealsId }
-                 )
-             }
-         }else{
-             _uiState.value = _uiState.value.copy(
-                 mealsHighlights =  Constant.mealHighlightCache
-             )
-         }
     }
 }
 

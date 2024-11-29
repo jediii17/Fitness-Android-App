@@ -3,6 +3,10 @@ package com.example.fitness.common
 import androidx.annotation.DrawableRes
 import com.example.fitness.R
 
+enum class MealsStatus{
+    DONE,
+    ON_GOING
+}
 enum class BodyType {
     BEGINNER,
     INTERMEDIATE,
@@ -19,13 +23,6 @@ enum class BodyFatLevel {
     LEAN,
     ATHLETIC,
     NATURAL,
-}
-
-enum class ExactLevel(val value: String) {
-    KCAL("1000kcal"),
-    FATT("540g"),
-    CARBBS("100g"),
-    PROTY("500g")
 }
 
 //For Workout Reps Count

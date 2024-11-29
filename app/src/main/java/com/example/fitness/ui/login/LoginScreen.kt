@@ -39,6 +39,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.common.PrimaryButton
+import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.theme.greenMain_light
 import com.example.fitnesstracker.common.Screens
 import kotlinx.coroutines.CoroutineScope
@@ -47,7 +48,7 @@ import kotlinx.coroutines.launch
 import androidx.compose.material3.Text as Text
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, sharedViewModel: SharedViewModel) {
 
     val loginViewModel: LoginViewModel = viewModel(factory = AppViewModelProvider.Factory)
 
@@ -61,9 +62,26 @@ fun LoginScreen(navController: NavController) {
     //Side effect - check only when the loginState variable was changed from the loginViewModel
     LaunchedEffect(loginState.value) {
         if(loginState.value == LoginState.SUCCESS){
-            navController.navigate(Screens.FIRSTLAST_SCREEN.screenName)
+            //TODO TO ADD ALSO TO SIGN UP PAGE
+            CoroutineScope(Dispatchers.IO).launch{
+                //get the current Day Meal
+                sharedViewModel.setCurrentDayMeals{
+                    CoroutineScope(Dispatchers.Main).launch{
+                        //wait for the load of content to Finish
+                        navController.navigate(Screens.FIRSTLAST_SCREEN.screenName)
+                    }
+                }
+            }
         }else if(loginState.value == LoginState.SUCCESS_SKIP_TO_DASHBOARD){
-            navController.navigate(Screens.DASHBOARD_SCREEN.screenName)
+            CoroutineScope(Dispatchers.IO).launch{
+                //get the current Day Meal
+                sharedViewModel.setCurrentDayMeals{
+                    CoroutineScope(Dispatchers.Main).launch{
+                        //wait for the load of content to Finish
+                        navController.navigate(Screens.DASHBOARD_SCREEN.screenName)
+                    }
+                }
+            }
         }
     }
 
@@ -190,11 +208,4 @@ fun SignUpText(navController: NavController) {
             navController.navigate(Screens.REGISTER_SCREEN.screenName)
         }
     )
-}
-
-@Preview(backgroundColor = 0xFFFFFFFF, showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    val navController = rememberNavController()
-    LoginScreen(navController = navController)
 }
