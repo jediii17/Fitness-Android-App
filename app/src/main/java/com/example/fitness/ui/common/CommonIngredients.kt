@@ -72,7 +72,7 @@ fun IngredientsDialog(
                     }
 
                     Text(
-                        text = "How to Cook",
+                        text ="Preparation method. ",
                         style = MaterialTheme.typography.headlineSmall.copy(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Light,
@@ -158,4 +158,3 @@ fun IngredientsDialogPreview() {
         imageRes = R.drawable.kare_kare
     )
 }
-

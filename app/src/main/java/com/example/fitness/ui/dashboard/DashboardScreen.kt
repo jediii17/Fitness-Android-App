@@ -42,10 +42,10 @@ fun DashboardScreen(navController: NavController, sharedViewModel: SharedViewMod
             currentProtein = sharedViewModelUIState.currentProtein,
             currentCarbs = sharedViewModelUIState.currentCarbs,
             currentFats = sharedViewModelUIState.currentFats,
-            totalCalories = sharedViewModelUIState.totalCalories,
-            totalProtein = sharedViewModelUIState.totalProtein,
-            totalCarbs = sharedViewModelUIState.totalCarbs,
-            totalFats = sharedViewModelUIState.totalFats,
+            totalCalories = sharedViewModelUIState.dashboardTotalCalories,
+            totalProtein = sharedViewModelUIState.dashboardTotalProtein,
+            totalCarbs = sharedViewModelUIState.dashboardTotalCarbs,
+            totalFats = sharedViewModelUIState.dashboardTotalFats,
         )
     })
 }
