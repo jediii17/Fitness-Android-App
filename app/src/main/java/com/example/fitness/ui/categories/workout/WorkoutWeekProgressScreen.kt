@@ -27,6 +27,7 @@ import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.common.CommonDayCircleProgress
 import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.PrimaryButton
+import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.common.TrophyOfExcellence
 import com.example.fitness.ui.common.updateCompletedIndexValues
 import com.example.fitness.ui.theme.MyColorTheme
@@ -37,7 +38,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun WorkoutWeekProgressScreen(navController: NavController) {
+fun WorkoutWeekProgressScreen(navController: NavController, sharedViewModel: SharedViewModel) {
 
     val workoutWeekProgressViewModel: WorkoutWeekProgressViewModel = viewModel(factory = AppViewModelProvider.Factory)
     val workoutUiState by workoutWeekProgressViewModel.uiState.collectAsState()

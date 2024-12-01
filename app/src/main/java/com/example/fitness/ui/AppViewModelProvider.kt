@@ -17,6 +17,8 @@ import com.example.fitness.ui.categories.weight.WeightViewModel
 import com.example.fitness.ui.categories.workout.WorkoutWeekProgressViewModel
 import com.example.fitness.ui.categories.workout.item.WorkoutListViewModel
 import com.example.fitness.ui.common.SharedViewModel
+import com.example.fitness.ui.dashboard.DashboardScreen
+import com.example.fitness.ui.dashboard.DashboardViewModel
 import com.example.fitness.ui.login.LoginViewModel
 import com.example.fitness.ui.signup.RegisterViewModel
 
@@ -26,6 +28,10 @@ import com.example.fitness.ui.signup.RegisterViewModel
 object AppViewModelProvider {
     val Factory = viewModelFactory {
         // Initializer for LoginViewModel
+        initializer {
+            DashboardViewModel()
+        }
+
         initializer {
             LoginViewModel(
                 fitnessApplication().container.loginUseCase

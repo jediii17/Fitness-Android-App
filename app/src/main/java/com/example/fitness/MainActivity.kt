@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
             //if already done in login
             Scaffold(
                 bottomBar = {
-                    if(Constant.isShowBottomNav.value || Constant.isLogin.value){
+                    if(Constant.isShowBottomNav.value && Constant.isLogin.value){
                         BottomNavigationBar(selectedScreen) { screenName ->
                             selectedScreen = screenName
                         }

@@ -22,15 +22,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.fitness.R
+import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.common.SharedViewModel
+import com.example.fitness.ui.login.LoginViewModel
 import com.example.fitness.ui.theme.Lightgreen_dark
 import com.example.fitness.ui.theme.Ly_dark
 import com.example.fitness.ui.theme.darkGreen_dark
 
 @Composable
 fun DashboardScreen(navController: NavController, sharedViewModel: SharedViewModel) {
+    val dashboardViewModel: DashboardViewModel = viewModel(factory = AppViewModelProvider.Factory)
+
     val sharedViewModelUIState by sharedViewModel.sharedVMUIState.collectAsState()
     DashboardContent(CalorieCard = {
         DailyCaloriesCard(
@@ -42,17 +47,24 @@ fun DashboardScreen(navController: NavController, sharedViewModel: SharedViewMod
             currentProtein = sharedViewModelUIState.currentProtein,
             currentCarbs = sharedViewModelUIState.currentCarbs,
             currentFats = sharedViewModelUIState.currentFats,
-            totalCalories = sharedViewModelUIState.totalCalories,
-            totalProtein = sharedViewModelUIState.totalProtein,
-            totalCarbs = sharedViewModelUIState.totalCarbs,
-            totalFats = sharedViewModelUIState.totalFats,
+            totalCalories = sharedViewModelUIState.dashboardTotalCalories,
+            totalProtein = sharedViewModelUIState.dashboardTotalProtein,
+            totalCarbs = sharedViewModelUIState.dashboardTotalCarbs,
+            totalFats = sharedViewModelUIState.dashboardTotalFats,
         )
-    })
+    },
+        WorkoutCard = {
+            WorkoutPlanCard(totalWorkout = sharedViewModelUIState.dashboardTotalWorkout.orEmpty(),
+                currentWorkout = sharedViewModelUIState.currentWorkout.orEmpty(),
+                percentageWorkout = sharedViewModelUIState.workoutPercentageProgress )
+        }
+    )
 }
 
 @Composable
 fun DashboardContent(
-     CalorieCard: @Composable ()-> Unit,
+    CalorieCard: @Composable ()-> Unit,
+    WorkoutCard: @Composable ()-> Unit,
 ){
     Column(
         modifier = Modifier
@@ -68,7 +80,7 @@ fun DashboardContent(
         ) {
             CalorieCard()
             Spacer(modifier = Modifier.height(16.dp))
-            WorkoutPlanCard()
+            WorkoutCard()
             Spacer(modifier = Modifier.weight(1f))
         }
     }
@@ -117,14 +129,18 @@ fun DailyCaloriesCard( caloriesPercentageProgress: Float = 0F,
 }
 
 @Composable
-fun WorkoutPlanCard() {
+fun WorkoutPlanCard(
+    totalWorkout: String,
+    currentWorkout: String,
+    percentageWorkout: Float
+) {
     DashboardCard(
         imageRes = R.drawable.gyms,
         title = "Workout Plan",
-        mainProgressText = "Body Weight",
-        mainProgressValue = 0.8F,
-        labels = listOf("Progress"),
-        progressValues = listOf(0.6f)
+        mainProgressText = "${currentWorkout}/${totalWorkout}",
+        mainProgressValue = percentageWorkout,
+        labels = emptyList(),
+        progressValues = emptyList()
     )
 }
 
@@ -246,6 +262,7 @@ fun DashboardScreenPreview() {
     DashboardContent(
         CalorieCard = {
             DailyCaloriesCard()
-        }
+        },
+        WorkoutCard = {}
     )
 }
