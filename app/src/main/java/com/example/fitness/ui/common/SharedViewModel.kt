@@ -97,38 +97,43 @@ class SharedViewModel(
                 //if may current cache na sa database get from cache
                 mealsListFromDB.let { meals ->
 
-                    val cacheBreakfastMeal =
-                        meals.first { ml -> ml.mealTime == MealTime.BREAKFAST.label }
+                    val cacheBreakfastMeal = meals.first { ml -> ml.mealTime == MealTime.BREAKFAST.label }
                     val cacheLunchMeal = meals.first { ml -> ml.mealTime == MealTime.LUNCH.label }
                     val cacheDinnerMeal = meals.first { ml -> ml.mealTime == MealTime.DINNER.label }
 
                     //get more meal details from our list
                     val breakfastMeal =
-                        mealsListUseCaseProgressDto.first { ml -> cacheBreakfastMeal.mealsId == ml.mealsId }
+                        mealsListUseCaseProgressDto.firstOrNull { ml -> cacheBreakfastMeal.mealsId == ml.mealsId }
                     val lunchMeal =
-                        mealsListUseCaseProgressDto.first { ml -> cacheLunchMeal.mealsId == ml.mealsId }
+                        mealsListUseCaseProgressDto.firstOrNull { ml -> cacheLunchMeal.mealsId == ml.mealsId }
                     val dinnerMeal =
-                        mealsListUseCaseProgressDto.first { ml -> cacheDinnerMeal.mealsId == ml.mealsId }
+                        mealsListUseCaseProgressDto.firstOrNull { ml -> cacheDinnerMeal.mealsId == ml.mealsId }
 
                     //set the current Daily Progress to MealsDto
-                    mealForToday.add(
-                        breakfastMeal.copy(
-                            mealsStatusProgress = cacheBreakfastMeal.status,
-                            mealsDayProgress = mealsDayProgressCounter
+                    breakfastMeal?.copy(
+                        mealsStatusProgress = cacheBreakfastMeal.status,
+                        mealsDayProgress = mealsDayProgressCounter
+                    )?.let {
+                        mealForToday.add(
+                            it
                         )
-                    )
-                    mealForToday.add(
-                        lunchMeal.copy(
-                            mealsStatusProgress = cacheLunchMeal.status,
-                            mealsDayProgress = mealsDayProgressCounter
+                    }
+                    lunchMeal?.let {
+                        mealForToday.add(
+                            it.copy(
+                                mealsStatusProgress = cacheLunchMeal.status,
+                                mealsDayProgress = mealsDayProgressCounter
+                            )
                         )
-                    )
-                    mealForToday.add(
-                        dinnerMeal.copy(
-                            mealsStatusProgress = cacheDinnerMeal.status,
-                            mealsDayProgress = mealsDayProgressCounter
+                    }
+                    dinnerMeal?.let {
+                        mealForToday.add(
+                            it.copy(
+                                mealsStatusProgress = cacheDinnerMeal.status,
+                                mealsDayProgress = mealsDayProgressCounter
+                            )
                         )
-                    )
+                    }
 
                     //populate details here
                     _sharedVMUIState.value = _sharedVMUIState.value.copy(
@@ -142,7 +147,7 @@ class SharedViewModel(
 
             //get meal display highlights
             getMealsWeekHighlights(mealsListUseCaseProgressDto)
- //       }
+
 
         //DONE LOADING CONTENT
         isLoadContentDoneCallback()
@@ -315,6 +320,21 @@ class SharedViewModel(
         )
     }
 
+    suspend fun calculateWorkoutProgress(){
+        getWorkoutProgressUseCase.invoke().lastOrNull()?.let {
+
+            val weekcounter = it.progressWeekCount + 1
+            val currentWorkout = weekcounter * it.progressDayCount
+            val totalWorkout = (4 * 7) //4 weeks x 7 days,
+
+            _sharedVMUIState.value = _sharedVMUIState.value.copy(
+                dashboardTotalWorkout = totalWorkout.toString(),
+                currentWorkout = currentWorkout.toString(),
+                workoutPercentageProgress = calculatePercentage(currentWorkout,totalWorkout)
+            )
+        }
+    }
+
     private fun calculatePercentage(currentVal: Int, totalVal: Int): Float{
         return (currentVal.toFloat() / totalVal)
     }
@@ -359,22 +379,30 @@ class SharedViewModel(
 
 /** Data class to hold the UI state */
 data class SharedViewModelUIState(
+    //Percentage Progress
     val caloriesPercentageProgress: Float = 0F,
     val carbsPercentageProgress: Float = 0F,
     val proteinPercentageProgress: Float = 0F,
     val fatsPercentageProgress: Float = 0F,
+    val workoutPercentageProgress: Float = 0F,
+    // Current
     val currentCalories: String? = null,
     val currentProtein: String? = null,
     val currentCarbs: String? = null,
     val currentFats: String? = null,
+    val currentWorkout: String? = null,
+    // Total
     val totalCalories: String? = null,
     val totalProtein: String? = null,
     val totalCarbs: String? = null,
     val totalFats: String? = null,
+    // Dashboard
     val dashboardTotalCalories: String? = null,
     val dashboardTotalProtein: String? = null,
     val dashboardTotalCarbs: String? = null,
     val dashboardTotalFats: String? = null,
+    val dashboardTotalWorkout: String? = null,
     val mealsDay: List<MealsDto> = emptyList(),
     val mealsWeekHighlights: List<MealsDto> = emptyList(),
+
 )

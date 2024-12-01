@@ -105,12 +105,12 @@ fun NavMainController(modifier: Modifier,
             MessageFeedbackScreen(navController = navController)
         }
         composable(route = Screens.WORKOUTPROGRESS_SCREEN.screenName) {
-            WorkoutWeekProgressScreen(navController = navController)
+            WorkoutWeekProgressScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
         composable(route = "${Screens.WORKOUT_LIST_SCREEN.screenName}/{dayId}") { navBackStackEntry ->
             val dayId = navBackStackEntry.arguments?.getInt("dayId")
             dayId?.let { id ->
-                WorkoutListScreen(navController = navController, dayId = id)
+                WorkoutListScreen(navController = navController, dayId = id, sharedViewModel = sharedViewModel)
             }
         }
         composable(route = Screens.ABOUTUS_SCREEN.screenName) {

@@ -38,13 +38,15 @@ import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.DialogConfirmation
 import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.common.PrimaryButton
+import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.theme.MyColorTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
+fun WorkoutListScreen(navController: NavController, dayId: Int = 1, sharedViewModel: SharedViewModel) {
 
     var selectedDay by remember { mutableStateOf(dayId + 1) }
 
@@ -129,8 +131,10 @@ fun WorkoutListScreen(navController: NavController, dayId: Int = 1) {
 
                 CoroutineScope(Dispatchers.IO).launch {
                     workoutListViewModel.updateDoneProgressCount()
+                    delay(500)
+                    //update the content in the dashboard
+                    sharedViewModel.calculateWorkoutProgress()
                 }
-
 
                 navController.popBackStack()
 

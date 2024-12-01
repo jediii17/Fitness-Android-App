@@ -64,6 +64,8 @@ fun LoginScreen(navController: NavController, sharedViewModel: SharedViewModel) 
         if(loginState.value == LoginState.SUCCESS){
             //TODO TO ADD ALSO TO SIGN UP PAGE
             CoroutineScope(Dispatchers.IO).launch{
+               //calculate Workout Progress
+                sharedViewModel.calculateWorkoutProgress()
                 //get the current Day Meal
                 sharedViewModel.setCurrentDayMeals{
                     CoroutineScope(Dispatchers.Main).launch{
@@ -74,6 +76,8 @@ fun LoginScreen(navController: NavController, sharedViewModel: SharedViewModel) 
             }
         }else if(loginState.value == LoginState.SUCCESS_SKIP_TO_DASHBOARD){
             CoroutineScope(Dispatchers.IO).launch{
+                //calculate Workout Progress
+                sharedViewModel.calculateWorkoutProgress()
                 //get the current Day Meal
                 sharedViewModel.setCurrentDayMeals{
                     CoroutineScope(Dispatchers.Main).launch{
