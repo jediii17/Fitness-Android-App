@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -383,8 +384,16 @@ private fun TabContent(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            //Show Finish meal button when breakfast and lunch was done
+            val isBreakfastAndLunchDone = meals.firstOrNull {
+                it.mealTime.lowercase(Locale.getDefault()) == MealTime.BREAKFAST.name.lowercase(Locale.getDefault()) }
+                ?.mealsStatusProgress == MealsStatus.DONE.name && meals.firstOrNull {
+                it.mealTime.lowercase(Locale.getDefault()) == MealTime.LUNCH.name.lowercase(Locale.getDefault()) }
+                ?.mealsStatusProgress == MealsStatus.DONE.name
+
             NavigationButtonOptions(
                 isLastMeal = selectedMeal == MealTime.DINNER.label,
+                isBreakfastAndLunchDone = isBreakfastAndLunchDone,
                 isCurrentMealDone = currentMeal.mealsStatusProgress == MealsStatus.DONE.name,
                 onMealFinishedClick = finalizeMealClick,
                 onDoneClick = doneMealClick
@@ -396,6 +405,7 @@ private fun TabContent(
 @Composable
 fun NavigationButtonOptions(
     isLastMeal: Boolean,
+    isBreakfastAndLunchDone: Boolean,
     isCurrentMealDone: Boolean,
     onMealFinishedClick: () -> Unit,
     onDoneClick: () -> Unit
@@ -406,11 +416,20 @@ fun NavigationButtonOptions(
         horizontalArrangement = Arrangement.Center
     ) {
         AnimatedVisibility(visible = !isCurrentMealDone) {
-            PrimaryButton(
-                iconSuffix = if (isLastMeal) R.drawable.ic_flag else  R.drawable.ic_check,
-                text = if (isLastMeal) "FINISH MEAL PREP" else "DONE",
-                onClick = { if (isLastMeal) onMealFinishedClick() else onDoneClick() }
-            )
+
+            if(isLastMeal && isBreakfastAndLunchDone){
+                PrimaryButton(
+                    iconSuffix = R.drawable.ic_flag,
+                    text = "FINISH MEAL PREP",
+                    onClick = {onMealFinishedClick()}
+                )
+            }else if(!isLastMeal){
+                PrimaryButton(
+                    iconSuffix = R.drawable.ic_check,
+                    text = "DONE",
+                    onClick ={ onDoneClick() }
+                )
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ class SharedViewModel(
                 it.mealsProgressWeekCount,
                 it.mealsProgressDayCount)
         } ?: DEFAULT_MEALS_PROGRESS_DAY_ID //start value
-        if(Constant.cachedProgressDayID != mealsDayProgressCounter) {
+       // if(Constant.cachedProgressDayID != mealsDayProgressCounter || Constant.cachedProgressDayID == DEFAULT_MEALS_PROGRESS_DAY_ID) {
 
             val mealsListUseCaseProgressDto = getMealsListUseCase.invoke()
 
@@ -142,14 +142,83 @@ class SharedViewModel(
 
             //get meal display highlights
             getMealsWeekHighlights(mealsListUseCaseProgressDto)
-        }
+ //       }
 
         //DONE LOADING CONTENT
         isLoadContentDoneCallback()
     }
 
-    suspend fun setNewDayMeals(){
+    suspend fun setPreviousDayMeals(progressDayID: String, isLoadContentDoneCallback: () -> Unit){
 
+        val mealsListFromDB = getCurrentDayMealsUseCase.invoke(progressDayID)
+        val mealsListUseCaseProgressDto = getMealsListUseCase.invoke()
+
+        val mealForToday = mutableListOf<MealsDto>()
+
+        //check if database is empty
+        //if may current cache na sa database get from cache
+        mealsListFromDB.shuffled().let { meals ->
+
+            val cacheBreakfastMeal = meals.first { ml -> ml.mealTime == MealTime.BREAKFAST.label && ml.progressDay == progressDayID }
+            val cacheLunchMeal = meals.first { ml -> ml.mealTime == MealTime.LUNCH.label && ml.progressDay == progressDayID  }
+            val cacheDinnerMeal = meals.first { ml -> ml.mealTime == MealTime.DINNER.label && ml.progressDay == progressDayID  }
+
+            //get more meal details from our list
+            val breakfastMeal =
+                mealsListUseCaseProgressDto.first { ml -> cacheBreakfastMeal.mealsId == ml.mealsId }
+            val lunchMeal =
+                mealsListUseCaseProgressDto.first { ml -> cacheLunchMeal.mealsId == ml.mealsId }
+            val dinnerMeal =
+                mealsListUseCaseProgressDto.first { ml -> cacheDinnerMeal.mealsId == ml.mealsId }
+
+            //set the current Daily Progress to MealsDto
+            mealForToday.add(
+                breakfastMeal.copy(
+                    mealsStatusProgress = MealsStatus.DONE.name,
+                    mealsDayProgress = progressDayID
+                )
+            )
+            mealForToday.add(
+                lunchMeal.copy(
+                    mealsStatusProgress = MealsStatus.DONE.name,
+                    mealsDayProgress = progressDayID
+                )
+            )
+            mealForToday.add(
+                dinnerMeal.copy(
+                    mealsStatusProgress = MealsStatus.DONE.name,
+                    mealsDayProgress = progressDayID
+                )
+            )
+
+            //update current screen total count
+            var totalCal = 0
+            var totalProtein = 0
+            var totalCarbs = 0
+            var totalFats = 0
+
+            meals.forEach {
+                totalCal += it.calories
+                totalProtein += it.protein
+                totalCarbs += it.carbs
+                totalFats += it.fat
+            }
+
+            //populate details here
+            _sharedVMUIState.value = _sharedVMUIState.value.copy(
+                totalCalories = totalCal.toString(),
+                totalProtein = totalProtein.toString(),
+                totalCarbs = totalCarbs.toString(),
+                totalFats = totalFats.toString(),
+                mealsDay = mealForToday
+            )
+
+        }
+
+
+
+        //DONE LOADING CONTENT
+        isLoadContentDoneCallback()
     }
 
     private fun getMealsWeekHighlights(mealsListUseCaseProgressDto: List<MealsDto>) {
@@ -230,6 +299,10 @@ class SharedViewModel(
             totalProtein = totalProtein.toString(),
             totalCarbs = totalCarbs.toString(),
             totalFats = totalFats.toString(),
+            dashboardTotalCalories = totalCalories.toString(),
+            dashboardTotalProtein = totalProtein.toString(),
+            dashboardTotalCarbs = totalCarbs.toString(),
+            dashboardTotalFats = totalFats.toString(),
             currentCalories = currentCalories.toString(),
             currentProtein = currentProtein.toString(),
             currentCarbs = currentCarbs.toString(),
@@ -298,6 +371,10 @@ data class SharedViewModelUIState(
     val totalProtein: String? = null,
     val totalCarbs: String? = null,
     val totalFats: String? = null,
+    val dashboardTotalCalories: String? = null,
+    val dashboardTotalProtein: String? = null,
+    val dashboardTotalCarbs: String? = null,
+    val dashboardTotalFats: String? = null,
     val mealsDay: List<MealsDto> = emptyList(),
     val mealsWeekHighlights: List<MealsDto> = emptyList(),
 )
