@@ -37,6 +37,7 @@ import com.example.fitness.ui.common.IngredientsDialog
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.theme.MyColorTheme
+import com.example.fitness.ui.theme.green
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -120,7 +121,7 @@ fun MealsItemPreviewScreen(navController: NavHostController, sharedViewModel: Sh
         )
     }
     if (isDialogOpen) {
-        val selectedMealData = sharedVMUIState.mealsWeekHighlights.firstOrNull { it.mealTime == selectedMeal }
+        val selectedMealData = sharedVMUIState.mealsDay.firstOrNull { it.mealTime == selectedMeal }
         IngredientsDialog(
             showDialog = isDialogOpen,
             onDismiss = { isDialogOpen = false },
@@ -219,7 +220,7 @@ fun NutritionSection(modifier: Modifier = Modifier,
             NutritionCard(
                 title = "Calories",
                 name = "Total:",
-                value = "${totalCalories}kcal",
+                value = "${totalCalories}",
                 color = Color(0xFFACFFEB),
                 icon = R.drawable.ic_fire
             )
@@ -228,7 +229,7 @@ fun NutritionSection(modifier: Modifier = Modifier,
             NutritionCard(
                 title = "Protein",
                 name = "Total:",
-                value = "${totalProtein}g",
+                value = "${totalProtein}",
                 color = Color(0xFFA3F3A6),
                 icon = R.drawable.ic_protein
             )
@@ -237,7 +238,7 @@ fun NutritionSection(modifier: Modifier = Modifier,
             NutritionCard(
                 title = "Carbs",
                 name = "Total:",
-                value =  "${totalCarbs}g",
+                value =  "${totalCarbs}",
                 color = Color(0xFFF6BFFF),
                 icon = R.drawable.ic_water
             )
@@ -246,7 +247,7 @@ fun NutritionSection(modifier: Modifier = Modifier,
             NutritionCard(
                 title = "Fats",
                 name = "Total:",
-                value =  "${totalFats}g",
+                value =  "${totalFats}",
                 color = Color(0xFFFDB299),
                 icon = R.drawable.ic_fire
             )
@@ -407,9 +408,10 @@ fun NavigationButtonOptions(
     ) {
         AnimatedVisibility(visible = !isCurrentMealDone) {
             PrimaryButton(
-                iconSuffix = if (isLastMeal) R.drawable.ic_flag else  R.drawable.ic_check,
                 text = if (isLastMeal) "FINISH MEAL PREP" else "DONE",
-                onClick = { if (isLastMeal) onMealFinishedClick() else onDoneClick() }
+                iconSuffix = if (isLastMeal) R.drawable.ic_flag else  R.drawable.ic_check,
+                onClick = { if (isLastMeal) onMealFinishedClick() else onDoneClick() },
+                backgroundColor = green
             )
         }
     }

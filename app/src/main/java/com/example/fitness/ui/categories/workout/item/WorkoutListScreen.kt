@@ -40,6 +40,7 @@ import com.example.fitness.ui.common.DialogSuccess
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.theme.MyColorTheme
+import com.example.fitness.ui.theme.green
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -320,9 +321,11 @@ fun WorkoutDetails(workout: WorkoutItemDto) {
 fun GoButton(onClick: () -> Unit) {
     PrimaryButton(
         text = "GO",
-    ){
-        onClick()
-    }
+        onClick = {
+            onClick()
+        },
+        backgroundColor = green,
+    )
 }
 
 @Composable

@@ -12,7 +12,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -21,13 +20,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fitness.R
+import com.example.fitness.ui.theme.green
 import com.example.fitness.ui.theme.greenMain_light
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Composable
-fun PrimaryButton(modifier: Modifier = Modifier, text: String, @DrawableRes iconSuffix: Int? = null, enabled: Boolean = true, onClick:() -> Unit){
+fun PrimaryButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    @DrawableRes iconSuffix: Int? = null,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+    backgroundColor: Color
+){
     Button(
         onClick = onClick,
         enabled = enabled,
@@ -60,9 +64,11 @@ fun PrimaryButton(modifier: Modifier = Modifier, text: String, @DrawableRes icon
 @Composable
 private fun ButtonPreview(){
     PrimaryButton(
-        iconSuffix =  R.drawable.ic_check,
         text = "DONE",
-    ){
+        iconSuffix =  R.drawable.ic_check,
+        onClick = {
 
-    }
+        },
+        backgroundColor = green,
+    )
 }

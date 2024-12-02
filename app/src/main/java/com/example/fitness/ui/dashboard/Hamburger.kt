@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,6 +23,7 @@ import com.example.fitness.ui.common.CommonHeader
 import com.example.fitness.ui.common.PrimaryButton
 import com.example.fitness.ui.dashboard.HamburgerViewModel
 import com.example.fitness.ui.theme.darkGreen_dark
+import com.example.fitness.ui.theme.green
 import com.example.fitnesstracker.common.Screens
 
 @Composable
@@ -31,7 +33,9 @@ fun Hamburger(navController: NavController) {
     // OnClick logout handler
     val onLogout = {
         hamburgerViewModel.onLogOutClick()
-        navController.navigate(Screens.LOGIN_SCREEN.screenName)
+        navController.navigate(Screens.LOGIN_SCREEN.screenName) {
+            popUpTo(Screens.HAMBURGER_SCREEN.screenName) { inclusive = true }
+        }
     }
 
     Column(
@@ -40,55 +44,45 @@ fun Hamburger(navController: NavController) {
             .background(Color.White)
             .padding(20.dp)
     ) {
-        Spacer(modifier = Modifier.height(20.dp))
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(16.dp))
-                .padding(19.dp)
+                .shadow(10.dp, RoundedCornerShape(16.dp)) // Added shadow
+                .background(Color.White)
         ) {
+            Spacer(modifier = Modifier.height(30.dp))
             CommonHeader(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally),
                 text = "Settings",
-                subText =  "Customize your account.",
+                subText = "Customize your account.",
                 fontSize = 16.sp
             )
 
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(110.dp))
 
-            // Settings items
             SettingsItem(
                 iconId = R.drawable.profile,
-                text = "Profile",
+                text = "Account",
                 onClick = {
                     navController.navigate(Screens.PROFILE_SCREEN.screenName)
                 }
             )
 
-            Spacer(modifier = Modifier.height(26.dp))
-
-            SettingsItem(
-                iconId = R.drawable.message,
-                text = "Messages",
-                onClick = {
-                    navController.navigate(Screens.MESSAGE_SCREEN.screenName)
-                }
-            )
-
-            Spacer(modifier = Modifier.height(26.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             SettingsItem(
                 iconId = R.drawable.helps,
-                text = "Help & Support",
+                text = "Help Center",
                 onClick = {
                     navController.navigate(Screens.HELP_SCREEN.screenName)
                 }
             )
 
-            Spacer(modifier = Modifier.height(26.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             SettingsItem(
                 iconId = R.drawable.info,
@@ -98,24 +92,26 @@ fun Hamburger(navController: NavController) {
                 }
             )
 
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(100.dp))
 
-            // Logout button
+            // Logout button with shadow
             PrimaryButton(
                 text = "Logout",
-            ){
-                onLogout()
-            }
+                onClick = onLogout,
+                backgroundColor = green,
+                modifier = Modifier.shadow(8.dp, RoundedCornerShape(12.dp)) // Added shadow to button
+            )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-        // Footer text
+
         Text(
-            text = "@Precision wellness 2024",
-            color = Color.Black,
-            fontSize = 12.sp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            text = "@Precision Wellness 2024",
+            color = Color.Gray,
+            fontSize = 18.sp,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
         )
     }
 }
@@ -130,6 +126,7 @@ fun SettingsItem(iconId: Int, text: String, onClick: () -> Unit = {}) {
             .border(1.dp, darkGreen_dark, RoundedCornerShape(8.dp))
             .clip(RoundedCornerShape(8.dp))
             .padding(16.dp)
+            .shadow(50.dp, RoundedCornerShape(8.dp)) // Shadow for settings item
     ) {
         Icon(
             painter = painterResource(id = iconId),

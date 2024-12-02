@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.fitness.ui.common.CommonHeader
+import com.example.fitness.util.defaultPadding
 
 @Composable
 fun AboutUsScreen(navController: NavController) {
@@ -35,13 +37,12 @@ fun AboutUsScreen(navController: NavController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
+            CommonHeader(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .defaultPadding(),
                 text = "About Us",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Left
+                fontSize = 16.sp
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
@@ -53,7 +54,7 @@ fun AboutUsScreen(navController: NavController) {
             )
 
             Text(
-                text = "At Precision & Wellness, we believe that health and fitness should be accessible to everyone. Our mission is to empower individuals to achieve their wellness goals through personalized fitness plans, nutritional guidance, and motivational support—all offline and at your fingertips.",
+                text = "We believe that health and fitness should be accessible to everyone. Our mission is to empower individuals to achieve their wellness goals, nutritional guidance, and motivational support—all offline and at your fingertips.",
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier
                     .padding(bottom = 16.dp)
@@ -75,11 +76,9 @@ fun AboutUsScreen(navController: NavController) {
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text(text = "• Customizable Workout Plans", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "• Nutrition Tracking", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "• Progress Monitoring", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "• Filipino Foods", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "• Workout ", style = MaterialTheme.typography.bodyLarge)
                 Text(text = "• Offline Accessibility", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "• Community Support", style = MaterialTheme.typography.bodyLarge)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -107,10 +106,16 @@ fun AboutUsScreen(navController: NavController) {
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(text = "• Cire Paul Cruz - Creator & Lead Developer", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "• Riza Patrice Anciano - Doc Specialist", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "• Trisha Rhinoa Caisip - Doc Specialist", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "• Christian Elmo Layto - Graphic Designer", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "• Cire Paul Cruz - Creator \n" +
+                       " \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t•Lead Developer\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t•Back End Developer\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t•Front End Developer\n", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "• Riza Patrice Anciano - Documentation " +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSpecialist", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "• Trisha Rhinoa Caisip - Documentation " +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSpecialist", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "• Christian Elmo Layto - Documentation " +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSpecialist", style = MaterialTheme.typography.bodyLarge)
             }
         }
     }

@@ -2,6 +2,7 @@ package com.example.fitness.ui.categories.workout
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -15,13 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.fitness.R
 import com.example.fitness.common.Constant
 import com.example.fitness.ui.AppViewModelProvider
 import com.example.fitness.ui.common.CommonDayCircleProgress
@@ -32,6 +35,7 @@ import com.example.fitness.ui.common.TrophyOfExcellence
 import com.example.fitness.ui.common.updateCompletedIndexValues
 import com.example.fitness.ui.theme.MyColorTheme
 import com.example.fitness.ui.theme.green
+import com.example.fitness.ui.theme.greenMain_light
 import com.example.fitnesstracker.common.Screens
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -66,12 +70,12 @@ fun WorkoutWeekProgressScreen(navController: NavController, sharedViewModel: Sha
 }
 
 @Composable
-fun WorkoutProgressContent(completedDaysList: SnapshotStateList<Int>,
-                           startButtonClick: () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize().padding(18.dp)){
-        Column(
-            modifier = Modifier.align(Alignment.TopStart).matchParentSize()
-        ) {
+fun WorkoutProgressContent(
+    completedDaysList: SnapshotStateList<Int>,
+    startButtonClick: () -> Unit
+) {
+    Box(modifier = Modifier.fillMaxSize().padding(18.dp)) {
+        Column(modifier = Modifier.align(Alignment.TopStart)) {
             CommonHeader(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -80,103 +84,117 @@ fun WorkoutProgressContent(completedDaysList: SnapshotStateList<Int>,
                 subText = "Stay motivated on your workout journey.",
                 fontSize = 16.sp
             )
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             LazyColumn(
-                modifier = Modifier
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 itemsIndexed(completedDaysList) { index, completedDays ->
                     WeekSection(
                         weekNumber = index + 1,
                         completedDays = completedDays,
-                        onDayCompleted = { day ->
-                            //TODO Remove the clicking of the button for now and add it to startButton
-                            // completedDaysList[index] = day
-                        }
+                        onDayCompleted = { day -> }
                     )
                 }
-
             }
         }
 
-
-
-        Column(modifier = Modifier.align(Alignment.BottomCenter)){
-            StartButton() {
-                startButtonClick()
-            }
+        // Start Button at the bottom
+        Column(modifier = Modifier.align(Alignment.BottomCenter)) {
+            StartButton(onClick = startButtonClick)
             Spacer(Modifier.height(20.dp))
         }
-
     }
-
 }
 
 @Composable
-fun StartButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun StartButton(onClick: () -> Unit) {
     PrimaryButton(
-        modifier = modifier,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp)
+            .height(56.dp),
         text = "START",
-    ){
-        onClick()
-    }
+        backgroundColor = green,
+        onClick = onClick
+    )
 }
 
 @Composable
 fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Unit) {
-    Column(
-        modifier = Modifier
-            .padding(vertical = 12.dp, horizontal = 8.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Column(modifier = Modifier
-            .border(1.dp, Color.Gray.copy(0.2f), RoundedCornerShape(10.dp))
-            .clip(RoundedCornerShape(10.dp))
-            .background(MyColorTheme.white)
-            .padding(start = 10.dp, top = 10.dp, bottom = 16.dp),
-            verticalArrangement = Arrangement.Center
+    val weekImages = listOf(
+        R.drawable.week1, // Image for Week 1
+        R.drawable.week3, // Image for Week 2
+        R.drawable.week2, // Image for Week 3
+        R.drawable.week4  // Image for Week 4
+    )
+
+    Column(modifier = Modifier.padding(vertical = 12.dp)) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(2.dp, Color.Gray, RoundedCornerShape(12.dp))
+                .padding(12.dp)
         ) {
-            Text(
-                text = "Week $weekNumber",
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp,
-                fontStyle = FontStyle.Normal,
-                modifier = Modifier.padding(bottom = 10.dp),
-                color = green
-            )
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(end = 5.dp)
-            ) {
-                (1..7).forEach { day ->
-                    CommonDayCircleProgress(
-                        day = day,
-                        hasExtraLine = day > 1,
-                        isCompleted = day <= completedDays,
-                        isClickable = day == completedDays + 1 && completedDays < 7,
-                        onDayClick = { onDayCompleted(day) }
-                    )
-                }
-                Spacer(modifier = Modifier)
-                if ((completedDays == 7)) {
-                    AnimatedVisibility(
-                        visible = true,
-                        enter = scaleIn(
-                            animationSpec = tween(durationMillis = 500)
-                        ) + fadeIn(animationSpec = tween(durationMillis = 500)),
-                        exit = scaleOut(
-                            animationSpec = tween(durationMillis = 500)
-                        ) + fadeOut(animationSpec = tween(durationMillis = 500))
-                    ) {
-                        TrophyOfExcellence()
+            Column {
+
+                Text(
+                    text = if (completedDays == 7) "Week $weekNumber: 🏆" else "Week $weekNumber",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    color = greenMain_light
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.5.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    (1..7).forEach { day ->
+                        CommonDayCircleProgress(
+                            day = day,
+                            hasExtraLine = day > 1,
+                            isCompleted = day <= completedDays,
+                            isClickable = day == completedDays + 1 && completedDays < 7,
+                            onDayClick = { onDayCompleted(day) }
+                        )
                     }
+                }
+                Spacer(modifier = Modifier.height(2.dp))
+
+                Text(
+                    text = "Workout highlights *",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 8.dp),
+                    color = greenMain_light
+                )
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(9 / 6f)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Color.Gray)
+                ) {
+                    Image(
+                        painter = painterResource(id = weekImages[weekNumber - 1]),
+                        contentDescription = "Week $weekNumber Image",
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(12.dp)),
+                        contentScale = ContentScale.Crop
+                    )
                 }
             }
         }
-        }
     }
+}
+
+
 
 
 @Preview(showBackground = true)
@@ -186,7 +204,7 @@ fun WeeksProgressPreview() {
         Surface {
             val initialWeeks = List(4) { 0 }
             val completedDaysList = remember { mutableStateListOf(*initialWeeks.toTypedArray()) }
-            WorkoutProgressContent(completedDaysList,){}
+            WorkoutProgressContent(completedDaysList) {}
         }
     }
 }

@@ -61,6 +61,7 @@ import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.common.TrophyOfExcellence
 import com.example.fitness.ui.common.updateCompletedIndexValues
 import com.example.fitness.ui.theme.MyColorTheme
+import com.example.fitness.ui.theme.green
 import com.example.fitness.util.defaultPadding
 import com.example.fitness.util.defaultPaddingStart
 import com.example.fitnesstracker.common.Screens
@@ -163,9 +164,11 @@ fun MealsProgressContent(
                     PrimaryButton(
                         modifier = Modifier,
                         text = "START",
-                    ) {
-                        startButtonClick()
-                    }
+                        onClick = {
+                            startButtonClick()
+                        },
+                        backgroundColor = green,
+                    )
                     Spacer(Modifier.height(20.dp))
                 }
             }

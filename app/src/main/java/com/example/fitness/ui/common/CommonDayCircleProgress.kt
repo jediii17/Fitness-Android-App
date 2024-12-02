@@ -110,7 +110,7 @@ fun TrophyOfExcellence() {
             .padding(bottom = 5.dp)
             .semantics { contentDescription = "Trophy of Excellence" }
     ) {
-        Text(text = "🏆", fontSize = 28.sp)
+        Text(text = " :🏆", fontSize = 28.sp)
     }
 }
 

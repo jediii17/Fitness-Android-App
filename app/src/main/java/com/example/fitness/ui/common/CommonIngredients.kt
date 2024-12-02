@@ -22,10 +22,12 @@ import androidx.compose.ui.window.Dialog
 import com.example.fitness.R
 
 import androidx.compose.foundation.Image
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import com.example.fitness.ui.theme.MyColorTheme.gradientGray01
 
 @Composable
@@ -46,106 +48,116 @@ fun IngredientsDialog(
                     .shadow(8.dp, RoundedCornerShape(25.dp)),
                 color = MaterialTheme.colorScheme.background
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(7.dp)
-                        .fillMaxWidth()
+                Box(
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-
-                    if (imageRes != null) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(150.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(Color.LightGray)
-                                .shadow(8.dp, RoundedCornerShape(16.dp))
-                        ) {
-                            Image(
-                                painter = painterResource(id = imageRes),
-                                contentDescription = "",
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                    }
-
-                    Text(
-                        text = "How to Cook",
-                        style = MaterialTheme.typography.headlineSmall.copy(
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Light,
-                            fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
-                            letterSpacing = 1.2.sp,
-                            color = greenMainLight
-                        ),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                            .background(
-                                color = Color(0xFFE8F5E9),
-                                shape = RoundedCornerShape(12.dp)
-                            )
-                            .padding(vertical = 12.dp, horizontal = 16.dp)
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-
-                    val numberedIngredients = ingredients.split(". ")
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .verticalScroll(rememberScrollState())
-                            .padding(horizontal = 8.dp)
+                            .padding(16.dp)
                     ) {
-                        numberedIngredients.forEachIndexed { index, ingredient ->
-                            Text(
-                                text = "${index + 1}. $ingredient",
-                                style = MaterialTheme.typography.bodyMedium.copy(
-                                    fontSize = 15.sp,
-                                    letterSpacing = 1.sp,
-                                    lineHeight = 20.sp
-                                ),
+
+                        if (imageRes != null) {
+                            Image(
+                                painter = painterResource(id = imageRes),
+                                contentDescription = "Dish Image",
+                                contentScale = ContentScale.Crop,
                                 modifier = Modifier
-                                    .padding(vertical = 8.dp)
                                     .fillMaxWidth()
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(Color(0xFFF9F9F9))
-                                    .padding(12.dp),
-                                color = gradientGray01
+                                    .height(150.dp)
+                                    .clip(RoundedCornerShape(16.dp))
+                                    .shadow(8.dp, RoundedCornerShape(16.dp))
+                                    .padding(bottom = 8.dp)
                             )
                         }
-                    }
 
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Button(
-                        onClick = onDismiss,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(46.dp)
-                            .padding(horizontal = 8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = greenMainLight,
-                            contentColor = Color.White
-                        )
-                    ) {
+                        // Dialog title
                         Text(
-                            "Close",
-                            style = MaterialTheme.typography.labelLarge.copy(
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Light
-                            )
+                            text = "How to Cook",
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = greenMainLight
+                            ),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp)
                         )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        // Ingredients list inside a scrollable column
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f) // Allows the list to expand and become scrollable
+                                .verticalScroll(rememberScrollState())
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            val numberedIngredients = ingredients.split(". ")
+                            Column {
+                                numberedIngredients.forEachIndexed { index, ingredient ->
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 4.dp)
+                                            .background(
+                                                Color(0xFFF9F9F9),
+                                                shape = RoundedCornerShape(8.dp)
+                                            )
+                                            .padding(12.dp)
+                                    ) {
+                                        Text(
+                                            text = "${index + 1}.",
+                                            style = MaterialTheme.typography.bodyMedium.copy(
+                                                fontSize = 15.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                color = greenMainLight
+                                            ),
+                                            modifier = Modifier.padding(end = 8.dp)
+                                        )
+                                        Text(
+                                            text = ingredient,
+                                            style = MaterialTheme.typography.bodyMedium.copy(
+                                                fontSize = 15.sp,
+                                                lineHeight = 20.sp,
+                                                color = gradientGray01
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                        Button(
+                            onClick = onDismiss,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.BottomCenter)
+                                .padding(16.dp)
+                                .height(50.dp),
+                            shape = RoundedCornerShape(12.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = greenMainLight,
+                                contentColor = Color.White
+                            ),
+                            elevation = ButtonDefaults.buttonElevation(8.dp)
+                        ) {
+                            Text(
+                                "Close",
+                                style = MaterialTheme.typography.labelLarge.copy(
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            )
+                        }
                     }
                 }
             }
         }
     }
-}
+
 
 @Preview(showBackground = true)
 @Composable
@@ -158,4 +170,3 @@ fun IngredientsDialogPreview() {
         imageRes = R.drawable.kare_kare
     )
 }
-

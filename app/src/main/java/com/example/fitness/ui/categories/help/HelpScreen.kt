@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.fitness.ui.common.CommonHeader
+import com.example.fitness.util.defaultPadding
 
 @Composable
 fun HelpScreen(navController: NavController) {
@@ -33,11 +35,12 @@ fun HelpScreen(navController: NavController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
-            Text(
+            CommonHeader(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .defaultPadding(),
                 text = "Help & Support",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 16.dp)
+                fontSize = 16.sp
             )
 
             val sectionModifier = Modifier
@@ -66,7 +69,7 @@ fun HelpScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = "Access a library of exercises and personalized workout plans."
+                    text = "Access the workout for free."
                 )
             }
 
@@ -78,7 +81,7 @@ fun HelpScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = "Get tips on meal planning and logging your nutritional intake."
+                    text = "We would like to introduce our Filipino Foods in meal planning."
                 )
             }
 
@@ -126,7 +129,7 @@ fun HelpScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = "Access articles, videos, and fitness challenges to enhance your journey."
+                    text = "Access meals and fitness challenges to enhance your journey."
                 )
             }
         }

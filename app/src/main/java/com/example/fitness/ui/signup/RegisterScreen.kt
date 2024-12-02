@@ -54,6 +54,8 @@ fun RegisterScreen(navController: NavHostController) {
     val confirmPassword = registerViewModel.confirmPassword
     val registerState = registerViewModel.registerState
 
+    var isTermsAccepted by remember { mutableStateOf(false) }
+
     LaunchedEffect(registerState.value) {
         if (registerState.value == RegisterViewModel.RegisterState.SUCCESS) {
             navController.navigate(Screens.LOGIN_SCREEN.screenName)
@@ -229,17 +231,16 @@ fun RegisterScreen(navController: NavHostController) {
                     }
                 }
             }
+
         )
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        TermsOfUseCheckbox()
+        Spacer(modifier = Modifier.height(12.dp))
+        TermsOfUseCheckbox(onCheckedChange = { isTermsAccepted = it })
     }
 }
 
 @Composable
-fun TermsOfUseCheckbox() {
-    var checked by remember { mutableStateOf(false) }
+fun TermsOfUseCheckbox(onCheckedChange: (Boolean) -> Unit) {
+    var checked by remember { mutableStateOf(true) }
     val context = LocalContext.current
 
     Row(
@@ -247,8 +248,16 @@ fun TermsOfUseCheckbox() {
     ) {
         Checkbox(
             checked = checked,
-            onCheckedChange = { checked = it },
-            modifier = Modifier.absoluteOffset((9).dp, -11.dp)
+            onCheckedChange = {
+                checked = it
+                onCheckedChange(it)
+            },
+            colors = CheckboxDefaults.colors(
+                checkedColor = greenMain_light,
+                uncheckedColor = Color.Gray,
+                checkmarkColor = Color.White
+            ),
+            modifier = Modifier.absoluteOffset(x = 9.dp, y = -11.dp)
         )
 
         val annotatedString = buildAnnotatedString {
@@ -294,7 +303,7 @@ data class Datasets(
     val username: String = "",
     val password: String = "",
     val confirmPassword: String = "",
-    val agreeToTerms: Boolean = false
+    val agreeToTerms: Boolean = true
 )
 
 @Preview(showBackground = true)
