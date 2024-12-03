@@ -27,8 +27,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineHeightStyle
 import com.example.fitness.ui.theme.MyColorTheme.gradientGray01
+
 
 @Composable
 fun IngredientsDialog(
@@ -36,7 +36,7 @@ fun IngredientsDialog(
     onDismiss: () -> Unit,
     ingredients: String,
     greenMainLight: Color,
-    imageRes: Int? = null
+    imageRes: Int? = null,
 ) {
     if (showDialog) {
         Dialog(onDismissRequest = onDismiss) {
@@ -70,7 +70,17 @@ fun IngredientsDialog(
                                     .padding(bottom = 8.dp)
                             )
                         }
-
+                        Text(
+                            text = "",
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = greenMainLight
+                            ),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        )
                         // Dialog title
                         Text(
                             text = "How to Cook",

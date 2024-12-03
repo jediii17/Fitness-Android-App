@@ -59,7 +59,7 @@ fun WorkoutWeekProgressScreen(navController: NavController, sharedViewModel: Sha
 
     //if this value changes change the progress
     LaunchedEffect(workoutUiState) {
-        //update the list from database content
+        
         completedDaysList = updateCompletedIndexValues(completedDaysList, workWeek = workoutUiState.workoutWeekCount, workDay = workoutUiState.workoutDayCount)
     }
     WorkoutProgressContent(
@@ -75,6 +75,7 @@ fun WorkoutProgressContent(
     startButtonClick: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize().padding(18.dp)) {
+
         Column(modifier = Modifier.align(Alignment.TopStart)) {
             CommonHeader(
                 modifier = Modifier
@@ -84,7 +85,6 @@ fun WorkoutProgressContent(
                 subText = "Stay motivated on your workout journey.",
                 fontSize = 16.sp
             )
-            Spacer(modifier = Modifier.height(10.dp))
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -99,13 +99,18 @@ fun WorkoutProgressContent(
             }
         }
 
-        // Start Button at the bottom
-        Column(modifier = Modifier.align(Alignment.BottomCenter)) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .align(Alignment.BottomCenter)
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
             StartButton(onClick = startButtonClick)
             Spacer(Modifier.height(20.dp))
         }
     }
 }
+
 
 @Composable
 fun StartButton(onClick: () -> Unit) {
@@ -133,8 +138,8 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(2.dp, Color.Gray, RoundedCornerShape(12.dp))
-                .padding(12.dp)
+                .border(0.5.dp, Color.Gray, RoundedCornerShape(12.dp))
+                .padding(2.dp)
         ) {
             Column {
 
@@ -142,12 +147,12 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
                     text = if (completedDays == 7) "Week $weekNumber: 🏆" else "Week $weekNumber",
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
-                    modifier = Modifier.padding(bottom = 8.dp),
+                    modifier = Modifier.padding(bottom = 6.dp),
                     color = greenMain_light
                 )
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.5.dp),
+                    horizontalArrangement = Arrangement.spacedBy(2.dp),
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -170,22 +175,20 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
                     modifier = Modifier.padding(top = 8.dp),
                     color = greenMain_light
                 )
-
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(1.dp))
 
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(9 / 6f)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(Color.Gray)
+                        .height(320.dp)
                 ) {
                     Image(
                         painter = painterResource(id = weekImages[weekNumber - 1]),
                         contentDescription = "Week $weekNumber Image",
                         modifier = Modifier
-                            .fillMaxSize()
-                            .clip(RoundedCornerShape(12.dp)),
+                            .fillMaxHeight()
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(topEnd = 8.dp, topStart = 8.dp,bottomStart = 8.dp, bottomEnd = 8.dp)),
                         contentScale = ContentScale.Crop
                     )
                 }

@@ -127,7 +127,7 @@ fun MealsItemPreviewScreen(navController: NavHostController, sharedViewModel: Sh
             onDismiss = { isDialogOpen = false },
             ingredients = selectedMealData?.ingredients.orEmpty(),
             greenMainLight = MyColorTheme.greenMain_light,
-            imageRes = selectedMealData?.imageRes
+            imageRes = selectedMealData?.imageRes,
         )
     }
 }
