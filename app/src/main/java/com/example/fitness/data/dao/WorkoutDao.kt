@@ -1,6 +1,7 @@
 package com.example.fitness.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -18,4 +19,7 @@ interface WorkoutDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(workoutEntity: WorkoutEntity)
+
+   @Query("Delete FROM workout WHERE accountId = :accountId")
+   suspend fun delete(accountId: Long)
 }

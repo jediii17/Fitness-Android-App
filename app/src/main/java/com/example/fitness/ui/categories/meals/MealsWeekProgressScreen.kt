@@ -97,6 +97,15 @@ fun MealsWeekProgressScreen(navController: NavController, sharedViewModel: Share
     MealsProgressContent(
         completedDaysList = completedDaysList,
         mealsHighlights = sharedVMUIState.mealsWeekHighlights,
+        onPreviousDayClick = { progressDayId ->
+            CoroutineScope(Dispatchers.IO).launch {
+                sharedViewModel.setPreviousDayMeals(progressDayID = progressDayId){
+                    CoroutineScope(Dispatchers.Main).launch {
+                        navController.navigate(Screens.MEALS_SCREEN.screenName+"/${Constant.NO_MEAL_HIGHLIGHT_ID}")//send only empty content -> to get from the enums
+                    }
+                }
+            }
+        }
     ){
         CoroutineScope(Dispatchers.IO).launch {
             //update the progress bar in Dashboard with new Content
@@ -118,6 +127,7 @@ fun MealsWeekProgressScreen(navController: NavController, sharedViewModel: Share
 fun MealsProgressContent(
     completedDaysList: SnapshotStateList<Int>,
     mealsHighlights: List<MealsDto>,
+    onPreviousDayClick: (String) -> Unit,
     startButtonClick: () -> Unit,
 ) {
     Column(modifier = Modifier
@@ -148,6 +158,14 @@ fun MealsProgressContent(
                                 weekNumber = index + 1,
                                 completedDays = completedDays,
                                 onDayCompleted = { day ->
+                                    //if day already completed for preview only
+                                    if(day <= completedDays){
+                                        onPreviousDayClick(Constant.createMealsProgressDayID(
+                                            month = 0,
+                                            week = if(index-1 >= 0) index-1 else index,
+                                            day = if(day-1 >= 0) day-1 else day,
+                                        ))
+                                    }
                                 }
                             )
                         }
@@ -271,7 +289,7 @@ private fun WeekMealSection(mealsDto: MealsDto, weekNumber: Int, completedDays: 
                             day = day,
                             hasExtraLine = day > 1,
                             isCompleted = day <= completedDays,
-                            isClickable = day == completedDays + 1 && completedDays < 7,
+                            isClickable = day <= completedDays,
                             onDayClick = { onDayCompleted(day) }
                         )
                     }
@@ -380,5 +398,5 @@ fun MealsWeekProgressScreenPreview() {
             mealTime = "20",
         )
     )
-    MealsProgressContent(completedDaysList,list){}
+    MealsProgressContent(completedDaysList,list,{}){}
 }

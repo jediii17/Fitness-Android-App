@@ -384,8 +384,16 @@ private fun TabContent(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            //Show Finish meal button when breakfast and lunch was done
+            val isBreakfastAndLunchDone = meals.firstOrNull {
+                it.mealTime.lowercase(Locale.getDefault()) == MealTime.BREAKFAST.name.lowercase(Locale.getDefault()) }
+                ?.mealsStatusProgress == MealsStatus.DONE.name && meals.firstOrNull {
+                it.mealTime.lowercase(Locale.getDefault()) == MealTime.LUNCH.name.lowercase(Locale.getDefault()) }
+                ?.mealsStatusProgress == MealsStatus.DONE.name
+
             NavigationButtonOptions(
                 isLastMeal = selectedMeal == MealTime.DINNER.label,
+                isBreakfastAndLunchDone = isBreakfastAndLunchDone,
                 isCurrentMealDone = currentMeal.mealsStatusProgress == MealsStatus.DONE.name,
                 onMealFinishedClick = finalizeMealClick,
                 onDoneClick = doneMealClick
@@ -397,6 +405,7 @@ private fun TabContent(
 @Composable
 fun NavigationButtonOptions(
     isLastMeal: Boolean,
+    isBreakfastAndLunchDone: Boolean,
     isCurrentMealDone: Boolean,
     onMealFinishedClick: () -> Unit,
     onDoneClick: () -> Unit
@@ -407,12 +416,21 @@ fun NavigationButtonOptions(
         horizontalArrangement = Arrangement.Center
     ) {
         AnimatedVisibility(visible = !isCurrentMealDone) {
-            PrimaryButton(
-                text = if (isLastMeal) "FINISH MEAL PREP" else "DONE",
-                iconSuffix = if (isLastMeal) R.drawable.ic_flag else  R.drawable.ic_check,
-                onClick = { if (isLastMeal) onMealFinishedClick() else onDoneClick() },
-                backgroundColor = green
-            )
+            if(isLastMeal && isBreakfastAndLunchDone){
+                PrimaryButton(
+                    backgroundColor = green,
+                    iconSuffix = R.drawable.ic_flag,
+                    text = "FINISH MEAL PREP",
+                    onClick = {onMealFinishedClick()}
+                )
+            }else if(!isLastMeal){
+                PrimaryButton(
+                    backgroundColor = green,
+                    iconSuffix = R.drawable.ic_check,
+                    text = "DONE",
+                    onClick ={ onDoneClick() }
+                )
+            }
         }
     }
 }

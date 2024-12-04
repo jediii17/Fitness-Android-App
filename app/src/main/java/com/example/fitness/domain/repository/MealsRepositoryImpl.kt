@@ -14,5 +14,9 @@ class MealsRepositoryImpl(private val mealsDao: MealsDao): MealsRepository {
        return mealsDao.insert(mealsEntity = mealsEntity)
     }
 
+    override suspend fun delete(accountId: Long) {
+        mealsDao.delete(accountId)
+    }
+
 
 }

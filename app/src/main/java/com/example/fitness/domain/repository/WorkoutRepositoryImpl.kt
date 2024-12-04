@@ -14,4 +14,8 @@ class WorkoutRepositoryImpl(private val workoutDao: WorkoutDao): WorkoutReposito
         workoutDao.insert(workoutEntity = workoutEntity)
     }
 
+    override suspend fun deleteAllWorkout(accountId: Long) {
+        workoutDao.delete(accountId)
+    }
+
 }

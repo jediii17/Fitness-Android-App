@@ -16,6 +16,6 @@ interface DailyMealSetRepository {
 
     suspend fun updateMealStatus(status: String, currentDate: String, accountId: Long, mealTime: String, mealsId: String)
 
-    suspend fun deleteAllDailyMeal()
+    suspend fun deleteAllDailyMeal(accountId: Long)
 
 }

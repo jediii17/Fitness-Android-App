@@ -24,6 +24,8 @@ import com.example.fitness.domain.usecase.meals.InsertCurrentDayMealUseCase
 import com.example.fitness.domain.usecase.meals.InsertMealsProgressUseCase
 import com.example.fitness.domain.usecase.meals.UpdateCurrentDayMealUseCase
 import com.example.fitness.domain.usecase.profile.UpdateUserProfileUseCase
+import com.example.fitness.domain.usecase.reset.DeleteMealsUseCase
+import com.example.fitness.domain.usecase.reset.DeleteWorkoutUseCase
 import com.example.fitness.domain.usecase.workout.GetWorkoutItemsUseCase
 import com.example.fitness.domain.usecase.workout.GetWorkoutProgressUseCase
 import com.example.fitness.domain.usecase.workout.InsertWorkoutProgressUseCase
@@ -58,6 +60,10 @@ interface AppContainer {
     //for workout
     val getWorkoutProgressUseCase: GetWorkoutProgressUseCase
     val insertWorkoutProgressUseCase: InsertWorkoutProgressUseCase
+
+    //for Deleting
+    val deleteMealsUseCase: DeleteMealsUseCase
+    val deleteWorkoutUseCase: DeleteWorkoutUseCase
 }
 
 
@@ -169,6 +175,16 @@ class AppDataContainer(
 
     override val getWorkoutItemsUseCase: GetWorkoutItemsUseCase by lazy {
         GetWorkoutItemsUseCase(userRepositoryImpL)
+    }
+
+
+    override val deleteMealsUseCase: DeleteMealsUseCase by lazy{
+        DeleteMealsUseCase(dailyMealSetRepositoryImpl = dailyMealSetRepositoryImpl,
+            mealsRepositoryImpl = mealsRepositoryImpL)
+    }
+
+    override val deleteWorkoutUseCase: DeleteWorkoutUseCase by lazy{
+        DeleteWorkoutUseCase(workoutRepositoryImpL)
     }
 
 }

@@ -108,7 +108,7 @@ fun DialogSuccess(modifier: Modifier = Modifier,
 
 @Composable
 fun DialogConfirmation(modifier: Modifier = Modifier,
-                       @DrawableRes icon: Int =R.drawable.goals,
+                       @DrawableRes icon: Int =R.drawable.ques,
                        text: String = " ",
                        buttonYesText: String = "Yes",
                        buttonNoText: String = "No",
@@ -140,7 +140,7 @@ fun DialogConfirmation(modifier: Modifier = Modifier,
             Image(
                 painter = painterResource(id = icon),
                 contentDescription = "Login Image",
-                modifier = Modifier.size(110.dp)
+                modifier = Modifier.size(150.dp)
             )
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -159,7 +159,7 @@ fun DialogConfirmation(modifier: Modifier = Modifier,
                         contentColor = Color.White
                     ),
                     modifier = Modifier
-                        .widthIn(min = 150.dp)
+                        .widthIn(min = 123.dp)
                         .padding(vertical = 12.dp)
                         .padding(16.dp),
                 ){

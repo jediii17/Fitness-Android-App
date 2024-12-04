@@ -13,11 +13,11 @@ import com.example.fitness.ui.categories.goals.BodyGoalsViewModel
 import com.example.fitness.ui.categories.height.HeightViewModel
 import com.example.fitness.ui.categories.meals.MealsWeekProgressViewModel
 import com.example.fitness.ui.categories.meals.item.MealsItemPreviewViewModel
+import com.example.fitness.ui.categories.reset.ResetViewModel
 import com.example.fitness.ui.categories.weight.WeightViewModel
 import com.example.fitness.ui.categories.workout.WorkoutWeekProgressViewModel
 import com.example.fitness.ui.categories.workout.item.WorkoutListViewModel
 import com.example.fitness.ui.common.SharedViewModel
-import com.example.fitness.ui.dashboard.DashboardScreen
 import com.example.fitness.ui.dashboard.DashboardViewModel
 import com.example.fitness.ui.login.LoginViewModel
 import com.example.fitness.ui.signup.RegisterViewModel
@@ -130,6 +130,13 @@ object AppViewModelProvider {
                 getMealsProgressUseCase = fitnessApplication().container.getMealsProgressUseCase,
                 getMealsListUseCase = fitnessApplication().container.getMealsListUseCase,
                 insertMealsProgressUseCase = fitnessApplication().container.insertMealsProgressUseCase,
+            )
+        }
+
+        initializer {
+            ResetViewModel(
+               deleteMealsUseCase =  fitnessApplication().container.deleteMealsUseCase,
+               deleteWorkoutUseCase =  fitnessApplication().container.deleteWorkoutUseCase
             )
         }
 

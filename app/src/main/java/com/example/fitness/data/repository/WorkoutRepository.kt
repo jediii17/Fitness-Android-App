@@ -14,5 +14,5 @@ interface WorkoutRepository {
      */
     suspend fun insertWorkoutProgress(workoutEntity: WorkoutEntity)
 
-
+    suspend fun deleteAllWorkout(accountId: Long)
 }

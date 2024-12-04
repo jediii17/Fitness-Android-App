@@ -19,11 +19,11 @@ enum class Screens(val screenName: String) {
     BODYGOALS_SCREEN("BodyGoals Screen"),
     GOALSNATURAL_SCREEN("GoalsNatural Screen"),
     PROFILE_SCREEN("Profile Screen"),
-    MESSAGE_SCREEN("Message Screen"),
     WORKOUT_LIST_SCREEN("Workout List Screen"),
     WORKOUTPROGRESS_SCREEN("Workout Progress Screen"),
     FIRSTLAST_SCREEN("Name Screen"),
     ABOUTUS_SCREEN("About Us Screen"),
+    RESET_SCREEN("Reset Screen"),
     HELP_SCREEN("Help Screen"),
 }
 

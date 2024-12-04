@@ -339,10 +339,6 @@ class SharedViewModel(
         return (currentVal.toFloat() / totalVal)
     }
 
-    suspend fun deleteAllDailyMeals(){
-        deleteCurrentDayMealUseCase.invoke()
-    }
-
     suspend fun updateCurrentMealStatus(mealsId: String,
                                         mealsProgressDay: String,
                                         mealTime: String,

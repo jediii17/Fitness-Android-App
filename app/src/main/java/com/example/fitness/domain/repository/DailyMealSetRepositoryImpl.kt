@@ -35,8 +35,8 @@ class DailyMealSetRepositoryImpl(private val dailyMealSetDao: DailyMealSetDao): 
            )
     }
 
-    override suspend fun deleteAllDailyMeal() {
-        return dailyMealSetDao.deleteALlDailyMeal()
+    override suspend fun deleteAllDailyMeal(accountId: Long) {
+        return dailyMealSetDao.deleteALlDailyMeal(accountId)
     }
 
 

@@ -96,6 +96,10 @@ fun WorkoutProgressContent(
                         onDayCompleted = { day -> }
                     )
                 }
+
+                item {
+                    Spacer(modifier = Modifier.height(80.dp))
+                }
             }
         }
 
@@ -138,8 +142,7 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(0.5.dp, Color.Gray, RoundedCornerShape(12.dp))
-                .padding(2.dp)
+                .border(1.dp, Color.Gray, RoundedCornerShape(12.dp))
         ) {
             Column {
 
@@ -147,12 +150,12 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
                     text = if (completedDays == 7) "Week $weekNumber: 🏆" else "Week $weekNumber",
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
-                    modifier = Modifier.padding(bottom = 6.dp),
-                    color = greenMain_light
+                    modifier = Modifier.padding(6.dp),
+                    color = greenMain_light,
                 )
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(2.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -172,7 +175,7 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
                     text = "Workout highlights *",
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
-                    modifier = Modifier.padding(top = 8.dp),
+                    modifier = Modifier.padding(8.dp),
                     color = greenMain_light
                 )
                 Spacer(modifier = Modifier.height(1.dp))
@@ -186,9 +189,8 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
                         painter = painterResource(id = weekImages[weekNumber - 1]),
                         contentDescription = "Week $weekNumber Image",
                         modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(topEnd = 8.dp, topStart = 8.dp,bottomStart = 8.dp, bottomEnd = 8.dp)),
+                            .matchParentSize()
+                            .clip(RoundedCornerShape(topEnd = 0.dp, topStart = 0.dp,bottomStart = 12.dp, bottomEnd = 12.dp)),
                         contentScale = ContentScale.Crop
                     )
                 }
@@ -196,6 +198,7 @@ fun WeekSection(weekNumber: Int, completedDays: Int, onDayCompleted: (Int) -> Un
         }
     }
 }
+
 
 
 

@@ -14,5 +14,5 @@ interface MealsRepository {
      */
     suspend fun insertMealsProgress(workoutEntity: MealsEntity)
 
-
+    suspend fun delete(accountId: Long)
 }

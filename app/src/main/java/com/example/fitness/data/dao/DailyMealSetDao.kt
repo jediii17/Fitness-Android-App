@@ -19,7 +19,7 @@ interface DailyMealSetDao{
     @Query("UPDATE daily_meals SET status = :status WHERE mealsId = :mealsId AND progressDay = :progressDay AND accountId = :accountId AND mealTime = :mealTime")
     fun updateMealStatus(status: String, mealsId: String, progressDay: String, accountId: Long, mealTime: String)
 
-    @Query("DELETE FROM daily_meals")
-    fun deleteALlDailyMeal()
+    @Query("DELETE FROM daily_meals WHERE accountId = :accountId")
+    fun deleteALlDailyMeal(accountId: Long)
 
 }

@@ -25,6 +25,7 @@ import com.example.fitnesstracker.ui.categories.GoalsNaturalScreen
 import com.example.fitness.ui.categories.height.HeightScreen
 import com.example.fitness.ui.categories.meals.MealsWeekProgressScreen
 import com.example.fitness.ui.categories.profile.FirstLastNameScreen
+import com.example.fitness.ui.categories.reset.ResetScreen
 import com.example.fitness.ui.common.SharedViewModel
 import com.example.fitness.ui.help.HelpScreen
 import com.example.fitness.ui.dashboard.DashboardScreen
@@ -96,6 +97,9 @@ fun NavMainController(modifier: Modifier,
 
         composable(route = Screens.HAMBURGER_SCREEN.screenName) {
             Hamburger(navController = navController)
+        }
+        composable(route = Screens.RESET_SCREEN.screenName) {
+            ResetScreen(navController = navController)
         }
         composable(route = Screens.PROFILE_SCREEN.screenName) {
             ProfileScreen(navController = navController)
