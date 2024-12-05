@@ -67,7 +67,6 @@ fun IngredientsDialog(
                                     .height(150.dp)
                                     .clip(RoundedCornerShape(16.dp))
                                     .shadow(8.dp, RoundedCornerShape(16.dp))
-                                    .padding(bottom = 8.dp)
                             )
                         }
                         Text(
@@ -81,9 +80,8 @@ fun IngredientsDialog(
                             modifier = Modifier
                                 .fillMaxWidth()
                         )
-                        // Dialog title
                         Text(
-                            text = "How to Cook",
+                                text = "How to cook",
                             style = MaterialTheme.typography.headlineSmall.copy(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
@@ -101,9 +99,9 @@ fun IngredientsDialog(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .weight(1f) // Allows the list to expand and become scrollable
+                                .weight(2f)
                                 .verticalScroll(rememberScrollState())
-                                .padding(horizontal = 8.dp)
+                                .padding(horizontal = 10.dp)
                         ) {
                             val numberedIngredients = ingredients.split(". ")
                             Column {
@@ -111,12 +109,13 @@ fun IngredientsDialog(
                                     Row(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(vertical = 4.dp)
+                                            .padding(vertical = 5.dp)
                                             .background(
                                                 Color(0xFFF9F9F9),
                                                 shape = RoundedCornerShape(8.dp)
                                             )
                                             .padding(12.dp)
+
                                     ) {
                                         Text(
                                             text = "${index + 1}.",
@@ -130,7 +129,7 @@ fun IngredientsDialog(
                                         Text(
                                             text = ingredient,
                                             style = MaterialTheme.typography.bodyMedium.copy(
-                                                fontSize = 15.sp,
+                                                fontSize = 18.sp,
                                                 lineHeight = 20.sp,
                                                 color = gradientGray01
                                             )

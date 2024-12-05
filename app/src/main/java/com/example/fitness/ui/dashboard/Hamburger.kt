@@ -95,7 +95,7 @@ fun Hamburger(navController: NavController) {
 
 
             SettingsItem(
-                iconId = R.drawable.info,
+                iconId = R.drawable.res,
                 text = "Reset",
                 onClick = {
                     navController.navigate(Screens.RESET_SCREEN.screenName)
